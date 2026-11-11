@@ -1,0 +1,137 @@
+# ------------------------------------------------------------
+# Claude Certification Hub — site configuration
+# Edit site_name / site_url / repo_url after you create your repo.
+# ------------------------------------------------------------
+site_name: Claude Certification Hub
+site_description: One-stop, basic-to-advanced learning platform for Anthropic's Claude certifications (Architect & Developer).
+site_author: Prasoon Abhinaw
+# GitHub username: pabhinaw
+site_url: https://pabhinaw.github.io/claude-certification-hub/
+repo_url: https://github.com/pabhinaw/claude-certification-hub
+repo_name: claude-certification-hub
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/school
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.mark
+  - pymdownx.keys
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/pabhinaw/claude-certification-hub
+
+copyright: >
+  Community study resource — not affiliated with or endorsed by Anthropic.
+  Content licensed CC BY 4.0.
+
+nav:
+  - Home: index.md
+  - Start Here:
+      - start-here/index.md
+      - The Certification Landscape: start-here/certification-landscape.md
+      - Learning Roadmap (Basic → Advanced): start-here/learning-roadmap.md
+      - How to Study Effectively: start-here/how-to-study.md
+  - Fundamentals:
+      - fundamentals/index.md
+      - LLM & Claude Basics: fundamentals/llm-basics.md
+      - The Messages API: fundamentals/messages-api.md
+      - Tool Use Basics: fundamentals/tool-use-basics.md
+      - Claude Code Basics: fundamentals/claude-code-basics.md
+      - MCP Basics: fundamentals/mcp-basics.md
+      - Glossary: fundamentals/glossary.md
+  - Architect (CCAR-F):
+      - architect/index.md
+      - Exam Overview: architect/exam-overview.md
+      - Exam Blueprint & Objectives: architect/exam-blueprint.md
+      - Study Plans: architect/study-plan.md
+      - The Six Scenarios: architect/scenarios.md
+      - Domains:
+          - "D1 · Agentic Architecture & Orchestration": architect/domains/d1-agentic-architecture.md
+          - "D2 · Tool Design & MCP Integration": architect/domains/d2-tool-design-mcp.md
+          - "D3 · Claude Code Configuration & Workflows": architect/domains/d3-claude-code.md
+          - "D4 · Prompt Engineering & Structured Output": architect/domains/d4-prompt-structured-output.md
+          - "D5 · Context Management & Reliability": architect/domains/d5-context-reliability.md
+      - Commonly Missed Topics: architect/commonly-missed.md
+      - Practice Questions: architect/practice-questions.md
+      - Cheat Sheet: architect/cheat-sheet.md
+      - Exam Day Guide: architect/exam-day.md
+  - Developer (CCDV-F):
+      - developer/index.md
+      - Exam Overview: developer/exam-overview.md
+      - Architect → Developer Bridge: developer/bridge-from-architect.md
+  - Hands-on Labs:
+      - labs/index.md
+      - "Lab 1 · Build an Agentic Loop": labs/lab-01-agentic-loop.md
+      - "Lab 2 · Reliable Structured Extraction": labs/lab-02-structured-extraction.md
+      - "Lab 3 · Configure Claude Code for a Team": labs/lab-03-claude-code-config.md
+  - Resources:
+      - resources/index.md
+      - Official Links: resources/official-links.md
+      - Contributing: resources/contributing.md
+  - About:
+      - about/index.md
+      - My Exam Journey: about/my-journey.md

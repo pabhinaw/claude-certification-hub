@@ -1,6 +1,6 @@
 # Practice Questions <span class="level-badge">L4</span>
 
-20 **original** scenario-style questions (not real exam items). Try each one before expanding the answer. Target: **17/20 or better**, and be able to say why each wrong option is wrong.
+20 **original** scenario-style questions, written from public documentation and design principles. They are **not** real or recalled exam items (see our [content policy](../resources/content-policy.md)). Try each one before expanding the answer. Target: **17/20 or better**, and be able to say why each wrong option is wrong.
 
 ---
 

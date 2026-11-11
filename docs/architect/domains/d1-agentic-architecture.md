@@ -2,7 +2,7 @@
 
 The largest domain. It tests whether you can build agents that **loop correctly, delegate cleanly, follow business rules deterministically, and always finish**, either resolved or handed to a human.
 
-## What this domain tests
+## What this domain covers
 
 * The agentic loop and `stop_reason` handling
 * Coordinator–subagent orchestration and explicit context passing
@@ -232,3 +232,12 @@ In Claude Code shell hooks, **exit code 2 blocks** a PreToolUse call and sends s
 
 ??? question "Business rule: refunds over a limit must never be issued by the agent. Where does this live?"
     In a **PreToolUse hook** (or equivalent code gate) on the refund tool that denies over-limit calls and routes them for approval.
+
+---
+
+!!! abstract "Verify in official docs"
+    Product details change. Before relying on a specific parameter, limit or price, check the current documentation:
+
+    * [Tool use: implement tool use (stop_reason, tool results)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use)
+    * [Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview)
+    * [Claude Code hooks reference](https://code.claude.com/docs/en/hooks)

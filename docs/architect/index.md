@@ -6,7 +6,7 @@
 
 ```mermaid
 flowchart LR
-    O[Exam Overview] --> B[Blueprint & Objectives] --> P[Study Plan] --> S[Six Scenarios]
+    O[Exam Overview] --> B[Domains & Checklist] --> P[Study Plan] --> S[Six Scenarios]
     S --> D1[D1 Agentic 27%]
     S --> D2[D2 Tools & MCP 18%]
     S --> D3[D3 Claude Code 20%]
@@ -26,11 +26,11 @@ flowchart LR
 | D5 | [Context Management & Reliability](domains/d5-context-reliability.md) | **15%** | How do you keep long work coherent, escalate correctly and review wisely? |
 
 !!! info "Domain numbering"
-    Community guides number the domains differently. This hub follows the task-statement numbering (1.x Agentic, 2.x Tools/MCP, 3.x Claude Code, 4.x Prompt/Output, 5.x Context). The weights are the same everywhere.
+    Community guides number the domains differently. This hub uses D1 Agentic, D2 Tools/MCP, D3 Claude Code, D4 Prompt/Output, D5 Context. The weights are the same everywhere. For the authoritative content outline, see the official exam guide in Anthropic's Partner Academy.
 
 ## Every domain page has the same structure
 
-1. **What this domain tests**: the official-style objectives
+1. **What this domain covers**: the competencies, in our own words
 2. **Core concepts**: explained from first principles
 3. **Patterns & code**: what "good" looks like
 4. **Anti-patterns & exam traps**: what the wrong options look like

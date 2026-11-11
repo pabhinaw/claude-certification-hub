@@ -22,7 +22,7 @@ hide:
 <a class="hub-track hub-track--featured" href="architect/">
 <span class="hub-badge hub-badge--live">Complete track</span>
 <span class="hub-track__title">Architect · CCAR-F</span>
-<span class="hub-track__desc">Exam blueprint, the six scenarios, five domain deep-dives, practice questions and a one-page cheat sheet.</span>
+<span class="hub-track__desc">Domain checklist, the six scenario themes, five domain deep-dives, practice questions and a one-page cheat sheet.</span>
 <span class="hub-track__go">Start the Architect track →</span>
 </a>
 <a class="hub-track" href="developer/">
@@ -59,8 +59,8 @@ hide:
 <div class="hub-feature" markdown>
 :material-clipboard-list-outline:{ .hub-icon }
 
-### [Exam blueprint](architect/exam-blueprint.md)
-Every domain, task statement and objective as a self-assessment checklist.
+### [Domain checklist](architect/exam-blueprint.md)
+Domain weights and a competency checklist, written as clear study goals.
 </div>
 
 <div class="hub-feature" markdown>
@@ -122,8 +122,9 @@ I built this hub after passing the CCAR-F exam, to give every learner the struct
 
 [:fontawesome-brands-linkedin: Connect on LinkedIn](https://www.linkedin.com/in/pabhinaw/){ .md-button .md-button--primary target="_blank" rel="noopener" }
 [Read my exam journey](about/my-journey.md){ .md-button }
+[Verify credential](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635){ .md-button target="_blank" rel="noopener" }
 </div>
 </div>
 </section>
 
-<p class="hub-disclaimer">Independent community resource. Not affiliated with or endorsed by Anthropic, and contains no real exam questions. Exam details change, so always confirm on the <a href="resources/official-links/">official pages</a>.</p>
+<p class="hub-disclaimer">Unofficial, independent community resource. Not affiliated with, sponsored or endorsed by Anthropic. Contains no real or recalled exam questions (<a href="resources/content-policy/">content policy</a>). Claude and Anthropic are trademarks of Anthropic, PBC. Exam details change, so always confirm on the <a href="resources/official-links/">official pages</a>.</p>

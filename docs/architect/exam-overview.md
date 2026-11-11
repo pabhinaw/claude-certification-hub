@@ -14,12 +14,13 @@
 | Validity | 12 months |
 | Price | about $125 USD (before partner discounts) |
 | Delivery | online proctored; registration via Anthropic's Partner Academy |
+| Eligibility | currently open to people at organisations in the **Claude Partner Network** |
 | Recommended experience | about 6 months hands-on with the Claude API, Agent SDK, Claude Code and MCP |
 | Aids | none: you cannot have Claude or docs open during the exam |
 
 ## What the exam really measures
 
-Reviewers who have taken it describe it less as a recall test and more as a check on whether you have **actually shipped agentic systems and learned from what broke**. Expect questions like:
+Reviewers who have taken it describe it less as a recall test and more as a check on whether you have **actually shipped agentic systems and learned from what broke**. The examples below are **our own illustrations** of that style, not exam questions:
 
 * *"The agent sometimes ends without resolving the case or escalating. What is the most reliable fix?"*
 * *"Where should a team-wide MCP server be configured, and how should its token be supplied?"*
@@ -29,7 +30,7 @@ All four options usually sound plausible. The best one is typically the **most d
 
 ## Scoring
 
-* The score report shows your scaled score plus **percent-correct per objective**. That is useful for spotting weak areas even after you pass.
+* The score report shows your scaled score and a per-area breakdown. That is useful for spotting weak areas even after you pass.
 * Scaled scoring means you cannot convert directly to "number of questions needed". Aim for **85% or better on practice** to have margin.
 
 ## The six scenarios (summary)

@@ -33,4 +33,4 @@
 
 ## After the exam
 
-You'll see a provisional result and later a **score report with per-objective percentages**. Even if you pass, note your lowest objectives; they're the best map for real-world improvement (and for the Developer exam).
+You'll get a result and a **score report with a per-area breakdown**. Even if you pass, note your weakest areas; they're the best map for real-world improvement (and for the Developer exam). Remember that exam questions stay confidential: discuss topics, never questions.

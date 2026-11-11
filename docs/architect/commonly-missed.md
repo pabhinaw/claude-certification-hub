@@ -1,8 +1,8 @@
 # Commonly Missed Topics <span class="level-badge">L4</span>
 
-These five objectives are where experienced candidates most often lose marks: they *feel* familiar, but the exam wants a specific, deterministic answer. This list comes from the author's own score report (see [My Exam Journey](../about/my-journey.md)) and from community feedback.
+These five topic areas are where experienced candidates most often lose marks: they *feel* familiar, but the right answer is a specific, deterministic one. The list is based on the topic-level results in the author's own score report (see [My Exam Journey](../about/my-journey.md)) and on community feedback. It contains no exam questions.
 
-| Rank | Objective | Why people miss it |
+| Rank | Topic area | Why people miss it |
 |---|---|---|
 | 1 | `tool_choice` + **sequencing** multi-tool workflows | they know `tool_choice` but not how to guarantee *order* |
 | 2 | **Human review routing** | default instinct is "random sample X%" |
@@ -27,7 +27,7 @@ These five objectives are where experienced candidates most often lose marks: th
 | B shouldn't even be considered yet | expose B in `tools` only after A's output exists |
 | Avoid A and B in the same turn | `disable_parallel_tool_use: true` |
 
-**Spot it in a question:** *"…sometimes calls `create_shipment` before `validate_address`…"* or *"…downstream parser fails when Claude replies in text…"*. Look for the option that **forces and/or gates**; reject "update the prompt" options.
+**Recognise the pattern:** *"…sometimes calls `create_shipment` before `validate_address`…"* or *"…downstream parser fails when Claude replies in text…"*. Look for the option that **forces and/or gates**; reject "update the prompt" options.
 
 [Full explanation → D2](domains/d2-tool-design-mcp.md#tool_choice-and-tool-sequencing)
 

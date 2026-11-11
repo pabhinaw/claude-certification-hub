@@ -15,8 +15,10 @@ flowchart TD
 
 - [ ] [LLM & Claude Basics](../fundamentals/llm-basics.md): tokens, context window, model families
 - [ ] [The Messages API](../fundamentals/messages-api.md): roles, statelessness, `stop_reason`
+- [ ] [Prompt Engineering Basics](../fundamentals/prompt-engineering-basics.md): clear, structured prompts
 - [ ] [Tool Use Basics](../fundamentals/tool-use-basics.md): `tool_use` → `tool_result` round trip
-- [ ] [Claude Code Basics](../fundamentals/claude-code-basics.md) and [MCP Basics](../fundamentals/mcp-basics.md)
+- [ ] [Structured Output Basics](../fundamentals/structured-output-basics.md) and [Agent SDK Basics](../fundamentals/agent-sdk-basics.md)
+- [ ] [Claude Code Basics](../fundamentals/claude-code-basics.md), [MCP Basics](../fundamentals/mcp-basics.md) and [Evaluation Basics](../fundamentals/evaluation-basics.md)
 
 **Milestone:** explain to a colleague, without notes, why you must resend the conversation history on every API call.
 

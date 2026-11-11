@@ -7,7 +7,7 @@ A free, community-built, **basic → advanced** learning platform for Anthropic'
 
 Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published with GitHub Pages.
 
-> Not affiliated with or endorsed by Anthropic. Always confirm exam details on the official Anthropic pages.
+> Unofficial and independent: not affiliated with, sponsored or endorsed by Anthropic. Contains no real or recalled exam questions. Claude and Anthropic are trademarks of Anthropic, PBC.
 
 ---
 

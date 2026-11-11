@@ -1,6 +1,6 @@
 # The Six Scenarios <span class="level-badge">L3</span>
 
-The exam picks **4 of these 6** scenarios at random, and each question sits inside one of them. Prepare **all six**. For each one, know the reference architecture, the main risks and the mechanisms that control them.
+Public descriptions of the exam say questions are framed around **four scenarios drawn from a published set of six** business themes. The architectures, risks and controls below are **our own teaching material** for each theme. They are not exam content. Prepare all six.
 
 ---
 

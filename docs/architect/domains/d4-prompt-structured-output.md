@@ -2,14 +2,15 @@
 
 This domain tests how you get **consistent, valid, honest output**: clear criteria, few-shot examples, schemas that don't force guesses, retry loops that actually help, the right processing mode, and independent review.
 
-## What this domain tests
+## What this domain covers
 
 * Explicit, categorical criteria
 * Few-shot prompting for format and ambiguous cases
 * Structured output: tool use + JSON schema + `tool_choice`
 * Schema design (optional, nullable, enums) that prevents fabrication
 * Validation/retry loops and feedback loops
-* Synchronous vs Message Batches API
+* Synchronous vs Message Batches API, and batch limits
+* Prompt caching: what to cache, TTLs and pitfalls
 * Multi-instance (independent) review
 
 ---
@@ -53,11 +54,28 @@ Good few-shot sets:
 | Method | Schema compliance | Use when |
 |---|---|---|
 | Prompt-based ("respond in JSON like…") | lowest; may drift or add prose | prototypes, low stakes |
-| Prefill the assistant reply (e.g. start with `{`) | better format adherence; still unvalidated | lightweight formatting nudges (not available with every feature) |
-| **Tool use with a JSON schema + forced `tool_choice`** | **highest**: always a tool call with schema-shaped input | production pipelines where parsers depend on it |
-| Strict / constrained structured outputs (where supported) | guaranteed schema validity | strict compliance requirements |
+| Prefill the assistant reply (e.g. start with `{`) | better adherence; still unvalidated | lightweight nudges (not compatible with every feature, e.g. JSON outputs mode) |
+| **Tool use with a JSON schema + forced `tool_choice`** | **high**: always a tool call shaped by the schema | the classic, widely supported pattern for production pipelines |
+| **Native structured outputs** (see below) | **guaranteed** schema-valid output (grammar-constrained) | strict compliance on models that support it |
 
-The exam pattern: **"strict compliance required, downstream system parses it"** → define a tool whose `input_schema` is your output schema, and **force** it with `tool_choice: {"type": "tool", "name": "..."}`.
+### Native structured outputs
+
+The Claude API also offers **structured outputs** with two complementary features:
+
+| Feature | Parameter | Controls | Use when |
+|---|---|---|---|
+| **JSON outputs** | `output_config.format` with `type: "json_schema"` | the shape of Claude's **final response** | pure extraction, classification, structured reports |
+| **Strict tool use** | `"strict": true` on a tool definition | the **tool name and inputs** Claude produces | agents whose tool calls must always validate |
+
+They can be used **together**: JSON outputs for what Claude says, strict tool use for how it calls your functions. (Earlier beta versions used an `output_format` parameter and a beta header; check the current docs for the exact shape.)
+
+Points to remember:
+
+* **Guaranteed format ≠ guaranteed truth.** Values can still be wrong or invented. Schema design, examples and review still matter.
+* Some features don't combine, for example **prefill with JSON outputs**. Check the compatibility notes before mixing features.
+* JSON Schema support has limitations (not every keyword is supported). Keep schemas simple and flat where you can.
+
+The classic scenario pattern: **"strict compliance required, downstream system parses it"** → define a tool whose `input_schema` is your output schema and **force** it with `tool_choice: {"type": "tool", "name": "..."}`, or use native structured outputs where available. Both beat "ask for JSON in the prompt".
 
 ```python
 extract_tool = {
@@ -135,11 +153,73 @@ flowchart LR
 
 | Choose **Messages API (sync)** when | Choose **Message Batches API** when |
 |---|---|
-| a user or a blocking workflow step is waiting | nothing is waiting: overnight jobs, back-fills, evals |
-| latency matters | throughput and **~50% lower cost** matter |
-| you need multi-turn tool loops interactively | each request is self-contained (one batch request can't do an interactive tool round trip with your code) |
+| a user or a blocking workflow step is waiting | nothing is waiting: overnight jobs, back-fills, evaluations |
+| latency matters | throughput and **50% lower cost** matter |
+| your code must run tools and reply within the same task | each request is independent and complete on its own |
 
-Batches complete within **24 hours** (often much sooner). Give each request a **`custom_id`** so you can match results to source records, because results aren't guaranteed to come back in order.
+### Message Batches: numbers worth knowing
+
+| Fact | Value |
+|---|---|
+| Cost | **50%** of standard prices |
+| Size limit per batch | **100,000 requests or 256 MB**, whichever comes first |
+| Processing time | most batches finish **within 1 hour**; anything unfinished **expires after 24 hours** |
+| Result availability | **29 days** after the batch is created |
+| Result order | **not guaranteed**: match results with your **`custom_id`** |
+| Per-request outcome | each request succeeds, errors, is canceled or expires **independently** |
+
+Design implications:
+
+* Make `custom_id` meaningful (for example the document's record ID), so results can always be joined back.
+* Requests are processed independently, so a batch suits **single-shot** work. An agent loop where your code runs tools between turns doesn't fit.
+* Plan for partial failure: re-submit only the errored or expired items.
+* Since batches can take longer than 5 minutes, shared-context batches benefit from the **1-hour cache** (see below).
+
+---
+
+## Prompt caching
+
+**Prompt caching** lets requests that share a long, identical **prefix** (tools, system prompt, reference documents, earlier conversation) reuse it instead of re-processing it, which cuts cost and latency.
+
+### How it works
+
+* Caching applies to the prompt **prefix** in this order: **tools → system → messages**, up to a marked point.
+* Mark the end of the reusable part with `cache_control: {"type": "ephemeral"}`, or use **automatic caching**, which moves the breakpoint along as a conversation grows.
+* **Anything that changes before the breakpoint breaks the cache.** Put stable content first and variable content (the user's question) last.
+
+```python
+resp = client.messages.create(
+    model=MODEL, max_tokens=1024,
+    system=[{
+        "type": "text",
+        "text": LONG_POLICY_MANUAL,                  # stable, reused on every request
+        "cache_control": {"type": "ephemeral"},      # 5-minute TTL by default
+    }],
+    messages=[{"role": "user", "content": question}],   # changes every time: after the breakpoint
+)
+print(resp.usage)   # cache_creation_input_tokens / cache_read_input_tokens show writes and hits
+```
+
+### Numbers worth knowing
+
+| Fact | Value |
+|---|---|
+| Default lifetime (TTL) | **5 minutes**, refreshed each time the cache is hit |
+| Extended lifetime | **1 hour**: `{"type": "ephemeral", "ttl": "1h"}` |
+| Cache **write** price | **1.25×** base input (5-min) · **2×** base input (1-hour) |
+| Cache **read** price | **0.1×** base input |
+| Explicit breakpoints | up to **4** per request |
+| Minimum cacheable length | depends on the model; **shorter prefixes silently don't cache** |
+
+### Design rules
+
+* Use caching when the **same large prefix** is reused often: long system prompts, tool catalogues, a document many questions are asked about, long agent conversations.
+* Pick the TTL by the **gap between requests**: frequent traffic → 5 minutes; requests minutes-to-an-hour apart, or batches → 1 hour.
+* Keep the cached prefix **byte-for-byte identical**: no timestamps or per-user IDs inside it. Changing tool definitions or `tool_choice` can also invalidate parts of the cache.
+* Verify with the `usage` fields. If `cache_read_input_tokens` stays at 0, something before the breakpoint is changing, or the prefix is too short.
+
+!!! tip "Caching vs batching"
+    They solve different problems and can be combined: **caching** reuses a shared prefix (good for repeated context); **batching** trades latency for a 50% discount (good for non-urgent volume).
 
 ---
 
@@ -173,6 +253,7 @@ A model reviewing **its own output in the same context** tends to agree with its
 5. **Retry with the specific error; never retry missing information.**
 6. **Waiting → sync; bulk and non-urgent → batch with `custom_id`.**
 7. **Review with a fresh, independent instance.**
+8. **Repeated large prefix → cache it; keep it identical; choose the TTL by request gap.**
 
 ## Check yourself
 
@@ -184,3 +265,19 @@ A model reviewing **its own output in the same context** tends to agree with its
 
 ??? question "Weekly re-scoring of 200k historical records. API mode?"
     **Message Batches API**: not time-sensitive, high volume, about 50% cheaper. Correlate via `custom_id`.
+
+??? question "A support bot sends the same 30-page policy manual as the system prompt with every question, and cache reads stay at zero. The system prompt starts with today's date and time. What's wrong?"
+    The timestamp at the **start** of the prefix changes on every request, so the cached prefix never matches. Move variable content after the cache breakpoint (or out of the system prompt) so the manual is byte-for-byte identical each time.
+
+??? question "A nightly batch of 5,000 requests shares one long instruction block. Which cache TTL fits better?"
+    The **1-hour** TTL. Batch processing can take longer than 5 minutes, so the default TTL may expire between requests that share the prefix.
+
+---
+
+!!! abstract "Verify in official docs"
+    Product details change. Before relying on a specific parameter, limit or price, check the current documentation:
+
+    * [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+    * [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
+    * [Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+    * [Prompt engineering overview](https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview)

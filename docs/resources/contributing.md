@@ -6,7 +6,7 @@ This hub is meant to grow with the community. Contributions are welcome!
 
 * **Found an error or outdated fact?** Open a GitHub *Issue* with the page, what's wrong, and a link to the official source.
 * **Want to improve a page?** Click the ✏️ edit icon at the top of any page. GitHub will guide you through a *pull request*.
-* **Have a practice question?** It must be **original**: never share real exam questions (that violates the exam agreement).
+* **Have a practice question?** It must be **original**. Never share real or recalled exam questions: exam content is confidential under Anthropic's certification policy. See the [content policy](content-policy.md).
 
 ## Content rules
 

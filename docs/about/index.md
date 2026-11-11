@@ -1,6 +1,6 @@
 # About this Hub
 
-**Claude Certification Hub** is an independent, community learning platform for Anthropic's Claude certifications, developed by **[Prasoon Abhinaw](https://www.linkedin.com/in/pabhinaw/)**, a software engineer and Claude Certified Architect – Foundations. Connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/).
+**Claude Certification Hub** is an independent, community learning platform for Anthropic's Claude certifications, developed by **[Prasoon Abhinaw](https://www.linkedin.com/in/pabhinaw/)**, a software engineer and Claude Certified Architect – Foundations. Connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/) · [Verify credential on Credly](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635).
 
 ## Mission
 
@@ -23,4 +23,4 @@ Make high-quality preparation **free, structured and practical**: from first pri
 Read the author's notes: [My Exam Journey](my-journey.md).
 
 !!! note
-    Not affiliated with or endorsed by Anthropic.
+    Unofficial and independent: not affiliated with, sponsored or endorsed by Anthropic. Claude and Anthropic are trademarks of Anthropic, PBC. See the [content policy](../resources/content-policy.md).

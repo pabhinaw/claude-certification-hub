@@ -2,12 +2,13 @@
 
 Tools are how agents act. This domain tests whether Claude **picks the right tool**, **calls tools in the right order**, **understands tool failures**, and whether MCP servers are **integrated at the right scope, securely**.
 
-## What this domain tests
+## What this domain covers
 
 * Writing tool descriptions that drive correct selection
 * Structured, type-specific error responses
 * How many tools to give an agent; `tool_choice`; sequencing
-* MCP scopes, authentication via env-var expansion, resources, discovery
+* MCP scopes, authentication via env-var expansion, discovery
+* MCP tools vs resources vs prompts, and transports
 * Built-in tools: Grep, Glob, Read, Edit
 
 ---
@@ -104,6 +105,47 @@ flowchart LR
 
 Also useful: `disable_parallel_tool_use: true` when calls must happen one at a time (otherwise Claude may request A and B in parallel in the same turn).
 
+### Worked example: a three-step dependency chain
+
+*Fictional scenario:* a shipping agent must call `validate_address` → `quote_rates` → `create_shipment`. In testing it sometimes creates shipments with unvalidated addresses.
+
+```python
+STEP_ORDER = ["validate_address", "quote_rates", "create_shipment"]
+done = set()
+
+def gate(tool_name):
+    """Return a structured precondition error if an earlier step is missing."""
+    idx = STEP_ORDER.index(tool_name) if tool_name in STEP_ORDER else -1
+    for required in STEP_ORDER[:max(idx, 0)]:
+        if required not in done:
+            return {"error_category": "precondition", "is_retryable": True,
+                    "message": f"{tool_name} requires {required} first",
+                    "suggested_action": f"Call {required} now"}
+    return None
+
+# Turn 1: force the first step
+first = client.messages.create(model=MODEL, max_tokens=1024, tools=TOOLS,
+    tool_choice={"type": "tool", "name": "validate_address"}, messages=msgs)
+# Later turns: auto, with every tool call passing through gate() before execution
+```
+
+Why this is the strongest answer:
+
+* **Forcing** step 1 removes the most common failure (skipping validation).
+* The **gate** catches every later out-of-order attempt, including after retries or long conversations.
+* The **structured error** tells Claude exactly how to recover, so it self-corrects instead of guessing.
+
+### Sequencing: choosing the mechanism
+
+| Situation | Best mechanism | Why not just prompt? |
+|---|---|---|
+| Output **must** be a tool call (parser downstream) | `tool_choice` `tool` or `any` | Prompts can still produce prose |
+| A **specific first step** is mandatory | Force it with `tool_choice: tool` on turn 1 | Model may "helpfully" skip ahead |
+| B must **never** run before A, at any point | Code gate / PreToolUse hook | Forcing only controls one turn |
+| B is **meaningless** until A's output exists | Progressive exposure (add B to `tools` later) | Fewer tools to choose from = fewer mistakes |
+| Calls must be strictly **one at a time** | `disable_parallel_tool_use: true` | Claude may request several tools in one turn |
+| Extended thinking is on | `auto` + gate in code (forced modes unsupported with manual thinking) | Forced `tool_choice` returns an error |
+
 ### How many tools?
 
 Accuracy drops as the tool list grows and overlaps. A focused agent with **4–5 relevant tools** routes better than one with 18+. Split responsibilities across specialised subagents, and give each only its tools (least privilege).
@@ -142,9 +184,31 @@ Use **environment-variable expansion**, so tokens never land in Git:
 
 After configuring: `claude mcp list` or `/mcp` in a session. Confirm the server is **connected** and its **tools are listed**. Many "Claude ignores my tool" problems are really "the server never connected" or "the env var wasn't set".
 
-### Resources
+### MCP: tools, resources and prompts
 
-Expose a **resource** (for example a catalogue of available documents or a schema) so the agent can read *what exists* in one step instead of making many exploratory tool calls.
+An MCP server can offer three different things. Choosing the right one is a design decision:
+
+| Primitive | Who decides to use it | Best for | Example |
+|---|---|---|---|
+| **Tool** | the **model** calls it | actions, or queries with parameters | `create_ticket`, `search_orders(customer_id)` |
+| **Resource** | the **application or user** attaches or reads it | read-only context: catalogues, schemas, reference docs | "list of available runbooks", DB schema |
+| **Prompt** | the **user** picks it (often as a slash command) | reusable, parameterised workflows | "summarise incident {id}" |
+
+Design rules:
+
+* If an agent wastes many tool calls just **discovering what exists**, expose a **resource** catalogue instead. One read replaces many exploratory calls.
+* Don't wrap static reference content as a tool with no parameters. That's what resources are for.
+* Use **prompts** for team workflows that should be invoked deliberately and consistently.
+
+### Transports
+
+| Transport | Runs | Typical use |
+|---|---|---|
+| **stdio** | as a local process launched by the client | local tools, file system, dev utilities |
+| **Streamable HTTP** | as a remote service | shared team or company servers, SaaS integrations |
+| SSE (older remote transport) | remote | legacy servers; prefer HTTP for new ones |
+
+Remote servers typically need authentication (OAuth or tokens). In configuration files, always reference secrets through **environment-variable expansion**.
 
 ---
 
@@ -193,3 +257,18 @@ Efficient exploration: **Glob/Grep to locate → Read only the relevant files/se
 
 ??? question "A teammate cloned the repo but Claude can't see the shared Jira MCP server. Likely cause?"
     It was configured at **local or user** scope on the original developer's machine. Move it to project scope (`.mcp.json`), with credentials via env-var expansion.
+
+??? question "An agent makes 12 'list' and 'search' calls at the start of every session just to find out which runbooks exist. Better design?"
+    Expose the runbook catalogue as an MCP **resource** the agent (or application) can read once, instead of making many exploratory tool calls.
+
+??? question "Extended thinking is enabled and you need `create_shipment` never to run before `validate_address`. Can you force the order with `tool_choice`?"
+    Not with forced modes: with manually enabled extended thinking only `auto` and `none` are supported. Keep `auto` and **enforce the order in code** (a gate or PreToolUse hook that returns a precondition error).
+
+---
+
+!!! abstract "Verify in official docs"
+    Product details change. Before relying on a specific parameter, limit or price, check the current documentation:
+
+    * [Tool use and tool_choice](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use)
+    * [Claude Code MCP quickstart (scopes)](https://code.claude.com/docs/en/mcp-quickstart)
+    * [Model Context Protocol specification](https://modelcontextprotocol.io)

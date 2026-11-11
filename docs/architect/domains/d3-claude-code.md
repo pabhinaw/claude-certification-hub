@@ -2,7 +2,7 @@
 
 This domain is about **putting each kind of guidance in the right mechanism at the right scope**, and running effective workflows: plan mode, iterative refinement, codebase exploration and CI.
 
-## What this domain tests
+## What this domain covers
 
 * CLAUDE.md hierarchy, `@` imports, `.claude/rules/` with path globs
 * Custom slash commands and Skills (project vs personal)
@@ -239,3 +239,11 @@ claude -p "Review this PR diff for security issues. Output JSON findings." \
 
 ??? question "You want a `/release-notes` command available to every engineer who clones the repo."
     Create `.claude/commands/release-notes.md` and commit it.
+
+---
+
+!!! abstract "Verify in official docs"
+    Product details change. Before relying on a specific parameter, limit or price, check the current documentation:
+
+    * [Claude Code documentation](https://code.claude.com/docs)
+    * [Claude Code hooks reference](https://code.claude.com/docs/en/hooks)

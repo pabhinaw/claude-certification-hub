@@ -3,7 +3,7 @@
 # Edit site_name / site_url / repo_url after you create your repo.
 # ------------------------------------------------------------
 site_name: Claude Certification Hub
-site_description: One-stop, basic-to-advanced learning platform for Anthropic's Claude certifications (Architect & Developer).
+site_description: Unofficial, independent basic-to-advanced study hub for the Claude certifications (Architect & Developer). Not affiliated with Anthropic.
 site_author: Prasoon Abhinaw
 # GitHub username: pabhinaw
 site_url: https://pabhinaw.github.io/claude-certification-hub/
@@ -96,7 +96,9 @@ extra:
 copyright: >
   &copy; 2026 Claude Certification Hub &middot; Developed by
   <a href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Prasoon Abhinaw</a>
-  &middot; Independent community resource, not affiliated with Anthropic.
+  &middot; Unofficial community resource, not affiliated with, sponsored or endorsed by Anthropic.
+  Claude and Anthropic are trademarks of Anthropic, PBC.
+  &middot; <a href="/claude-certification-hub/resources/content-policy/">Content policy</a>
 
 nav:
   - Home: index.md
@@ -109,14 +111,18 @@ nav:
       - fundamentals/index.md
       - LLM & Claude Basics: fundamentals/llm-basics.md
       - The Messages API: fundamentals/messages-api.md
+      - Prompt Engineering Basics: fundamentals/prompt-engineering-basics.md
       - Tool Use Basics: fundamentals/tool-use-basics.md
+      - Structured Output Basics: fundamentals/structured-output-basics.md
+      - Agent SDK Basics: fundamentals/agent-sdk-basics.md
       - Claude Code Basics: fundamentals/claude-code-basics.md
       - MCP Basics: fundamentals/mcp-basics.md
+      - Evaluation Basics: fundamentals/evaluation-basics.md
       - Glossary: fundamentals/glossary.md
   - Architect (CCAR-F):
       - architect/index.md
       - Exam Overview: architect/exam-overview.md
-      - Exam Blueprint & Objectives: architect/exam-blueprint.md
+      - Domains & Study Checklist: architect/exam-blueprint.md
       - Study Plans: architect/study-plan.md
       - The Six Scenarios: architect/scenarios.md
       - Domains:
@@ -142,6 +148,7 @@ nav:
       - resources/index.md
       - Official Links: resources/official-links.md
       - Contributing: resources/contributing.md
+      - Content & Exam-Integrity Policy: resources/content-policy.md
   - About:
       - about/index.md
       - My Exam Journey: about/my-journey.md

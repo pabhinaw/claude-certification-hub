@@ -2,7 +2,7 @@
 
 The smallest domain by weight, but its ideas show up inside almost every scenario. It tests whether long-running work **stays coherent**, whether agents **escalate at the right time**, whether **errors are propagated honestly**, and whether **human review is targeted where it matters**.
 
-## What this domain tests
+## What this domain covers
 
 * Preserving critical context (summarisation risks, lost-in-the-middle, case-facts blocks)
 * Escalation decisions
@@ -144,3 +144,12 @@ For research and synthesis systems:
 
 ??? question "A subagent's web search times out. What should it return to the coordinator?"
     A structured error (what failed, transient/retryable, what was attempted), not "no sources found", so the coordinator can retry or report the gap honestly.
+
+---
+
+!!! abstract "Verify in official docs"
+    Product details change. Before relying on a specific parameter, limit or price, check the current documentation:
+
+    * [Context windows](https://docs.claude.com/en/docs/build-with-claude/context-windows)
+    * [Claude Code documentation (context, /compact, subagents)](https://code.claude.com/docs)
+    * [Build evaluations](https://docs.claude.com/en/docs/test-and-evaluate/develop-tests)

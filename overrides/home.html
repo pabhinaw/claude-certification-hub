@@ -1,0 +1,45 @@
+{#- Custom landing page: full-width hero + the content of docs/index.md -#}
+{% extends "main.html" %}
+
+{% block tabs %}
+  {{ super() }}
+  <section class="hub-hero">
+    <div class="md-grid hub-hero__inner">
+      <div class="hub-hero__text md-typeset">
+        <p class="hub-greeting" id="hub-greeting">Welcome, learner 👋</p>
+        <h1>Master the Claude certifications, <span class="hub-hl">from first principles to exam-ready.</span></h1>
+        <p class="hub-lead">
+          A free, structured, one-stop learning platform for Anthropic's
+          <strong>Claude Certified Architect</strong> and <strong>Developer</strong> exams:
+          concepts, decision rules, hands-on labs and original practice questions.
+        </p>
+        <div class="hub-cta">
+          <a href="{{ 'architect/' | url }}" class="md-button md-button--primary">Start the Architect track</a>
+          <a href="{{ 'start-here/' | url }}" class="md-button">New here? Start here</a>
+        </div>
+        <p class="hub-byline">
+          Developed by
+          <a href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Prasoon Abhinaw</a>
+          &middot; Claude Certified Architect – Foundations
+        </p>
+      </div>
+
+      <aside class="hub-panel" aria-label="CCAR-F at a glance">
+        <p class="hub-panel__title">CCAR-F at a glance</p>
+        <div class="hub-stats">
+          <div class="hub-stat"><strong>60</strong><span>scenario questions</span></div>
+          <div class="hub-stat"><strong>120</strong><span>minutes</span></div>
+          <div class="hub-stat"><strong>720</strong><span>pass mark / 1000</span></div>
+          <div class="hub-stat"><strong>5</strong><span>weighted domains</span></div>
+        </div>
+        <a class="hub-panel__link" href="{{ 'architect/exam-overview/' | url }}">Full exam overview →</a>
+      </aside>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  <div class="hub-home">
+    {{ page.content }}
+  </div>
+{% endblock %}

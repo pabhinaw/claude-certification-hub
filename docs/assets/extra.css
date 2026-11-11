@@ -266,3 +266,18 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
   letter-spacing: .08em; text-transform: uppercase; color: #fff; opacity: .85;
   border: 1px dashed rgba(255, 255, 255, .45);
 }
+
+/* Secondary (outline) buttons: keep them visible in dark mode */
+[data-md-color-scheme="slate"] .md-typeset .md-button:not(.md-button--primary) {
+  color: var(--hub-accent-light);
+  border-color: rgba(94, 234, 212, .55);
+}
+[data-md-color-scheme="slate"] .md-typeset .md-button:not(.md-button--primary):hover {
+  color: #0d1324;
+  background-color: var(--hub-accent-light);
+  border-color: var(--hub-accent-light);
+}
+/* Light mode: navy outline buttons with a teal hover */
+[data-md-color-scheme="default"] .md-typeset .md-button:not(.md-button--primary):hover {
+  color: #fff; background-color: var(--hub-accent-dark); border-color: var(--hub-accent-dark);
+}

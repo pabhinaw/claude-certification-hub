@@ -1,0 +1,5 @@
+/* Small visual tweaks on top of Material */
+.md-typeset .grid.cards > ul > li { border-radius: 10px; }
+.md-typeset table:not([class]) th { white-space: nowrap; }
+.weight-bar { display:inline-block; height:10px; border-radius:5px; background: var(--md-accent-fg-color); vertical-align: middle; }
+.level-badge { font-size: .7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--md-primary-fg-color); color: var(--md-primary-bg-color); }

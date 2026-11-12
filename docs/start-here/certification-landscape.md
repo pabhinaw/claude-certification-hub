@@ -1,4 +1,4 @@
-# The Certification Landscape <span class="level-badge">L1</span>
+# The Four Claude Certifications <span class="level-badge">L1</span>
 
 Anthropic launched its first technical certification, **Claude Certified Architect – Foundations**, on **12 March 2026**, alongside the Claude Partner Network. As of mid-2026 the programme has **four** proctored exams.
 

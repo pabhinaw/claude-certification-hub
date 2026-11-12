@@ -34,7 +34,7 @@ Then choose between the remaining two by asking: *which one is more reliable, mo
 
 ## 4. Build something small
 
-Reading about hooks is not the same as seeing a PostToolUse hook fail your build. The three [labs](../labs/index.md) take about 1–2 hours each, and they are the fastest way to make L3 concepts stick.
+Reading about hooks is not the same as seeing a PostToolUse hook fail your build. The four [labs](../labs/index.md) take one to three hours each, and nothing makes the L3 ideas stick faster.
 
 ## 5. Weight your time by the blueprint
 

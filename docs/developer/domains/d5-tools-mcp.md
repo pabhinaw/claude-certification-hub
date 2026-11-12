@@ -221,7 +221,7 @@ Combinations are normal: an MCP server provides access to the ticketing system, 
 * An MCP server runs with **whatever access you give it**. Apply least privilege: read-only credentials unless writes are required, narrow scopes.
 * Tool results from a server are **untrusted content**. They can carry injected instructions ([Security](d6-security-safety.md)).
 * Only install servers you trust; a server's tool descriptions are read by the model.
-* Remote servers need proper authentication and per-user authorisation. Don't share one powerful token across all users.
+* Remote servers need proper authentication and per-user authorisation. Don't share one high-privilege token across all users.
 
 ---
 

@@ -43,5 +43,5 @@ Claude can "think" before answering, which improves performance on hard reasonin
 ??? question "Claude answered correctly in turn 1 but 'forgot' the user's name in turn 2. What is the most likely bug?"
     The application did not include the turn-1 messages in the turn-2 request. The API is stateless; the client must resend the history.
 
-??? question "Why might a crucial instruction placed in the middle of a 150k-token prompt be ignored?"
+??? question "Why might an important instruction placed in the middle of a 150k-token prompt be ignored?"
     The "lost in the middle" effect. Put critical facts at the start or end, or keep them in a compact, repeated "case facts" block.

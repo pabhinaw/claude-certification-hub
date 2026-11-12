@@ -1,6 +1,6 @@
 # Contributing
 
-This hub is meant to grow with the community. Contributions are welcome!
+The site gets better when people point out what's missing or wrong. Here's how to help.
 
 ## Ways to help
 

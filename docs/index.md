@@ -8,9 +8,9 @@ hide:
 ---
 
 <section class="hub-section" markdown>
-<p class="hub-eyebrow">Choose your path</p>
+<p class="hub-eyebrow">Where to start</p>
 
-## Three ways in, one destination
+## Pick a track
 
 <div class="hub-tracks">
 <a class="hub-track" href="fundamentals/">
@@ -22,22 +22,22 @@ hide:
 <a class="hub-track hub-track--featured" href="architect/">
 <span class="hub-badge hub-badge--live">Complete track</span>
 <span class="hub-track__title">Architect · CCAR-F</span>
-<span class="hub-track__desc">Domain checklist, the six scenario themes, five domain deep-dives, practice questions and a one-page cheat sheet.</span>
+<span class="hub-track__desc">A checklist of what is tested, the six exam scenarios, a page for each domain, practice questions and a one-page cheat sheet.</span>
 <span class="hub-track__go">Start the Architect track →</span>
 </a>
 <a class="hub-track" href="developer/">
 <span class="hub-badge hub-badge--live">Complete track</span>
 <span class="hub-track__title">Developer · CCDV-F</span>
-<span class="hub-track__desc">A 10-day study plan, nine deep-dive pages mapped to the official skill list, 205 practice questions, three timed mock exams and a cheat sheet.</span>
+<span class="hub-track__desc">A 10-day study plan, a page for each part of the official skill list, 205 practice questions, three timed mocks and a cheat sheet.</span>
 <span class="hub-track__go">Start the Developer track →</span>
 </a>
 </div>
 </section>
 
 <section class="hub-section" markdown>
-<p class="hub-eyebrow">How it works</p>
+<p class="hub-eyebrow">How it's organised</p>
 
-## A learning path from basic to exam-ready
+## Four levels, from the basics to exam day
 
 <div class="hub-steps">
   <div class="hub-step"><span class="hub-step__num">L1</span><h4>Basic</h4><p>Concepts and vocabulary: tokens, the Messages API, tools, Claude Code, MCP.</p></div>
@@ -50,9 +50,9 @@ hide:
 </section>
 
 <section class="hub-section" markdown>
-<p class="hub-eyebrow">Inside the hub</p>
+<p class="hub-eyebrow">On this site</p>
 
-## Everything you need, in one place
+## What you'll find here
 
 <div class="hub-features" markdown>
 
@@ -66,8 +66,8 @@ Domain weights and a competency checklist, written as clear study goals.
 <div class="hub-feature" markdown>
 :material-layers-triple-outline:{ .hub-icon }
 
-### [Domain deep-dives](architect/index.md)
-Core concepts, patterns, anti-patterns and decision rules for all five domains.
+### [Domain pages](architect/index.md)
+The concepts, the usual mistakes and the decision rules, one page per domain.
 </div>
 
 <div class="hub-feature" markdown>
@@ -88,14 +88,14 @@ Reference architectures, risks and controls for every exam scenario.
 :material-flask-outline:{ .hub-icon }
 
 ### [Hands-on labs](labs/index.md)
-Build an agent loop, an extraction pipeline and a team Claude Code setup.
+Four small builds: an agent loop, an extraction pipeline, a team Claude Code setup and a multi-agent research pipeline.
 </div>
 
 <div class="hub-feature" markdown>
 :material-lightning-bolt-outline:{ .hub-icon }
 
 ### [Cheat sheet & Study Notes](architect/cheat-sheet.md)
-The decision rules on one page, plus short [articles](notes/index.md) on the ideas that matter most.
+The decision rules on one page, plus a few short [articles](notes/index.md) on ideas people often get wrong.
 </div>
 
 </div>
@@ -103,7 +103,7 @@ The decision rules on one page, plus short [articles](notes/index.md) on the ide
 
 <section class="hub-section" markdown>
 <div class="hub-principle">
-  <p class="hub-eyebrow">The one idea to remember</p>
+  <p class="hub-eyebrow">If you remember one thing</p>
   <p class="hub-principle__quote">The exams reward <strong>deterministic guarantees over hopeful instructions</strong>. When something must <em>always</em> happen, the answer lives in code, configuration, hooks or schemas, not in a stronger prompt.</p>
 </div>
 </section>
@@ -121,7 +121,7 @@ The decision rules on one page, plus short [articles](notes/index.md) on the ide
 
 ### Video lessons on TarkoniX Academy
 
-Everything you need for the exams is on this site, and it stays free. For those who learn better by watching, I am starting a video series on **TarkoniX Academy**, in Hinglish (Hindi and English): walkthroughs of these certification topics, core AI concepts explained simply, and hands-on build sessions. The series is just getting started, so subscribe if you would like to be notified as new videos are published.
+A friend and I have started a YouTube channel, **TarkoniX Academy**, where we'll go through these certification topics, explain AI concepts and build things on screen. The videos are in Hinglish (Hindi and English). It's early days and there isn't much up yet, so subscribe if you'd like to know when new ones come out. You don't need the videos for the exams: everything is here on the site, and it stays free.
 
 [:fontawesome-brands-youtube: Visit the channel](https://www.youtube.com/@tarkonixacademy){ .md-button target="_blank" rel="noopener" }
 </div>
@@ -137,7 +137,7 @@ Everything you need for the exams is on this site, and it stays free. For those 
 
 <p class="hub-author__role">Software Engineer · Claude Certified Architect – Foundations</p>
 
-I built this hub after passing the CCAR-F exam, to give every learner the structured, honest preparation I wished I'd had: clear explanations, real decision rules, and the topics candidates most often find tricky. Questions about a topic? Connect with me on LinkedIn.
+I passed CCAR-F in November 2026. While preparing, I kept notes on the rules of thumb that kept coming up and the topics I found easy to get wrong. This site is those notes, tidied up and expanded. If something is unclear, or you think it's wrong, message me on LinkedIn.
 
 [:fontawesome-brands-linkedin: Connect on LinkedIn](https://www.linkedin.com/in/pabhinaw/){ .md-button .md-button--primary target="_blank" rel="noopener" }
 [How I prepared](about/my-journey.md){ .md-button }

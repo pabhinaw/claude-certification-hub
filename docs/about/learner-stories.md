@@ -7,7 +7,7 @@ hide:
 
 # Learner Stories
 
-Used this hub while preparing for a Claude certification, or while building with Claude? Leave a comment at the bottom of this page, the same way you would under a video. Your feedback helps other learners decide where to start, and helps me improve the content.
+Used this site to prepare for a Claude certification, or while building with Claude? Leave a comment at the bottom of this page. It helps other people decide where to start, and it tells me what to fix.
 
 !!! info "How comments work"
     * Comments are **written by learners themselves** and appear straight away. Nothing is written or edited on their behalf.

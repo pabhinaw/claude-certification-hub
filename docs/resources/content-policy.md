@@ -22,6 +22,10 @@ This hub exists to help people **learn the skills** behind the Claude certificat
 * **Technical facts link to official documentation** wherever practical, and pages carry a review date.
 * **Exam logistics** (format, price, eligibility) come from public pages and may change. Always confirm with Anthropic before you book.
 
+## Learner comments
+
+The Learner Stories page accepts public comments through GitHub Discussions. Comments are written by learners, not by this site. Comments containing exam questions, exam content, score details, personal data or abuse are removed. Loading the comment box connects your browser to giscus.app and GitHub, and only happens after you click "Load comments".
+
 ## Reporting a problem
 
 If you believe any page breaks these rules, or a fact is out of date, please open an issue on the [GitHub repository](https://github.com/pabhinaw/claude-certification-hub/issues). It will be reviewed and corrected promptly.

@@ -7,10 +7,11 @@ hide:
 
 # Learner Stories
 
-Real notes from people who used this hub while preparing for a Claude certification or building with Claude.
+Used this hub while preparing for a Claude certification, or while building with Claude? Leave a comment at the bottom of this page, the same way you would under a video. Your feedback helps other learners decide where to start, and helps me improve the content.
 
-!!! info "How stories are published"
-    * Every story is **real and submitted by the learner**, with their consent to publish. Nothing here is written or edited to sound better.
-    * Learners choose how they're named: full name, first name and initial, or role only.
-    * Stories never include **exam questions, exam content or score details**.
-    * Anyone can ask for their story to be **removed at any time**.
+!!! info "How comments work"
+    * Comments are **written by learners themselves** and appear straight away. Nothing is written or edited on their behalf.
+    * To post, you sign in with a **GitHub account**. Your comment and GitHub username are public.
+    * Comments must never include **exam questions, exam content, score details or personal contact information**. Those are removed.
+    * You can **edit or delete your own comment** at any time.
+    * The comment box only loads after you click **Load comments** (see the [content policy](../resources/content-policy.md#learner-comments)).

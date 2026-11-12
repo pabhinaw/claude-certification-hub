@@ -1,11 +1,11 @@
 {#-
-  Learner testimonial cards.
-  Data comes from `extra.testimonials` in mkdocs.yml (real, consented stories only).
-  If the list is empty, an invitation card is shown instead.
+  Featured learner stories (optional).
+  Data: extra.testimonials in mkdocs.yml: comments the owner chose to feature,
+  copied word for word. If the list is empty, an invitation to comment is shown.
 -#}
 {% set stories = config.extra.testimonials or [] %}
 {% set limit = limit or 99 %}
-{% set submit_url = config.repo_url ~ "/issues/new?template=learner-story.yml" %}
+{% set comments_url = ('about/learner-stories/' | url) ~ '#comments' %}
 
 {% if stories %}
   <div class="hub-stories">
@@ -29,9 +29,9 @@
 {% else %}
   <div class="hub-stories-empty">
     <div class="hub-stories-empty__icon" aria-hidden="true">💬</div>
-    <h3>Be the first to share your story</h3>
-    <p>Did this hub help you prepare for a Claude certification or build something better? A short note helps other learners decide where to start.</p>
-    <a class="md-button md-button--primary" href="{{ submit_url }}" target="_blank" rel="noopener">Share your story</a>
+    <h3>Be the first to leave a comment</h3>
+    <p>Did this hub help you prepare for a Claude certification or build something better? Leave a quick comment, just like you would under a video.</p>
+    <a class="md-button md-button--primary" href="{{ comments_url }}">Leave a comment</a>
     <a class="md-button" href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Or message me on LinkedIn</a>
   </div>
 {% endif %}

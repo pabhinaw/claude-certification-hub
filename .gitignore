@@ -21,3 +21,6 @@ private/
 Thumbs.db
 .vscode/
 .idea/
+
+# Leftover files waiting to be deleted by hand
+_to_delete/

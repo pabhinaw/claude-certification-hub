@@ -87,23 +87,27 @@ mkdocs serve
 ```
 Then open http://127.0.0.1:8000 — the page refreshes as you edit.
 
-## Publishing learner stories (testimonials)
+## Learner comments
 
-Only **real, consented** stories are ever published. Never write or "improve" a testimonial yourself.
+The **About → Learner Stories** page has an on-page comment box powered by [giscus](https://giscus.app). Comments are stored in this repo's **GitHub Discussions**, so there is no separate database and no ads.
 
-1. A learner submits the **"Share your learner story"** form (GitHub → Issues → New issue). Both consent boxes are required.
-2. Read it. Reject anything containing exam questions, exam content, score details or personal contact data.
-3. Open `mkdocs.yml`, find `testimonials: []` and add the story **exactly as written**:
-   ```yaml
-   testimonials:
-     - name: "Asha K."            # as the learner chose
-       role: "Solution Architect" # optional
-       cert: "CCAR-F · Passed"    # optional
-       quote: "Their words, unedited."
-       link: "https://..."        # optional, only if they provided it
-   ```
-4. Commit and push. The home page shows the 3 newest stories; **About → Learner Stories** shows all.
-5. If someone asks for removal, delete their entry and push. Close their issue with a thank-you.
+**One-time setup**
+
+1. Repo **Settings → General → Features**: tick **Discussions**.
+2. Open the **Discussions** tab → pencil icon next to *Categories* → **New category**: name `Learner Stories`, format **Announcement** (only you and giscus can start threads; anyone can comment).
+3. Install the giscus app on this repo only: https://github.com/apps/giscus
+4. On https://giscus.app enter `pabhinaw/claude-certification-hub`, choose the `Learner Stories` category, and copy `data-repo-id` and `data-category-id` from the generated snippet.
+5. Paste both into `mkdocs.yml` under `extra: comments:` (`repo_id` and `category_id`), then commit and push.
+
+**Moderating**
+
+* Every comment appears in the Discussions tab. Use the `…` menu on a comment to **hide** or **delete** it.
+* Remove anything containing exam questions, exam content, score details or personal contact data.
+* Watch the repo's Discussions (Watch → Custom → Discussions) to get an email for each new comment.
+
+**Featuring a comment on the home page (optional)**
+
+Copy the comment **word for word** into the `testimonials:` list in `mkdocs.yml`, after the commenter agrees. Never write or "improve" a testimonial yourself.
 
 ## Privacy rule for this repo
 

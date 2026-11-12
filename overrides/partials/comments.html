@@ -1,0 +1,34 @@
+{#-
+  On-page learner comments, powered by giscus (GitHub Discussions on this repo).
+  Configure in mkdocs.yml -> extra.comments. Nothing loads from a third party
+  until the visitor clicks "Load comments".
+-#}
+{% set c = config.extra.comments or {} %}
+<section class="md-typeset hub-comments" id="comments">
+  <h2>Comments from learners</h2>
+  <p class="hub-comments__rules">
+    Share how the hub helped you, or what would make it better. Please keep it friendly, and
+    <strong>never post exam questions, exam content, score details or personal contact information</strong>.
+    Comments that break these rules are removed.
+  </p>
+  {% if c.repo_id and c.category_id %}
+    <div class="hub-comments__gate" id="hub-comments-gate"
+         data-repo="{{ c.repo }}" data-repo-id="{{ c.repo_id }}"
+         data-category="{{ c.category }}" data-category-id="{{ c.category_id }}"
+         data-term="{{ c.term or 'Learner Stories' }}">
+      <p>
+        Comments use <strong>giscus</strong>, which stores them in this project's public GitHub Discussions.
+        Loading them connects your browser to giscus.app and GitHub. To post, you sign in with a GitHub account;
+        your comment and GitHub username are public.
+      </p>
+      <button type="button" class="md-button md-button--primary" id="hub-comments-load">Load comments</button>
+      <a class="md-button" href="https://github.com/{{ c.repo }}/discussions" target="_blank" rel="noopener">Read them on GitHub</a>
+    </div>
+    <div id="hub-comments-mount"></div>
+  {% else %}
+    <div class="hub-comments__gate">
+      <p>Comments are being set up and will open here soon. Until then, I'd love to hear from you on LinkedIn.</p>
+      <a class="md-button md-button--primary" href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Message me on LinkedIn</a>
+    </div>
+  {% endif %}
+</section>

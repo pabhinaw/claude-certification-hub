@@ -1,13 +1,11 @@
-{#- Learner Stories page: page content + all testimonial cards -#}
+{#- Learner Stories page: intro, featured stories (if any), then the comment thread -#}
 {% extends "main.html" %}
 {% block content %}
   {{ page.content }}
-  {% set limit = 99 %}
-  {% include "partials/testimonials.html" %}
-  <div class="md-typeset hub-stories-cta">
-    <h2>Share your story</h2>
-    <p>Used this hub on your certification journey? Tell other learners what helped.</p>
-    <a class="md-button md-button--primary" href="{{ config.repo_url }}/issues/new?template=learner-story.yml" target="_blank" rel="noopener">Share your story</a>
-    <a class="md-button" href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Message me on LinkedIn</a>
-  </div>
+  {% if config.extra.testimonials %}
+    <h2>Featured stories</h2>
+    {% set limit = 99 %}
+    {% include "partials/testimonials.html" %}
+  {% endif %}
+  {% include "partials/comments.html" %}
 {% endblock %}

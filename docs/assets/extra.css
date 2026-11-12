@@ -441,3 +441,16 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
 
 /* Study notes */
 .md-typeset .hub-post-meta { font-size: .7rem; color: var(--hub-muted); margin-top: -.6rem; }
+
+/* =====================================================================
+   LEARNER COMMENTS (giscus)
+   ===================================================================== */
+.hub-comments { margin-top: 2.5rem; }
+.md-typeset .hub-comments__rules { font-size: .76rem; color: var(--hub-muted); }
+.hub-comments__gate {
+  padding: 1.4rem 1.5rem; border-radius: var(--hub-radius); text-align: center;
+  border: 2px dashed var(--hub-card-border); background: var(--hub-section-alt);
+}
+.md-typeset .hub-comments__gate p { max-width: 38rem; margin: 0 auto 1rem; font-size: .76rem; color: var(--hub-muted); }
+.md-typeset .hub-comments__gate .md-button { margin: .25rem .3rem 0; }
+#hub-comments-mount { margin-top: 1rem; }

@@ -17,6 +17,10 @@ What's new in the hub. Dates are when changes were published.
 * **Study Notes**: three short articles on the ideas that matter most.
 * **Runnable lab code** with a no-API-key dry-run mode.
 
+**Community**
+
+* **Learner comments** on the Learner Stories page: leave feedback directly on the site.
+
 **Trust & transparency**
 
 * Content & Exam-Integrity Policy, trademark notice and "Unofficial community resource" labelling.

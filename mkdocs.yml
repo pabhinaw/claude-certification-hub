@@ -83,19 +83,31 @@ extra_css:
 extra_javascript:
   - assets/greeting.js
   - assets/mock-exam.js
+  - assets/comments.js
 
 extra:
   generator: false
   reviewed_on: November 2026
   # ------------------------------------------------------------------
-  # Learner testimonials: REAL, CONSENTED stories only.
-  # Copy each approved story from its GitHub issue. Example format:
-  #   - name: "Asha K."                       # as the learner chose
+  # Learner comments (giscus, stored in this repo's GitHub Discussions).
+  # Paste the two IDs from https://giscus.app (see README). While they are
+  # empty, the page shows a "being set up" note instead of the comment box.
+  # ------------------------------------------------------------------
+  comments:
+    repo: pabhinaw/claude-certification-hub
+    repo_id: ""
+    category: Learner Stories
+    category_id: ""
+    term: Learner Stories
+  # ------------------------------------------------------------------
+  # Featured stories (optional): comments you choose to highlight on the
+  # home page, copied WORD FOR WORD, with the commenter's agreement. Example:
+  #   - name: "Asha K."
   #     role: "Solution Architect"            # optional
   #     cert: "CCAR-F · Passed"               # optional
   #     quote: "Their words, unedited."
-  #     link: "https://www.linkedin.com/in/…" # optional, only if they gave it
-  # Leave the list empty ([]) to show the "Be the first" invitation.
+  #     link: "https://github.com/…"          # optional
+  # Leave the list empty ([]) to show the "Leave a comment" invitation.
   # ------------------------------------------------------------------
   testimonials: []
   social:

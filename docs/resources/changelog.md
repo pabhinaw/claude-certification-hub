@@ -4,6 +4,12 @@ What's new in the hub. Dates are when changes were published.
 
 ## November 2026
 
+**Developer (CCDV-F) track**
+
+* Full Developer track: eight domain deep-dives with code, covering API mechanics, application design, model selection and cost, agents, prompt and context engineering, tools and MCP server development, security, Claude Code and evals.
+* A day-by-day **10-Day Study Plan**, a one-page cheat sheet and an exam-day guide with a strategy for multiple-response questions.
+* **135 original Developer questions** and **two timed 53-question mock exams**. The mock engine now supports multiple-response ("Select TWO") questions.
+
 **Practice & assessment**
 
 * Question bank grown to **202 original questions** across all five domains, each with an explanation of why every wrong option is wrong.

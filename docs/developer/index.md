@@ -1,22 +1,47 @@
 # Developer Track: CCDV-F
 
-**Claude Certified Developer – Foundations** is the hands-on builder credential: implementing applications with the Claude API, agents, tools/MCP, Claude Code, and the security, cost and model-selection decisions that come with production.
+**Claude Certified Developer – Foundations** is the hands-on builder credential: implementing applications with the Claude API, agents, tools and MCP, Claude Code, and the security, cost and model-selection decisions that come with production.
 
-!!! info "Status: in progress"
-    The Architect track is complete. Developer domain deep-dives are being written next. Start with the two pages below; they already show you how to reuse everything from the Architect track.
+!!! tip "Short on time?"
+    Follow the **[10-Day Study Plan](study-plan-10-day.md)**. It tells you exactly what to read, build and practise each day, in order of exam weight.
 
-| Page | What's inside |
-|---|---|
-| [Exam Overview](exam-overview.md) | format, eight domains with weights, prerequisites |
-| [Architect → Developer Bridge](bridge-from-architect.md) | what you already know, what's new, and a study order |
+## Your route through this track
 
-## Planned content
+```mermaid
+flowchart LR
+    A[Exam overview] --> B[10-day plan]
+    B --> C[Domain deep-dives]
+    C --> D[Question bank<br/>135 questions]
+    D --> E[2 timed mocks<br/>53 questions each]
+    E --> F[Cheat sheet +<br/>exam-day guide]
+```
 
-- [ ] Applications & Integration (33.1%): API mechanics, app design, configuration management
-- [ ] Model Selection & Optimisation (16.8%): model trade-offs, tokens, caching, cost
-- [ ] Agents & Workflows (14.7%)
-- [ ] Prompt & Context Engineering (11.0%)
-- [ ] Tools & MCPs (10.6%): including building an MCP server
-- [ ] Security & Safety (8.1%): guardrails, hooks, secrets and key management
-- [ ] Claude Code (3.1%) · Eval, Testing & Debugging (2.6%)
-- [ ] Developer practice questions and labs
+| Step | Page | What you get |
+|---|---|---|
+| 1 | [Exam Overview](exam-overview.md) | Format, domains and weights, question types, scoring |
+| 2 | [10-Day Study Plan](study-plan-10-day.md) | A day-by-day schedule with reading, a small build and practice |
+| 3 | Domain deep-dives (below) | Concepts, code, traps, decision rules, self-checks |
+| 4 | [Question Bank](practice-questions.md) | 135 original questions with full explanations |
+| 5 | [Mock Exams](mock-exams.md) | Two timed 53-question exams, including multiple-response items |
+| 6 | [Cheat Sheet](cheat-sheet.md) · [Exam Day Guide](exam-day.md) | Last-day revision and a strategy for the sitting |
+
+## Domains, by weight
+
+| Weight | Domain | Deep-dive |
+|---|---|---|
+| **33.1%** | Applications & Integration | [Part 1 · API Mechanics](domains/d1-api-mechanics.md) · [Part 2 · Application Design](domains/d1-application-design.md) |
+| **16.8%** | Model Selection & Optimisation | [Models, tokens, caching, cost](domains/d2-model-selection.md) |
+| **14.7%** | Agents & Workflows | [Loops, stop conditions, Agent SDK](domains/d3-agents-workflows.md) |
+| **11.0%** | Prompt & Context Engineering | [Structured output, validation, context](domains/d4-prompt-context.md) |
+| **10.6%** | Tools & MCPs | [Tool implementation, building an MCP server](domains/d5-tools-mcp.md) |
+| **8.1%** | Security & Safety | [Injection, guardrails, secrets, access](domains/d6-security-safety.md) |
+| **3.1% + 2.6%** | Claude Code · Eval, Testing & Debugging | [Two small domains on one page](domains/d7-claude-code-evals.md) |
+
+The first two rows are **half the exam**. Spend your time accordingly.
+
+## Coming from the Architect track?
+
+About 40% of this exam (agents, prompting, tools, Claude Code) overlaps with CCAR-F. The [Architect → Developer Bridge](bridge-from-architect.md) shows what you can skim and what is new.
+
+!!! note "Unofficial study material"
+    This track is written from public documentation and general engineering practice. It is not affiliated with or endorsed by Anthropic, and it contains no real exam questions. Always cross-check against the official exam guide in the Partner Academy, which is the authority on what is tested.

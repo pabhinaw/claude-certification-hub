@@ -26,10 +26,10 @@ hide:
 <span class="hub-track__go">Start the Architect track →</span>
 </a>
 <a class="hub-track" href="developer/">
-<span class="hub-badge hub-badge--soon">In progress</span>
+<span class="hub-badge hub-badge--live">Complete track</span>
 <span class="hub-track__title">Developer · CCDV-F</span>
-<span class="hub-track__desc">Exam overview and a bridge from the Architect track. Domain deep-dives are being added next.</span>
-<span class="hub-track__go">Preview the Developer track →</span>
+<span class="hub-track__desc">A 10-day study plan, eight domain deep-dives with code, 135 practice questions, two timed mock exams and a cheat sheet.</span>
+<span class="hub-track__go">Start the Developer track →</span>
 </a>
 </div>
 </section>

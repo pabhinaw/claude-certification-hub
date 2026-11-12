@@ -170,7 +170,29 @@ nav:
   - Developer (CCDV-F):
       - developer/index.md
       - Exam Overview: developer/exam-overview.md
+      - 10-Day Study Plan: developer/study-plan-10-day.md
       - Architect → Developer Bridge: developer/bridge-from-architect.md
+      - Domains:
+          - "Applications & Integration · API Mechanics": developer/domains/d1-api-mechanics.md
+          - "Applications & Integration · Application Design": developer/domains/d1-application-design.md
+          - "Model Selection & Optimisation": developer/domains/d2-model-selection.md
+          - "Agents & Workflows": developer/domains/d3-agents-workflows.md
+          - "Prompt & Context Engineering": developer/domains/d4-prompt-context.md
+          - "Tools & MCPs": developer/domains/d5-tools-mcp.md
+          - "Security & Safety": developer/domains/d6-security-safety.md
+          - "Claude Code · Eval, Testing & Debugging": developer/domains/d7-claude-code-evals.md
+      - Question Bank & Practice:
+          - Overview: developer/practice-questions.md
+          - "Applications & Integration (50)": developer/question-bank/ai.md
+          - "Model Selection (24)": developer/question-bank/ms.md
+          - "Agents & Workflows (16)": developer/question-bank/aw.md
+          - "Prompt & Context (12)": developer/question-bank/pc.md
+          - "Tools & MCPs (14)": developer/question-bank/tm.md
+          - "Security & Safety (11)": developer/question-bank/ss.md
+          - "Claude Code · Evals (8)": developer/question-bank/cc-ev.md
+      - Mock Exams: developer/mock-exams.md
+      - Cheat Sheet: developer/cheat-sheet.md
+      - Exam Day Guide: developer/exam-day.md
   - Hands-on Labs:
       - labs/index.md
       - "Lab 1 · Build an Agentic Loop": labs/lab-01-agentic-loop.md

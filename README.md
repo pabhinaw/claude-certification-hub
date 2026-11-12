@@ -50,6 +50,14 @@ python tools/qbank/build.py
 
 The script assigns IDs, spreads correct answers evenly across A–D, builds three non-overlapping 60-question mocks weighted by domain, and writes `docs/assets/data/qbank.json` and `docs/architect/question-bank/d1.md`–`d5.md`. Commit the generated files too.
 
+The Developer bank works the same way. Questions live in `tools/qbank/dev/q_*.py` (`Q(...)` for single-answer, `M(...)` for "Select TWO"):
+
+```bash
+python tools/qbank/build_dev.py
+```
+
+It writes `docs/assets/data/qbank-dev.json` and `docs/developer/question-bank/*.md`, and builds two non-overlapping 53-question mocks.
+
 ---
 
 ## Publish to GitHub Pages — step by step (first time)

@@ -49,4 +49,4 @@ flowchart TD
 
 ## After CCAR-F → CCDV-F
 
-Go to [Architect → Developer Bridge](../developer/bridge-from-architect.md). It lists exactly what is new (API mechanics, model selection, cost/token management, security) and what you can skip because you already know it.
+Go to [Architect → Developer Bridge](../developer/bridge-from-architect.md). It lists exactly what is new (API mechanics, model selection, cost/token management, security) and what you can skip because you already know it. Then follow the [10-Day Study Plan](../developer/study-plan-10-day.md).

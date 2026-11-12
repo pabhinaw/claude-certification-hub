@@ -362,7 +362,7 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
 .hub-mock-progress { height: 6px; border-radius: 3px; background: var(--hub-section-alt); margin: .7rem 0 1.1rem; overflow: hidden; }
 .hub-mock-progress__fill { height: 100%; background: var(--md-accent-fg-color); transition: width .2s ease; }
 .md-typeset .hub-mock-scen { margin: 0 0 .4rem; font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--md-accent-fg-color); }
-.md-typeset .hub-mock-stem { font-size: .9rem; line-height: 1.6; margin: 0 0 1rem; }
+.md-typeset .hub-mock-stem { font-size: .9rem; line-height: 1.6; margin: 0 0 1rem; white-space: pre-wrap; }
 .hub-mock-options { display: grid; gap: .55rem; }
 .hub-mock-option {
   display: flex; gap: .7rem; align-items: flex-start; padding: .75rem .9rem; border-radius: 10px; cursor: pointer;
@@ -454,3 +454,8 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
 .md-typeset .hub-comments__gate p { max-width: 38rem; margin: 0 auto 1rem; font-size: .76rem; color: var(--hub-muted); }
 .md-typeset .hub-comments__gate .md-button { margin: .25rem .3rem 0; }
 #hub-comments-mount { margin-top: 1rem; }
+
+/* multiple-response questions */
+.hub-mock-multi { font-size: .72rem; font-weight: 600; color: var(--md-accent-fg-color); margin: 0 0 .6rem; }
+.hub-mock-option.is-multi .hub-mock-letter { border-radius: .25rem; }
+.hub-mock-multi--hint { color: #b45309; font-weight: 500; }

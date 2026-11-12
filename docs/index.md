@@ -81,7 +81,7 @@ Reference architectures, risks and controls for every exam scenario.
 :material-head-question-outline:{ .hub-icon }
 
 ### [Question bank & mock exams](architect/practice-questions.md)
-202 original questions and three timed 60-question mocks, with a full explanation for every option.
+214 original questions, three timed 60-question mocks and a random exam simulation, with a full explanation for every option.
 </div>
 
 <div class="hub-feature" markdown>

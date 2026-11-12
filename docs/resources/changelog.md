@@ -4,6 +4,16 @@ What's new in the hub. Dates are when changes were published.
 
 ## November 2026
 
+**Mock exams closer to the real format**
+
+* Architect: 12 new multiple-response questions (bank now 214), four in each mock; scenario framing above each question; and an **exam simulation** that draws 4 of the 6 scenarios at random with 15 questions each.
+* Developer: an **exam simulation** that draws a fresh 53-question paper from the whole bank in the published domain proportions.
+
+**Architect (CCAR-F) review**
+
+* Checked the Architect track against the task statements in the official exam guide. Added: multiple-response question guidance, the published in-scope and out-of-scope lists, self-check fields for extraction, `--json-schema` and re-review practice in CI, state manifests, and two escalation cases.
+* Official Links now lists the official courses for each exam with direct links, matched to hub pages.
+
 **Developer (CCDV-F) track**
 
 * Full Developer track, mapped to the 25 skills in the official exam guide: nine deep-dive pages with code, covering API mechanics, application design, model selection and cost, agents, prompt and context engineering, tools and MCP server development, security, Claude Code and evals, plus engineering foundations (requirements, REST and JSON, async, code review, refactoring).

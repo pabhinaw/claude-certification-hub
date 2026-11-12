@@ -28,7 +28,7 @@ The Learner Stories page accepts public comments through GitHub Discussions. Com
 
 ## Reporting a problem
 
-If you believe any page breaks these rules, or a fact is out of date, please open an issue on the [GitHub repository](https://github.com/pabhinaw/claude-certification-hub/issues). It will be reviewed and corrected promptly.
+If you believe any page breaks these rules, or a fact is out of date, please contact the author through the [About page](../about/index.md#contact). It will be reviewed and corrected promptly.
 
 ## Trademarks
 

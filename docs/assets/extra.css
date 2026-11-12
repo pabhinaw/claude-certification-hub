@@ -459,3 +459,18 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
 .hub-mock-multi { font-size: .72rem; font-weight: 600; color: var(--md-accent-fg-color); margin: 0 0 .6rem; }
 .hub-mock-option.is-multi .hub-mock-letter { border-radius: .25rem; }
 .hub-mock-multi--hint { color: #b45309; font-weight: 500; }
+
+/* scenario framing and exam simulation */
+.hub-mock-scenario { border-left: 3px solid var(--md-accent-fg-color); padding: .5rem .8rem; margin: 0 0 1rem;
+  background: var(--md-code-bg-color); border-radius: .25rem; }
+.hub-mock-scenario .hub-mock-scen { margin: 0 0 .25rem; }
+.md-typeset .hub-mock-scenario__text { margin: 0; font-size: .78rem; line-height: 1.5; color: var(--md-default-fg-color--light); }
+.hub-mock-choice--sim { margin-top: 1rem; border-style: dashed; }
+
+/* author block on the About page */
+.hub-author { display: flex; gap: 1.2rem; align-items: center; margin: 1rem 0 1.5rem; }
+.md-typeset .hub-author__photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex: none;
+  border: 3px solid var(--md-accent-fg-color); }
+.hub-author__text > :first-child { margin-top: 0; }
+.hub-author__text > :last-child { margin-bottom: 0; }
+@media (max-width: 600px) { .hub-author { flex-direction: column; align-items: flex-start; } }

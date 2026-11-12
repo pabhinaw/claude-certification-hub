@@ -16,7 +16,7 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 
 import qlib  # noqa: E402
-import q_core, q_d1, q_d2, q_d3, q_d4, q_d5  # noqa: E402,F401
+import q_core, q_d1, q_d2, q_d3, q_d4, q_d5, q_multi  # noqa: E402,F401
 from overrides import OV, OV2  # noqa: E402
 
 DOMAINS = {
@@ -37,7 +37,18 @@ MOCKS = ["A", "B", "C"]
 # Editorial difficulty: questions that combine several concepts or hinge on a subtle detail
 HARD = {"D1-031", "D1-033", "D1-042", "D1-046", "D2-015", "D2-016", "D2-020", "D2-021", "D2-022",
         "D3-029", "D3-030", "D3-034", "D3-035", "D4-033", "D4-040", "D5-018", "D5-022", "D5-024"}
-LETTERS = "ABCD"
+LETTERS = "ABCDE"
+# Short scenario framing shown above each question (our own wording).
+SCENARIO_INTRO = {
+    "S1": "You are building an agent that resolves customer issues such as orders, refunds and account changes with backend tools, and escalates to people when needed.",
+    "S2": "Your team uses Claude Code to write, refactor and document code, and wants consistent, shared configuration across the repository.",
+    "S3": "A coordinator agent delegates searching, analysis and synthesis to specialised sub-agents and produces a cited report.",
+    "S4": "You are building tools that help engineers explore unfamiliar codebases and automate routine work, using built-in tools and MCP servers.",
+    "S5": "Claude Code runs in a CI/CD pipeline to review changes, generate tests and report findings without human interaction.",
+    "S6": "A pipeline extracts structured fields from unstructured documents, validates them and routes uncertain results to people.",
+}
+# Exam simulation: 4 of the 6 scenarios, 15 questions each, like the published exam structure.
+SIM = {"type": "scenarios", "pick": 4, "per": 15, "filler": "G"}
 
 
 def build():
@@ -75,7 +86,15 @@ def build():
             rng.shuffle(wrong)
             options, notes = [], []
             wi = 0
-            for slot in range(4):
+            multi = q.get("multi")
+            if multi:
+                slots = sorted(random.Random(f"hub-multi-{qid}").sample(range(5), 2)); ri = 0
+                for slot in range(5):
+                    if slot in slots:
+                        options.append(multi[ri][0]); notes.append(multi[ri][1]); ri += 1
+                    else:
+                        options.append(wrong[wi][0]); notes.append(wrong[wi][1]); wi += 1
+            for slot in range(0 if multi else 4):
                 if slot == pos:
                     options.append(q["correct"]); notes.append(q["why"])
                 else:
@@ -89,11 +108,26 @@ def build():
                 for alt in MOCKS:
                     if mock_fill[alt] < MOCK_COUNTS[d]:
                         mock = alt; mock_fill[alt] += 1; break
-            out.append(dict(id=qid, domain=d, scenario=q["scenario"], topic=q["topic"],
-                            level=3 if qid in HARD else q["level"], stem=q["stem"], options=options, answer=pos,
-                            notes=notes, mock=mock))
+            item = dict(id=qid, domain=d, scenario=q["scenario"], topic=q["topic"],
+                        level=3 if qid in HARD else q["level"], stem=q["stem"], options=options,
+                        notes=notes, mock=mock)
+            if multi:
+                item["answers"] = slots; item["select"] = 2
+            else:
+                item["answer"] = pos
+            out.append(item)
         short = {m: MOCK_COUNTS[d] - mock_fill[m] for m in MOCKS if mock_fill[m] < MOCK_COUNTS[d]}
         assert not short, f"{d} lacks questions for mocks: {short}"
+    # Put the multiple-response questions into the mocks: each replaces the last
+    # single-answer question of the same domain in its mock, so domain counts stay exact.
+    multis = [q for q in out if "answers" in q and q["mock"] is None]
+    for k, mq in enumerate(multis):
+        m = MOCKS[k % len(MOCKS)]
+        victim = [q for q in out if q["mock"] == m and q["domain"] == mq["domain"] and "answer" in q][-1]
+        victim["mock"] = None; mq["mock"] = m
+    for d in DOMAINS:
+        for m in MOCKS:
+            assert sum(1 for q in out if q["domain"] == d and q["mock"] == m) == MOCK_COUNTS[d], (d, m)
     return out
 
 
@@ -131,13 +165,15 @@ def write_pages(data):
             for i, o in enumerate(q["options"]):
                 lines.append(f"- **{LETTERS[i]}.** {md_escape(o)}")
             lines.append("")
-            lines.append(f'??? success "Answer: {LETTERS[q["answer"]]}"')
-            lines.append(f'    **Why {LETTERS[q["answer"]]} is right:** {md_escape(q["notes"][q["answer"]])}')
-            lines.append("")
+            right = q["answers"] if "answers" in q else [q["answer"]]
+            lines.append(f'??? success "Answer: {" and ".join(LETTERS[i] for i in right)}"')
+            for i in right:
+                lines.append(f'    **Why {LETTERS[i]} is right:** {md_escape(q["notes"][i])}')
+                lines.append("")
             lines.append("    **Why the others are wrong:**")
             lines.append("")
-            for i in range(4):
-                if i != q["answer"]:
+            for i in range(len(q["options"])):
+                if i not in right:
                     lines.append(f"    * **{LETTERS[i]}:** {md_escape(q['notes'][i])}")
             lines.append("")
             lines.append("---")
@@ -151,7 +187,8 @@ def main():
     check_overrides_used()
     path = os.path.join(ROOT, "docs", "assets", "data")
     os.makedirs(path, exist_ok=True)
-    payload = {"version": 1, "domains": DOMAINS, "scenarios": SCENARIOS,
+    payload = {"version": 2, "exam": "CCAR-F", "domains": DOMAINS, "scenarios": SCENARIOS,
+               "scenarioIntro": SCENARIO_INTRO, "sim": SIM, "minutes": 120,
                "mockCounts": MOCK_COUNTS, "questions": data}
     with open(os.path.join(path, "qbank.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))

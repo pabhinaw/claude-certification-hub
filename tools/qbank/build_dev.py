@@ -163,6 +163,7 @@ def main():
     os.makedirs(path, exist_ok=True)
     payload = {"version": 1, "exam": "CCDV-F", "domains": DOMAINS, "mocks": MOCKS, "minutes": 120,
                "blurb": "weighted by domain · single and multiple-response · mixed order",
+               "sim": {"type": "domains", "counts": MOCK_COUNTS},
                "mockCounts": MOCK_COUNTS, "questions": data}
     with open(os.path.join(path, "qbank-dev.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))

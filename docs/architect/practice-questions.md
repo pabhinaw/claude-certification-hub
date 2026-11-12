@@ -1,6 +1,6 @@
 # Question Bank & Practice <span class="level-badge">L4</span>
 
-**202 original scenario-style questions**, organised by domain. Every answer explains why the correct option is right **and why each wrong option is wrong**. That second part is where most of the learning happens.
+**214 original scenario-style questions** (12 of them multiple-response), organised by domain. Every answer explains why the correct option is right **and why each wrong option is wrong**. That second part is where most of the learning happens.
 
 !!! note "Original practice material"
     All questions are written from public documentation and design principles. They are **not** real or recalled exam questions, and all names and data are fictional. See the [content policy](../resources/content-policy.md).
@@ -19,7 +19,7 @@
 
     ---
 
-    Three full 60-question mock exams, weighted like the real blueprint, with a 120-minute timer and a per-domain score breakdown.
+    Three full 60-question mock exams, weighted like the real blueprint, with a 120-minute timer and a per-domain score breakdown. Plus an **exam simulation** that draws four scenarios at random, as the real exam does.
 
     [:octicons-arrow-right-24: Take a mock exam](mock-exams.md)
 
@@ -29,11 +29,11 @@
 
 | Domain | Weight | Questions | Start |
 |---|---|---|---|
-| D1 · Agentic Architecture & Orchestration | 27% | 49 | [Open D1 bank](question-bank/d1.md) |
-| D2 · Tool Design & MCP Integration | 18% | 35 | [Open D2 bank](question-bank/d2.md) |
-| D3 · Claude Code Configuration & Workflows | 20% | 47 | [Open D3 bank](question-bank/d3.md) |
-| D4 · Prompt Engineering & Structured Output | 20% | 42 | [Open D4 bank](question-bank/d4.md) |
-| D5 · Context Management & Reliability | 15% | 29 | [Open D5 bank](question-bank/d5.md) |
+| D1 · Agentic Architecture & Orchestration | 27% | 52 | [Open D1 bank](question-bank/d1.md) |
+| D2 · Tool Design & MCP Integration | 18% | 37 | [Open D2 bank](question-bank/d2.md) |
+| D3 · Claude Code Configuration & Workflows | 20% | 50 | [Open D3 bank](question-bank/d3.md) |
+| D4 · Prompt Engineering & Structured Output | 20% | 44 | [Open D4 bank](question-bank/d4.md) |
+| D5 · Context Management & Reliability | 15% | 31 | [Open D5 bank](question-bank/d5.md) |
 
 Each question is tagged with its **topic**, its **scenario theme** (support agent, Claude Code, multi-agent research, developer productivity, CI/CD or structured extraction) and a **difficulty** rating from ●○○ to ●●●.
 

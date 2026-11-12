@@ -85,6 +85,16 @@
       grid.appendChild(card);
     });
     wrap.appendChild(grid);
+    if (this.data.sim) {
+      var sim = this.data.sim, simCard = el("div", "hub-mock-choice hub-mock-choice--sim");
+      simCard.appendChild(el("h3", null, "Exam simulation"));
+      simCard.appendChild(el("p", null, sim.type === "scenarios"
+        ? "A new paper every time: " + sim.pick + " scenarios chosen at random from " + (Object.keys(this.data.scenarioIntro || {}).length || 6) +
+          ", " + sim.per + " questions each, like the published exam structure. Drawn from the whole bank, so you will meet questions from the fixed mocks again."
+        : "A new paper every time: questions drawn at random from the whole bank in the published domain proportions. You will meet questions from the fixed mocks again."));
+      simCard.appendChild(btn("Start a simulation", "md-button--primary", function () { self.startSim(); }));
+      wrap.appendChild(simCard);
+    }
     var opts = el("label", "hub-mock-timer-opt");
     var cb = el("input"); cb.type = "checkbox"; cb.checked = true; cb.id = "hub-mock-timed";
     opts.appendChild(cb);
@@ -101,8 +111,46 @@
       var s = SCEN_ORDER.indexOf(a.scenario) - SCEN_ORDER.indexOf(b.scenario);
       return s !== 0 ? s : (a.id < b.id ? -1 : 1);
     });
+    this.begin(mock, "Mock " + mock, qs);
+  };
+
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* Exam simulation: a fresh random paper drawn from the whole bank. */
+  Exam.prototype.startSim = function () {
+    var sim = this.data.sim, all = this.data.questions, qs = [];
+    if (sim.type === "scenarios") {
+      var names = shuffle(Object.keys(this.data.scenarioIntro || {})).slice(0, sim.pick);
+      var filler = shuffle(all.filter(function (q) { return q.scenario === sim.filler; }));
+      names.forEach(function (sc) {
+        var pool = shuffle(all.filter(function (q) { return q.scenario === sc; })).slice(0, sim.per);
+        while (pool.length < sim.per && filler.length) {            // top up thin scenarios with general questions
+          var f = filler.pop(), copy = {}; for (var k in f) copy[k] = f[k];
+          copy.scenario = sc; pool.push(copy);
+        }
+        qs = qs.concat(pool);
+      });
+    } else {
+      Object.keys(sim.counts).forEach(function (d) {
+        qs = qs.concat(shuffle(all.filter(function (q) { return q.domain === d; })).slice(0, sim.counts[d]));
+      });
+      shuffle(qs);
+    }
+    this.begin("sim", "Exam simulation", qs);
+  };
+
+  Exam.prototype.begin = function (mock, label, qs) {
     var timedEl = document.getElementById("hub-mock-timed");
-    this.state = { mock: mock, qs: qs, idx: 0, answers: {}, flags: {},
+    // scenario groups, for "Scenario 2 of 4" headers
+    var groups = [], seen = {};
+    var intros = this.data.scenarioIntro || {};
+    qs.forEach(function (q) { if (intros[q.scenario] && !seen[q.scenario]) { seen[q.scenario] = 1; groups.push(q.scenario); } });
+    this.state = { mock: mock, label: label, groups: groups, qs: qs, idx: 0, answers: {}, flags: {},
                    timed: timedEl ? timedEl.checked : true, remaining: this.minutes * 60 };
     window.addEventListener("beforeunload", this.beforeUnload);
     if (this.state.timed) this.startTimer();
@@ -130,7 +178,7 @@
 
     // header
     var head = el("div", "hub-mock-head");
-    head.appendChild(el("span", "hub-mock-title", "Mock " + st.mock + " · Question " + (st.idx + 1) + " of " + st.qs.length));
+    head.appendChild(el("span", "hub-mock-title", st.label + " · Question " + (st.idx + 1) + " of " + st.qs.length));
     if (st.timed) head.appendChild(el("span", "hub-mock-time" + (st.remaining <= 600 ? " is-low" : ""), fmtTime(st.remaining)));
     shell.appendChild(head);
     var answered = countAnswered(st);
@@ -140,7 +188,16 @@
     // question
     var card = el("div", "hub-mock-q");
     var multi = isMulti(q), need = multi ? q.answers.length : 1, mine = st.answers[q.id];
-    card.appendChild(el("p", "hub-mock-scen", this.scenarios[q.scenario] || this.data.domains[q.domain] || ""));
+    var intro = (this.data.scenarioIntro || {})[q.scenario];
+    if (intro) {
+      var gi = st.groups.indexOf(q.scenario) + 1;
+      var box = el("div", "hub-mock-scenario");
+      box.appendChild(el("p", "hub-mock-scen", "Scenario " + gi + " of " + st.groups.length + " · " + this.scenarios[q.scenario]));
+      box.appendChild(el("p", "hub-mock-scenario__text", intro));
+      card.appendChild(box);
+    } else {
+      card.appendChild(el("p", "hub-mock-scen", this.scenarios[q.scenario] || (this.data.scenarios ? "General" : this.data.domains[q.domain]) || ""));
+    }
     card.appendChild(el("p", "hub-mock-stem", q.stem));
     if (multi) {
       var got = Array.isArray(mine) ? mine.length : 0;
@@ -237,7 +294,7 @@
     this.clear();
     var res = el("div", "hub-mock-results");
     if (timeUp) res.appendChild(el("p", "hub-mock-timeup", "Time's up! Your exam was submitted automatically."));
-    res.appendChild(el("h2", null, "Mock " + st.mock + " results"));
+    res.appendChild(el("h2", null, st.label + " results"));
 
     var score = el("div", "hub-mock-score");
     score.appendChild(el("span", "hub-mock-score__pct", pct + "%"));
@@ -264,7 +321,9 @@
 
     var actions = el("div", "hub-mock-controls");
     actions.appendChild(btn("Back to mock list", "", function () { self.home(); }));
-    actions.appendChild(btn("Retake mock " + st.mock, "md-button--primary", function () { self.start(st.mock); }));
+    actions.appendChild(st.mock === "sim"
+      ? btn("New simulation", "md-button--primary", function () { self.startSim(); })
+      : btn("Retake mock " + st.mock, "md-button--primary", function () { self.start(st.mock); }));
     res.appendChild(actions);
 
     // review

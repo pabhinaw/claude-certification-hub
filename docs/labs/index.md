@@ -9,7 +9,7 @@ Reading makes ideas familiar; building makes them stick. Each lab takes about 1â
 | [Lab 3 Â· Configure Claude Code for a Team](lab-03-claude-code-config.md) | CLAUDE.md, a path rule, a command, a formatting hook, permissions and a project MCP config | D3, D2 |
 
 !!! tip "Runnable code"
-    Every lab has ready-to-run code in the repository's [`labs-code/`](https://github.com/pabhinaw/claude-certification-hub/tree/main/labs-code) folder. Labs 1 and 2 include a **`--dry-run`** mode that works **without an API key**, so you can see the patterns in action first.
+    Every lab has ready-to-run code in the [lab code download](../assets/downloads/labs-code.zip) (a small zip file; unzip it anywhere). Labs 1 and 2 include a **`--dry-run`** mode that works **without an API key**, so you can see the patterns in action first.
 
 ## Setup (once)
 

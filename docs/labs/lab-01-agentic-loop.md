@@ -1,7 +1,7 @@
 # Lab 1 · Build an Agentic Loop <span class="level-badge">L2</span>
 
 !!! tip "Prefer to run it first?"
-    The complete script is in [`labs-code/`](https://github.com/pabhinaw/claude-certification-hub/tree/main/labs-code). Try `python lab01_agent_loop.py --dry-run`, which needs no API key, then read on to understand each part.
+    The complete script is in the [lab code download](../assets/downloads/labs-code.zip) (a small zip file). Try `python lab01_agent_loop.py --dry-run`, which needs no API key, then read on to understand each part.
 
 **Goal:** a small support agent that
 

@@ -1,6 +1,13 @@
 # About this Hub
 
-**Claude Certification Hub** is an independent, community learning platform for Anthropic's Claude certifications, developed by **[Prasoon Abhinaw](https://www.linkedin.com/in/pabhinaw/)**, a software engineer and Claude Certified Architect – Foundations. Connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/) · [Verify credential on Credly](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635).
+<div class="hub-author" markdown>
+<img class="hub-author__photo" src="../assets/img/prasoon-abhinaw.jpg" alt="Portrait of Prasoon Abhinaw" width="120" height="120" loading="lazy">
+<div class="hub-author__text" markdown>
+**Claude Certification Hub** is an independent, community learning platform for Anthropic's Claude certifications, developed by **[Prasoon Abhinaw](https://www.linkedin.com/in/pabhinaw/)**, a software engineer and Claude Certified Architect – Foundations.
+
+[Connect on LinkedIn](https://www.linkedin.com/in/pabhinaw/) · [Verify credential on Credly](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635)
+</div>
+</div>
 
 ## Mission
 
@@ -16,7 +23,7 @@ Make high-quality preparation **free, structured and practical**: from first pri
 ## Roadmap
 
 - [x] Architect – Foundations (CCAR-F) track
-- [x] 202-question bank and three timed mock exams
+- [x] 214-question bank, three timed mock exams and a random exam simulation
 - [x] Runnable lab code and Study Notes
 - [x] Learner stories with on-page comments
 - [x] Developer – Foundations (CCDV-F) track: deep-dives, 194 questions, three timed mocks, 10-day plan
@@ -27,7 +34,7 @@ Read the author's notes: [How I Prepared](my-journey.md).
 
 ## Contact
 
-For questions about the content, suggestions or collaboration, connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/). For corrections, you can also open an issue on [GitHub](https://github.com/pabhinaw/claude-certification-hub/issues). I can discuss topics and study strategy, but never exam questions.
+For questions about the content, suggestions or collaboration, connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/). To report an error, message me there with the page name and, if you can, a link to the official source. I can discuss topics and study strategy, but never exam questions.
 
 !!! note
     Unofficial and independent: not affiliated with, sponsored or endorsed by Anthropic. Claude and Anthropic are trademarks of Anthropic, PBC. See the [content policy](../resources/content-policy.md).

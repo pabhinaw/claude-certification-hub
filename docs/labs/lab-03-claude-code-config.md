@@ -3,7 +3,7 @@
 **Goal:** take a small repo and give it a team-ready Claude Code setup, putting each piece of guidance in the **right mechanism at the right scope**.
 
 !!! tip "Starter files"
-    A ready-made copy of every file below is in [`labs-code/lab03-team-config/`](https://github.com/pabhinaw/claude-certification-hub/tree/main/labs-code/lab03-team-config). Copy it into a **test** repository and rename its `dot-claude` folder to `.claude`.
+    A ready-made copy of every file below is in the `lab03-team-config/` folder of the [lab code download](../assets/downloads/labs-code.zip). Copy it into a **test** repository and rename its `dot-claude` folder to `.claude`.
 
 ## Target structure
 

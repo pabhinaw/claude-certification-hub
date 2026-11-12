@@ -21,3 +21,15 @@ def Q(domain, scenario, topic, stem, correct, why, wrong, level=2):
     QUESTIONS.append(dict(domain=domain, scenario=scenario, topic=topic, stem=stem.strip(),
                           correct=correct.strip(), why=why.strip(),
                           wrong=[(a.strip(), b.strip()) for a, b in wrong], level=level))
+
+
+def M(domain, scenario, topic, stem, right, wrong, level=2):
+    """Multiple-response question: TWO correct options + three wrong ones."""
+    assert domain in {"D1", "D2", "D3", "D4", "D5"}, domain
+    assert scenario in {"S1", "S2", "S3", "S4", "S5", "S6", "G"}, scenario
+    assert len(right) == 2 and len(wrong) == 3, stem[:60]
+    assert "TWO" in stem, "multiple-response stems must say 'Select TWO'"
+    QUESTIONS.append(dict(domain=domain, scenario=scenario, topic=topic, stem=stem.strip(),
+                          multi=[(a.strip(), b.strip()) for a, b in right],
+                          correct=None, why=None,
+                          wrong=[(a.strip(), b.strip()) for a, b in wrong], level=level))

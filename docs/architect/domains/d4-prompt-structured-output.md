@@ -145,6 +145,7 @@ flowchart LR
 * On retry, **append the exact validation error** ("`invoice_date` '2026-13-02' is not a valid date"). A bare "try again" helps little.
 * **Retries cannot create missing information.** If the document doesn't have the PO number, retrying only encourages fabrication. Accept `null` or route to review.
 * Bound retries (for example 2), then escalate.
+* **Self-check fields.** Ask the model to report what it computed next to what the document states, for example `stated_total` and `calculated_total`, plus a boolean such as `conflict_detected`. Your code compares them and routes mismatches to review. The schema guarantees the fields exist; the comparison catches the semantic error.
 * **Feedback loop:** log structured metadata on each error (field, error type, document type, a `detected_pattern` such as "European decimal format"). Review the patterns periodically and fix the root cause in the prompt, schema or few-shot examples.
 
 ---
@@ -234,7 +235,7 @@ print(resp.usage)   # cache_creation_input_tokens / cache_read_input_tokens show
 A model reviewing **its own output in the same context** tends to agree with itself. More effective:
 
 * An **independent instance** (fresh context, its own reviewer prompt) checks the work.
-* For large changes: **per-file review passes** plus a **cross-file integration pass** (interfaces, consistency).
+* For large changes: **per-file review passes** plus a **cross-file integration pass** (interfaces, consistency). One pass over everything suffers from **attention dilution**: findings get shallower and contradictory as the input grows.
 * Give the reviewer explicit criteria (see above), not "check if it's good".
 
 ---

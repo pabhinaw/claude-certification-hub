@@ -264,3 +264,4 @@ Exam questions usually fix one corner and ask you to optimise another. Read for 
     * [Models overview](https://platform.claude.com/docs/en/models/overview) · [Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model)
     * [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)
     * [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting)
+    * [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode)

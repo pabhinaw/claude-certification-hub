@@ -10,6 +10,7 @@
 ## Time strategy (60 questions · 120 minutes)
 
 * Budget about **1 min 45 s per question**, keeping about 15 minutes for review.
+* Some questions are **multiple response**: the question states how many options to choose. Select exactly that number, judge each option on its own, and assume there is no partial credit.
 * Questions come grouped by **scenario**. Read the scenario setup carefully once; most answers depend on a detail in it (team-wide vs personal, blocking vs not, strict vs flexible).
 * **Flag and move on** if you're stuck past 3 minutes.
 

@@ -176,4 +176,4 @@ The principle behind all of them: **fail loudly and specifically**. An empty str
 !!! abstract "Verify in official docs"
     * Claude Code on this site: [Fundamentals → Claude Code Basics](../../fundamentals/claude-code-basics.md)
     * Evaluation on this site: [Fundamentals → Evaluation Basics](../../fundamentals/evaluation-basics.md)
-    * [Claude Code documentation](https://code.claude.com/docs)
+    * [Claude Code documentation](https://code.claude.com/docs) · [CLI reference](https://code.claude.com/docs/en/cli)

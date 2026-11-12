@@ -117,7 +117,7 @@ Check: tests added, no secrets, error handling, naming conventions.
 Output a table of findings with severity.
 ```
 
-**Skills** live in `.claude/skills/<name>/SKILL.md` (or `~/.claude/skills/`). Their **description** tells Claude when to load them automatically, and they can bundle scripts and reference files. Frontmatter can restrict `allowed-tools` and, for example, run the skill in an isolated forked context. In recent Claude Code versions, commands and skills are converging; `.claude/commands/` files keep working.
+**Skills** live in `.claude/skills/<name>/SKILL.md` (or `~/.claude/skills/`). Their **description** tells Claude when to load them automatically, and they can bundle scripts and reference files. Frontmatter options worth knowing: `allowed-tools` restricts what the skill may use, `argument-hint` tells the user what input it expects, and `context: fork` runs the skill in an isolated sub-agent context so that verbose output stays out of the main conversation. In recent Claude Code versions, commands and skills are converging; `.claude/commands/` files keep working.
 
 !!! question "Command or skill?"
     * Person decides when → **command**.
@@ -203,7 +203,9 @@ claude -p "Review this PR diff for security issues. Output JSON findings." \
 ```
 
 * `-p` (print mode): non-interactive; nothing waits for keyboard input.
-* `--output-format json`: machine-parseable output for the pipeline (some versions also accept a JSON schema for the final result; check `claude --help`).
+* `--output-format json`: machine-parseable output for the pipeline. Add `--json-schema` to have the final result validated against a schema you supply, so the next step can rely on its shape.
+* **Give the reviewer what already exists.** Include the existing tests so it doesn't suggest duplicates, and on a re-review include the earlier findings so it reports only new or unresolved issues.
+* Put review criteria, testing standards and fixture conventions in `CLAUDE.md`, so a CI-invoked run has the same project context as a developer.
 * Use a **separate, fresh session** for review rather than the one that generated the code (independent review).
 * Lock it down: restrict allowed tools in CI settings and inject secrets via the CI's secret store.
 

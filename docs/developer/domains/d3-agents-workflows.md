@@ -256,4 +256,5 @@ If a question says "must", "always", "never" or "guarantee", the answer is rarel
     * [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
     * [Tool use: implementation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use)
     * [Stop reasons](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons)
+    * [Managed agents overview](https://platform.claude.com/docs/en/managed-agents/overview)
     * Agent SDK basics on this site: [Fundamentals → Agent SDK](../../fundamentals/agent-sdk-basics.md)

@@ -39,7 +39,9 @@ policy: agent refund limit 2,000 INR → approval required
 | Situation | Action |
 |---|---|
 | Customer **explicitly asks for a human** | **Escalate immediately**. Don't attempt "one more fix" first |
-| Request falls in a **policy gap** (no rule covers it) | Escalate; don't improvise policy |
+| Request falls in a **policy gap** (no rule covers it, for example a competitor price-match when policy only covers your own prices) | Escalate; don't improvise policy |
+| A lookup returns **several matching records** | Ask for another identifier; never guess which one |
+| Customer is frustrated but the issue is within the agent's ability | Acknowledge, offer the fix; escalate if they repeat the request for a human |
 | **No progress** after reasonable attempts / repeated failures | Escalate with a handoff package |
 | Action exceeds **authorisation** (amount, permission) | Escalate / route for approval |
 | Issue is routine and resolvable with available tools | Attempt autonomous resolution |
@@ -65,7 +67,8 @@ policy: agent refund limit 2,000 INR → approval required
 | **Scratchpad / notes files** | durable findings that survive `/compact`, crashes and new sessions |
 | **Targeted reading** | Grep/Glob to locate, then Read only the relevant parts |
 | **`/compact`** | summarise the conversation when context grows; pair it with notes so details aren't lost |
-| **State exports** | periodically write progress (done / pending / decisions) to a file for crash recovery and resumption |
+| **State exports (manifests)** | each agent periodically writes its progress (done / pending / decisions) to a file; on restart the coordinator loads these manifests and resumes instead of starting over |
+| **Phase summaries** | summarise one phase before starting the next, and inject the summary into the fresh context |
 
 ---
 

@@ -66,3 +66,30 @@ Tick an item only when you could **explain it to someone else and pick it out of
 - [ ] Decide when to escalate immediately and when to keep working → [D5](domains/d5-context-reliability.md#escalation-decisions)
 - [ ] Route human review by risk rather than at random → [D5](domains/d5-context-reliability.md#human-review-routing)
 - [ ] Keep claims traceable to sources and dates → [D5](domains/d5-context-reliability.md#information-provenance)
+
+
+## What is and isn't in scope
+
+The official guide publishes both lists. Summarised in my own words:
+
+| In scope | Out of scope |
+|---|---|
+| Agentic loops, multi-agent orchestration, sub-agent context | Fine-tuning, model internals and training methods |
+| Tool interface design; MCP tools, resources and server configuration | Deploying or hosting MCP servers |
+| Error handling, propagation and escalation decisions | Authentication protocols, key rotation, billing and account management |
+| `CLAUDE.md`, commands, skills, plan mode, iterative refinement | Cloud-provider-specific configuration |
+| Structured output through tool use, few-shot prompting, batch processing | Streaming and server-sent events; rate limits and pricing arithmetic |
+| Context-window optimisation, human review, provenance | Prompt-caching internals; token counting; vision; computer use; embeddings and vector databases |
+
+Two consequences for your study time:
+
+* Several topics in the right-hand column **are** tested on the Developer exam. This hub teaches them in the [Developer track](../developer/index.md), and the short prompt-caching section on the D4 page is background, not a priority, for CCAR-F.
+* Everything in the left-hand column has a checklist item above. If you can tick them all honestly, you have covered the published scope.
+
+## Official courses
+
+| Resource | Link |
+|---|---|
+| Architect – Foundations prep courses | <https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses> |
+| Architect learning path | <https://anthropic-partners.skilljar.com/path/claude-architect> |
+| All recommended courses, by domain | [Official Links](../resources/official-links.md#courses-for-the-architect-exam-ccar-f) |

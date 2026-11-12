@@ -66,7 +66,7 @@ It writes `docs/assets/data/qbank-dev.json` and `docs/developer/question-bank/*.
 
 **Step 2 — Create an empty repository**
 - Click **+** (top right) → **New repository**
-- Name: `claude-certification-hub` · Visibility: **Public**
+- Name: `claude-certification-hub` · Visibility: **Public** on the free plan (see "Keeping the source private" below for alternatives)
 - Do **not** tick "Add a README" (we already have one) → **Create repository**
 
 **Step 3 — Upload this folder.** Easiest beginner route is **GitHub Desktop** (https://desktop.github.com):
@@ -95,17 +95,34 @@ mkdocs serve
 ```
 Then open http://127.0.0.1:8000 — the page refreshes as you edit.
 
+## Keeping the source private
+
+The site itself is public (that is its purpose), but the source repository does not have to be. Nothing on the site links to this repository: there is no "edit this page" link, lab code is offered as a zip download, and corrections go through the About page.
+
+Things to know:
+
+* **Hosting.** GitHub Pages serves a site from a *private* repository only on a paid plan (GitHub Pro or higher). On the free plan the repository must be public, or the site goes offline. Options:
+    1. **GitHub Pro**: make this repository private and change nothing else. Same address, same workflow.
+    2. **Free, different host**: connect the private repository to a static host that supports private repositories on its free tier (for example Cloudflare Pages or Netlify). Build command `pip install -r requirements.txt && mkdocs build`, output folder `site`. The address changes, so update `site_url` in `mkdocs.yml`.
+    3. **Free, two repositories**: keep the source here (private) and push only the built `site/` folder to a second, public repository that Pages serves.
+* **What stays visible.** Whatever the site serves is public by nature: every page, and the question data file with its answers. A private repository hides the *source* (the authoring scripts, drafts and history), not the published content.
+* **Lab code zip.** After changing anything in `labs-code/`, rebuild the download:
+  `zip -r docs/assets/downloads/labs-code.zip labs-code -x "*/__pycache__/*"`
+* **History.** If this repository was public before, earlier commits may already have been copied or indexed. Check that no secret was ever committed (none should have been).
+
 ## Learner comments
 
-The **About → Learner Stories** page has an on-page comment box powered by [giscus](https://giscus.app). Comments are stored in this repo's **GitHub Discussions**, so there is no separate database and no ads.
+The **About → Learner Stories** page has an on-page comment box powered by [giscus](https://giscus.app). giscus needs a **public** repository to store comments, so use a small separate one that contains nothing but discussions.
 
 **One-time setup**
 
-1. Repo **Settings → General → Features**: tick **Discussions**.
-2. Open the **Discussions** tab → pencil icon next to *Categories* → **New category**: name `Learner Stories`, format **Announcement** (only you and giscus can start threads; anyone can comment).
-3. Install the giscus app on this repo only: https://github.com/apps/giscus
-4. On https://giscus.app enter `pabhinaw/claude-certification-hub`, choose the `Learner Stories` category, and copy `data-repo-id` and `data-category-id` from the generated snippet.
-5. Paste both into `mkdocs.yml` under `extra: comments:` (`repo_id` and `category_id`), then commit and push.
+1. Create a new **public** repository named `claude-certification-hub-comments` (tick "Add a README").
+2. In that repository: **Settings → General → Features**: tick **Discussions**.
+3. Open its **Discussions** tab → pencil icon next to *Categories* → **New category**: name `Learner Stories`, format **Announcement** (only you and giscus can start threads; anyone can comment).
+4. Install the giscus app on that repository only: https://github.com/apps/giscus
+5. On https://giscus.app enter `pabhinaw/claude-certification-hub-comments`, choose the `Learner Stories` category, and copy `data-repo-id` and `data-category-id` from the generated snippet.
+6. Paste both into `mkdocs.yml` under `extra: comments:` (`repo_id` and `category_id`), then commit and push.
+7. Optional: add a file `giscus.json` to the comments repository containing `{"origins": ["https://pabhinaw.github.io"]}` so that only your site can embed the comments.
 
 **Moderating**
 

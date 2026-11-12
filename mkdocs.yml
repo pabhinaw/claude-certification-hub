@@ -7,9 +7,7 @@ site_description: Unofficial, independent basic-to-advanced study hub for the Cl
 site_author: Prasoon Abhinaw
 # GitHub username: pabhinaw
 site_url: https://pabhinaw.github.io/claude-certification-hub/
-repo_url: https://github.com/pabhinaw/claude-certification-hub
-repo_name: claude-certification-hub
-edit_uri: edit/main/docs/
+# No repo_url / edit_uri on purpose: the source repository is private.
 
 theme:
   name: material
@@ -94,7 +92,7 @@ extra:
   # empty, the page shows a "being set up" note instead of the comment box.
   # ------------------------------------------------------------------
   comments:
-    repo: pabhinaw/claude-certification-hub
+    repo: pabhinaw/claude-certification-hub-comments   # a separate PUBLIC repo used only for comments
     repo_id: ""
     category: Learner Stories
     category_id: ""
@@ -114,9 +112,6 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pabhinaw/
       name: Prasoon Abhinaw on LinkedIn
-    - icon: fontawesome/brands/github
-      link: https://github.com/pabhinaw/claude-certification-hub
-      name: Source on GitHub
 
 copyright: >
   &copy; 2026 Claude Certification Hub &middot; Developed by
@@ -159,11 +154,11 @@ nav:
       - Commonly Missed Topics: architect/commonly-missed.md
       - Question Bank & Practice:
           - Overview: architect/practice-questions.md
-          - "D1 · Agentic (49)": architect/question-bank/d1.md
-          - "D2 · Tools & MCP (35)": architect/question-bank/d2.md
-          - "D3 · Claude Code (47)": architect/question-bank/d3.md
-          - "D4 · Prompt & Output (42)": architect/question-bank/d4.md
-          - "D5 · Context (29)": architect/question-bank/d5.md
+          - "D1 · Agentic (52)": architect/question-bank/d1.md
+          - "D2 · Tools & MCP (37)": architect/question-bank/d2.md
+          - "D3 · Claude Code (50)": architect/question-bank/d3.md
+          - "D4 · Prompt & Output (44)": architect/question-bank/d4.md
+          - "D5 · Context (31)": architect/question-bank/d5.md
       - Mock Exams: architect/mock-exams.md
       - Cheat Sheet: architect/cheat-sheet.md
       - Exam Day Guide: architect/exam-day.md

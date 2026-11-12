@@ -33,14 +33,16 @@
           <div class="hub-stat"><strong>720</strong><span>pass mark / 1000</span></div>
           <div class="hub-stat"><strong>5</strong><span>weighted domains</span></div>
         </div>
-        <a class="hub-panel__link" href="{{ 'architect/exam-overview/' | url }}">Full exam overview →</a>
+        <a class="hub-panel__link" href="{{ 'architect/mock-exams/' | url }}">Take a timed mock exam →</a>
       </aside>
     </div>
   </section>
 {% endblock %}
 
 {% block content %}
+  {% set limit = 3 %}
+  {% set stories_html %}{% include "partials/testimonials.html" %}{% endset %}
   <div class="hub-home">
-    {{ page.content }}
+    {{ page.content | replace('<div id="hub-stories-slot"></div>', stories_html) }}
   </div>
 {% endblock %}

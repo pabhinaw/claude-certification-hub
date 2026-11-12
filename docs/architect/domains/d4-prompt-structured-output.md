@@ -223,6 +223,12 @@ print(resp.usage)   # cache_creation_input_tokens / cache_read_input_tokens show
 
 ---
 
+!!! practitioner "Practitioner's note: check the schema before the prompt"
+    When an extraction pipeline "hallucinates", look at the schema before rewriting the prompt. A **required** field that some documents simply don't contain is the most common cause of invented values. Make missing a valid answer (nullable fields, `not_stated` enums) and the fabrication usually disappears without any prompt change.
+    <br>— *Prasoon Abhinaw*
+
+---
+
 ## Multi-instance (independent) review
 
 A model reviewing **its own output in the same context** tends to agree with itself. More effective:

@@ -209,6 +209,10 @@ claude -p "Review this PR diff for security issues. Output JSON findings." \
 
 ---
 
+!!! practitioner "Practitioner's note: the 'should or must?' audit"
+    Go through your CLAUDE.md one line at a time and ask a single question: **is this a *should* or a *must*?** Every *must* (never read secrets, always format, never push to main) moves into permissions or a hook. Every *should* stays in memory or becomes a path-scoped rule. After that audit, the file is usually shorter, clearer and far more reliable.
+    <br>— *Prasoon Abhinaw*
+
 ## Anti-patterns & exam traps
 
 | Wrong option | Better |

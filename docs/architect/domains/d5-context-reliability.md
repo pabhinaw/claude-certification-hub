@@ -114,6 +114,10 @@ For research and synthesis systems:
 
 ---
 
+!!! practitioner "Practitioner's note: put numbers on review before writing rules"
+    Before deciding what goes to human review, build a simple table: **accuracy per field, per document type**, from a labelled sample. It almost always shows that a handful of fields on a handful of document types cause most of the risk. Route those, sample the rest by stratum, and reviewers spend their time where it actually matters.
+    <br>— *Prasoon Abhinaw*
+
 ## Anti-patterns & exam traps
 
 | Wrong option | Better |

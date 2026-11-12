@@ -1,6 +1,6 @@
 # Commonly Missed Topics <span class="level-badge">L4</span>
 
-These five topic areas are where experienced candidates most often lose marks: they *feel* familiar, but the right answer is a specific, deterministic one. The list is based on the topic-level results in the author's own score report (see [My Exam Journey](../about/my-journey.md)) and on community feedback. It contains no exam questions.
+These five topic areas are ones that experienced candidates commonly find tricky: they *feel* familiar, but the right answer is a specific, deterministic one. The list reflects community feedback and the design reasoning in this hub's domain pages. It contains no exam questions.
 
 | Rank | Topic area | Why people miss it |
 |---|---|---|

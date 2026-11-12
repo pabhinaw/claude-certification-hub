@@ -199,6 +199,10 @@ In Claude Code shell hooks, **exit code 2 blocks** a PreToolUse call and sends s
 
 ---
 
+!!! practitioner "Practitioner's note: draw the exit paths"
+    When reviewing any agent design, list **every** way the loop can end: `end_turn`, the iteration cap, an exception, a refusal, a timeout, a user who goes quiet. Then check each one lands in exactly one of two states: *resolved* or *escalated with a handoff*. The paths nobody drew are where customers get lost, and they're usually what a scenario question is really testing.
+    <br>— *Prasoon Abhinaw*
+
 ## Anti-patterns & exam traps
 
 | Wrong option sounds like… | Why it's wrong |

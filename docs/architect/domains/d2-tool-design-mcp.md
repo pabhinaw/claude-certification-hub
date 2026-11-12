@@ -227,6 +227,10 @@ Efficient exploration: **Glob/Grep to locate → Read only the relevant files/se
 
 ---
 
+!!! practitioner "Practitioner's note: read your tool descriptions side by side"
+    When tool selection is flaky, put all the tool descriptions next to each other and read them as if you were a new teammate seeing them for the first time. If *you* can't tell which tool to use for a request, Claude can't either. Fix the overlap in the descriptions first; reach for `tool_choice` and code gates when the order or the call itself must be **guaranteed**.
+    <br>— *Prasoon Abhinaw*
+
 ## Anti-patterns & exam traps
 
 | Wrong option | Better |

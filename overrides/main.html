@@ -1,0 +1,14 @@
+{#- Adds a "Reviewed by" line to the end of every content page. -#}
+{% extends "base.html" %}
+{% block content %}
+  {{ super() }}
+  {% set reviewed = page.meta.reviewed if page.meta and page.meta.reviewed else config.extra.reviewed_on %}
+  {% if reviewed and not (page.meta and page.meta.hide_reviewed) %}
+    <p class="hub-reviewed">
+      Written and reviewed by
+      <a href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Prasoon Abhinaw</a>
+      · Last reviewed {{ reviewed }} ·
+      <a href="{{ config.repo_url }}/issues/new" target="_blank" rel="noopener">Suggest a correction</a>
+    </p>
+  {% endif %}
+{% endblock %}

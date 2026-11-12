@@ -80,8 +80,8 @@ Reference architectures, risks and controls for every exam scenario.
 <div class="hub-feature" markdown>
 :material-head-question-outline:{ .hub-icon }
 
-### [Practice questions](architect/practice-questions.md)
-Original scenario-style questions, each with a full explanation.
+### [Question bank & mock exams](architect/practice-questions.md)
+202 original questions and three timed 60-question mocks, with a full explanation for every option.
 </div>
 
 <div class="hub-feature" markdown>
@@ -94,8 +94,8 @@ Build an agent loop, an extraction pipeline and a team Claude Code setup.
 <div class="hub-feature" markdown>
 :material-lightning-bolt-outline:{ .hub-icon }
 
-### [Cheat sheet](architect/cheat-sheet.md)
-The decision rules that answer most questions, on a single page.
+### [Cheat sheet & Study Notes](architect/cheat-sheet.md)
+The decision rules on one page, plus short [articles](notes/index.md) on the ideas that matter most.
 </div>
 
 </div>
@@ -108,6 +108,13 @@ The decision rules that answer most questions, on a single page.
 </div>
 </section>
 
+<section class="hub-section">
+<p class="hub-eyebrow">Learner stories</p>
+<h2 id="learner-stories">What learners say</h2>
+<div id="hub-stories-slot"></div>
+<p class="hub-center"><a href="about/learner-stories/" class="md-button">All learner stories</a></p>
+</section>
+
 <section class="hub-section" markdown>
 <div class="hub-author" markdown>
 <div class="hub-author__avatar" aria-hidden="true">PA</div>
@@ -118,10 +125,10 @@ The decision rules that answer most questions, on a single page.
 
 <p class="hub-author__role">Software Engineer · Claude Certified Architect – Foundations</p>
 
-I built this hub after passing the CCAR-F exam, to give every learner the structured, honest preparation I wished I'd had: clear explanations, real decision rules, and notes on exactly where candidates lose marks.
+I built this hub after passing the CCAR-F exam, to give every learner the structured, honest preparation I wished I'd had: clear explanations, real decision rules, and the topics candidates most often find tricky. Questions about a topic? Connect with me on LinkedIn.
 
 [:fontawesome-brands-linkedin: Connect on LinkedIn](https://www.linkedin.com/in/pabhinaw/){ .md-button .md-button--primary target="_blank" rel="noopener" }
-[Read my exam journey](about/my-journey.md){ .md-button }
+[How I prepared](about/my-journey.md){ .md-button }
 [Verify credential](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635){ .md-button target="_blank" rel="noopener" }
 </div>
 </div>

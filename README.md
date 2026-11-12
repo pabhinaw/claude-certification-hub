@@ -25,11 +25,30 @@ claude-certification-hub/
     ├── architect/             ← CCAR-F track (overview, blueprint, 5 domains, practice)
     ├── developer/             ← CCDV-F track
     ├── labs/                  ← hands-on exercises
+    ├── notes/                 ← Study Notes articles
     ├── resources/             ← official links, contributing
-    └── about/                 ← author's exam journey
+    └── about/                 ← about the author, how I prepared
+```
+
+Also at the top level:
+
+```
+├── overrides/            ← custom page templates (home, learner stories, reviewed-by line)
+├── labs-code/            ← runnable lab code (dry-run mode needs no API key)
+└── tools/qbank/          ← question-bank source files + build script
 ```
 
 To add a page: create a `.md` file under `docs/`, then add one line for it under `nav:` in `mkdocs.yml`.
+
+## Updating the question bank
+
+Questions live in `tools/qbank/q_*.py` (one file per domain). After editing, regenerate the bank pages and the mock-exam data:
+
+```bash
+python tools/qbank/build.py
+```
+
+The script assigns IDs, spreads correct answers evenly across A–D, builds three non-overlapping 60-question mocks weighted by domain, and writes `docs/assets/data/qbank.json` and `docs/architect/question-bank/d1.md`–`d5.md`. Commit the generated files too.
 
 ---
 
@@ -67,6 +86,24 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 Then open http://127.0.0.1:8000 — the page refreshes as you edit.
+
+## Publishing learner stories (testimonials)
+
+Only **real, consented** stories are ever published. Never write or "improve" a testimonial yourself.
+
+1. A learner submits the **"Share your learner story"** form (GitHub → Issues → New issue). Both consent boxes are required.
+2. Read it. Reject anything containing exam questions, exam content, score details or personal contact data.
+3. Open `mkdocs.yml`, find `testimonials: []` and add the story **exactly as written**:
+   ```yaml
+   testimonials:
+     - name: "Asha K."            # as the learner chose
+       role: "Solution Architect" # optional
+       cert: "CCAR-F · Passed"    # optional
+       quote: "Their words, unedited."
+       link: "https://..."        # optional, only if they provided it
+   ```
+4. Commit and push. The home page shows the 3 newest stories; **About → Learner Stories** shows all.
+5. If someone asks for removal, delete their entry and push. Close their issue with a thank-you.
 
 ## Privacy rule for this repo
 

@@ -82,9 +82,22 @@ extra_css:
 
 extra_javascript:
   - assets/greeting.js
+  - assets/mock-exam.js
 
 extra:
   generator: false
+  reviewed_on: November 2026
+  # ------------------------------------------------------------------
+  # Learner testimonials: REAL, CONSENTED stories only.
+  # Copy each approved story from its GitHub issue. Example format:
+  #   - name: "Asha K."                       # as the learner chose
+  #     role: "Solution Architect"            # optional
+  #     cert: "CCAR-F · Passed"               # optional
+  #     quote: "Their words, unedited."
+  #     link: "https://www.linkedin.com/in/…" # optional, only if they gave it
+  # Leave the list empty ([]) to show the "Be the first" invitation.
+  # ------------------------------------------------------------------
+  testimonials: []
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pabhinaw/
@@ -132,7 +145,14 @@ nav:
           - "D4 · Prompt Engineering & Structured Output": architect/domains/d4-prompt-structured-output.md
           - "D5 · Context Management & Reliability": architect/domains/d5-context-reliability.md
       - Commonly Missed Topics: architect/commonly-missed.md
-      - Practice Questions: architect/practice-questions.md
+      - Question Bank & Practice:
+          - Overview: architect/practice-questions.md
+          - "D1 · Agentic (49)": architect/question-bank/d1.md
+          - "D2 · Tools & MCP (35)": architect/question-bank/d2.md
+          - "D3 · Claude Code (47)": architect/question-bank/d3.md
+          - "D4 · Prompt & Output (42)": architect/question-bank/d4.md
+          - "D5 · Context (29)": architect/question-bank/d5.md
+      - Mock Exams: architect/mock-exams.md
       - Cheat Sheet: architect/cheat-sheet.md
       - Exam Day Guide: architect/exam-day.md
   - Developer (CCDV-F):
@@ -144,11 +164,18 @@ nav:
       - "Lab 1 · Build an Agentic Loop": labs/lab-01-agentic-loop.md
       - "Lab 2 · Reliable Structured Extraction": labs/lab-02-structured-extraction.md
       - "Lab 3 · Configure Claude Code for a Team": labs/lab-03-claude-code-config.md
+  - Study Notes:
+      - notes/index.md
+      - Prompts guide, code guarantees: notes/prompts-guide-code-guarantees.md
+      - Forcing and ordering tool calls: notes/forcing-and-ordering-tool-calls.md
+      - Human review that isn't random: notes/human-review-that-isnt-random.md
   - Resources:
       - resources/index.md
       - Official Links: resources/official-links.md
       - Contributing: resources/contributing.md
       - Content & Exam-Integrity Policy: resources/content-policy.md
+      - Changelog: resources/changelog.md
   - About:
       - about/index.md
-      - My Exam Journey: about/my-journey.md
+      - How I Prepared: about/my-journey.md
+      - Learner Stories: about/learner-stories.md

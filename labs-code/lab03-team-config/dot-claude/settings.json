@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": ["Bash(pnpm test:*)", "Bash(pnpm lint:*)"],
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Edit(./migrations/**)", "Bash(git push --force:*)"]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format.sh" }]
+      }
+    ]
+  }
+}

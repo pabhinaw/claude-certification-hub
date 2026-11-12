@@ -16,11 +16,18 @@ Make high-quality preparation **free, structured and practical**: from first pri
 ## Roadmap
 
 - [x] Architect – Foundations (CCAR-F) track
+- [x] 202-question bank and three timed mock exams
+- [x] Runnable lab code and Study Notes
+- [ ] Learner stories with on-page comments
 - [ ] Developer – Foundations (CCDV-F) domain deep-dives and practice
 - [ ] More labs (MCP server build, prompt caching, eval harness)
 - [ ] Architect – Professional (CCAR-P) overview
 
-Read the author's notes: [My Exam Journey](my-journey.md).
+Read the author's notes: [How I Prepared](my-journey.md).
+
+## Contact
+
+For questions about the content, suggestions or collaboration, connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/). For corrections, you can also open an issue on [GitHub](https://github.com/pabhinaw/claude-certification-hub/issues). I can discuss topics and study strategy, but never exam questions.
 
 !!! note
     Unofficial and independent: not affiliated with, sponsored or endorsed by Anthropic. Claude and Anthropic are trademarks of Anthropic, PBC. See the [content policy](../resources/content-policy.md).

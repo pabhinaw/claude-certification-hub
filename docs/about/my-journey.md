@@ -1,38 +1,37 @@
-# My Exam Journey: CCAR-F
+# How I Prepared for CCAR-F
 
-**Result:** Pass · **893 / 1000** (pass mark 720) · November 2026 · online proctored ·
+**Result:** Passed · November 2026 ·
 [Verify credential on Credly](https://www.credly.com/badges/b512d180-1dd7-4edb-8fb6-6251ec998635){ target="_blank" rel="noopener" }
 
-I'm sharing my results at **topic level** because the weak spots are more useful to you than the strong ones.
+This page shares my **preparation approach**: what I did, in what order, and what I'd do again. It contains no exam questions or exam content (see the [content policy](../resources/content-policy.md)).
 
-!!! note "What this page does and doesn't contain"
-    Exam content is confidential, and candidates agree not to share, reproduce or discuss the questions. This page contains **no exam questions or recalled scenarios**. It only describes, in my own words, the broad topic areas where my score report showed I was strong or weak, and what I've studied since.
+## My approach in one line
 
-## Where I was strong
+> Learn the **design principle** first, **build it once** by hand, then **practise choosing** between plausible options.
 
-Across all five domains, especially:
+## What I did, step by step
 
-* the agent loop, guaranteed termination and structured handoffs
-* hooks for policy enforcement
-* everything about Claude Code configuration: where each kind of guidance belongs, commands, plan mode and quality hooks
-* MCP scopes, secrets handling and tool error design
-* choosing between synchronous and batch processing, and structured-output methods
-* escalation decisions
+1. **Mapped the domains first.** Before studying anything, I listed the five domains and their weights and planned my time by weight. → [Domains & Study Checklist](../architect/exam-blueprint.md)
+2. **Filled the basics gaps.** I made sure I could explain statelessness, `stop_reason`, tool use and `tool_choice` without notes. → [Fundamentals](../fundamentals/index.md)
+3. **Built small things.** An agent loop with a code gate, a forced-tool extraction pipeline, and a repo with CLAUDE.md, a path rule, a command and a hook. Building is what made the concepts stick. → [Labs](../labs/index.md)
+4. **Studied the "why", not just the "what".** For every topic I wrote the one-line decision rule. Most of those rules are on the [Cheat Sheet](../architect/cheat-sheet.md).
+5. **Practised with scenario-style questions** and, for every answer, explained why each *wrong* option was wrong.
+6. **Reviewed the tricky topics** in the final week. → [Commonly Missed Topics](../architect/commonly-missed.md)
 
-## Where I lost marks
+## What I'd tell you
 
-| Topic area | My result | What I learned afterwards |
-|---|---|---|
-| Forcing tool calls **and enforcing the order** of dependent tool calls | weakest area | Knowing `tool_choice` isn't enough: ordering needs gates in code. → [Commonly Missed #1](../architect/commonly-missed.md#1-tool_choice-sequencing) |
-| Routing extractions to human reviewers | weak | Think *risk-based routing*, not random sampling. → [D5](../architect/domains/d5-context-reliability.md#human-review-routing) |
-| Schema design for missing or ambiguous data | below average | Every required field invites a guess. → [D4](../architect/domains/d4-prompt-structured-output.md#schema-design-that-prevents-fabrication) |
-| Iterative refinement feedback | good, not perfect | Batch issues that interact; handle independent ones in sequence. → [D3](../architect/domains/d3-claude-code.md#iterative-refinement) |
-| Resuming sessions after changes | good, not perfect | Re-analyse only what changed. → [D1](../architect/domains/d1-agentic-architecture.md#session-state-resume-fork-or-fresh-start) |
-
-## My top three tips
-
-1. **Hands-on beats reading.** The topics I had actually configured in a real repo were the ones I found easiest.
-2. **"Guarantee" means code.** Whenever an option says "instruct the model to…", look for a deterministic alternative.
+1. **Hands-on beats reading.** Topics I had actually configured in a real repo felt easy; topics I'd only read about didn't.
+2. **"Guarantee" means code.** When an option says "instruct the model to…", look for a deterministic alternative: hooks, schemas, `tool_choice`, permissions or code gates.
 3. **Read each scenario's constraints twice.** Words like *team-wide*, *strict*, *blocking* and *overnight* each point to a specific kind of answer.
+4. **Don't skip the "boring" topics.** Tool ordering, review routing and schema design for missing data look simple, but they're easy to get subtly wrong.
 
-Good luck. If this hub helped you, consider [contributing](../resources/contributing.md) a fix or an original question.
+## Questions? Let's connect
+
+If something on this site is unclear, or you want to talk about your preparation, I'm happy to help.
+
+[:fontawesome-brands-linkedin: Connect with me on LinkedIn](https://www.linkedin.com/in/pabhinaw/){ .md-button .md-button--primary target="_blank" rel="noopener" }
+
+!!! note "Please don't ask for exam questions"
+    I'll gladly discuss **topics, concepts and study strategy**, but I can't share or discuss exam questions or exam content. That's confidential for every candidate.
+
+If this hub helped you, consider [contributing](../resources/contributing.md) a fix or an original question.

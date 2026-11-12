@@ -1,0 +1,37 @@
+{#-
+  Learner testimonial cards.
+  Data comes from `extra.testimonials` in mkdocs.yml (real, consented stories only).
+  If the list is empty, an invitation card is shown instead.
+-#}
+{% set stories = config.extra.testimonials or [] %}
+{% set limit = limit or 99 %}
+{% set submit_url = config.repo_url ~ "/issues/new?template=learner-story.yml" %}
+
+{% if stories %}
+  <div class="hub-stories">
+    {% for t in stories[:limit] %}
+      <figure class="hub-story">
+        <div class="hub-story__mark" aria-hidden="true">&ldquo;</div>
+        <blockquote class="hub-story__quote">{{ t.quote }}</blockquote>
+        <figcaption class="hub-story__who">
+          <span class="hub-story__avatar" aria-hidden="true">{{ t.name[:1] | upper }}</span>
+          <span class="hub-story__meta">
+            <strong>
+              {% if t.link %}<a href="{{ t.link }}" target="_blank" rel="noopener nofollow">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}
+            </strong>
+            {% if t.role %}<span>{{ t.role }}</span>{% endif %}
+          </span>
+          {% if t.cert %}<span class="hub-story__cert">{{ t.cert }}</span>{% endif %}
+        </figcaption>
+      </figure>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="hub-stories-empty">
+    <div class="hub-stories-empty__icon" aria-hidden="true">💬</div>
+    <h3>Be the first to share your story</h3>
+    <p>Did this hub help you prepare for a Claude certification or build something better? A short note helps other learners decide where to start.</p>
+    <a class="md-button md-button--primary" href="{{ submit_url }}" target="_blank" rel="noopener">Share your story</a>
+    <a class="md-button" href="https://www.linkedin.com/in/pabhinaw/" target="_blank" rel="noopener">Or message me on LinkedIn</a>
+  </div>
+{% endif %}

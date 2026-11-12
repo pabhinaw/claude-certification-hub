@@ -151,6 +151,45 @@ Everything that shapes behaviour belongs in git: code, **prompts**, tool definit
 * **Pull requests are the checkpoint** where a person reviews what an agent wrote.
 * Claude fits *into* this process (drafting changes, reviewing diffs, writing tests in CI); it does not replace it.
 
+### Claude across the life cycle
+
+Anthropic's [AI-native SDLC playbook](https://claude.com/resources/articles/the-ai-native-sdlc-playbook) describes the same six stages, with one idea running through them: **every stage ends by committing an artefact that the next stage reads.** Summarised in my own words:
+
+| Stage | What Claude does | Artefact committed | Human decision |
+|---|---|---|---|
+| Plan | Helps turn an idea, ticket or alert into a short written statement of intent | The intent document | Product owner accepts or rejects |
+| Design | Turns the intent into requirements and a design, applying the organisation's standards (packaged as skills) and **flagging conflicts** | The specification | Owner resolves flagged concerns |
+| Build | Starts in **plan mode**, produces an implementation plan, then implements | The plan, then code and tests | Engineer approves the plan before any edit |
+| Test | Checks its own work with a **feedback loop** (tests, build, screenshot) | Test output attached to the change | Reviewer judges intent and risk |
+| Deploy | Reviews pull requests; runs non-interactively in CI | Review findings on the pull request | A person approves; hooks gate production |
+| Maintain | Is triggered by monitoring, diagnoses, proposes a fix | An incident record that becomes new intent | Owner triages |
+
+The full picture, with the ladder of control and the working patterns, is on the [AI-Native SDLC](../../fundamentals/ai-native-sdlc.md) fundamentals page. Points worth remembering:
+
+* **The commit history is the audit trail**: who asked for what, what the agent produced, who approved it.
+* **Name one source of truth per artefact.** If tickets live in an existing tracker, either the tracker or the repository is authoritative, and the other holds a link. Two unlinked copies drift.
+* **Design review moves earlier.** Correcting a plan is editing a document; correcting finished code is rework.
+* **Separation of duties still holds.** The agent that wrote a change cannot approve it; branch protection keeps a human approval in the path.
+* **The agent acts up to the production gate, not past it.** Anything it writes arrives as a pull request, and production release needs a named approval enforced by a hook.
+* **Autonomy is tiered by environment**: free in development, gated in production.
+* **Rollback is rehearsed in advance**, so that it is a known, tested path when it is needed.
+* **Detection stays deterministic.** A script decides that a metric is out of range; only then is the model invoked, with permissions that depend on severity.
+
+### Working in parallel
+
+| | Parallel sessions | Sub-agents |
+|---|---|---|
+| What | Separate Claude Code instances, each in its own **git worktree** and branch | Helpers inside one session, each with its own context and tool limits |
+| Share | Nothing, except the engineer steering them | The parent's task; they report back to it |
+| Use for | Independent tasks that touch different files | Recurring jobs: verifying, researching, simplifying |
+| Limit | How many streams one person can review properly | Token cost |
+
+Tasks that touch the **same files** belong in one session, one after another.
+
+### Test-first with an agent
+
+For a bug fix: have the failing test written **first**, confirm it fails for the expected reason, commit it, then ask for the fix **without changing the test**. A test that existed before the fix and could not be rewritten is real evidence. Protect the check itself: a hook (or review rule) should stop the agent from editing or deleting tests during a fix. "Fix the code, not the test."
+
 ## 7. Code review
 
 AI-generated code needs the same review as anyone's, with a few extra habits.
@@ -163,6 +202,8 @@ AI-generated code needs the same review as anyone's, with a few extra habits.
 | Look for invented APIs, packages or flags | A known failure mode; check they exist |
 | Review with a **separate** session or reviewer | The author's context shares the author's blind spots |
 | Keep a human approval for risky changes | Accountability stays with people |
+| Give the automated reviewer written criteria: what to check, what counts as important, what to skip, a cap on minor comments | Consistent reviews and fewer noisy findings |
+| Feed repeated findings back into `CLAUDE.md` | The same mistake stops recurring |
 
 ## 8. Refactoring
 
@@ -205,6 +246,9 @@ Reasons to choose a cloud platform are usually organisational: existing contract
 | Raw HTTP "for performance" | Loses retries and stream handling for no real gain |
 | Merge agent-written code because tests pass | Review still needed: edge cases, security, invented APIs |
 | Refactor 200 files in one prompt | Plan, split, verify step by step |
+| Let the agent that wrote the change approve it | No separation of duties; a person approves |
+| Let the agent edit a failing test to make it pass | Weakens the check; fix the code |
+| Run two parallel sessions on the same files | Conflicting edits; use one session or separate files |
 | Assume a beta feature exists on every cloud | Check per platform |
 
 ## Decision rules

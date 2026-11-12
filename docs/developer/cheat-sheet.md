@@ -105,6 +105,10 @@ Latency: smaller model · shorter output · stream (perceived) · cache · paral
 * Git for prompts, schemas, tools, evals, `CLAUDE.md`; CI runs tests **and** evals
 * Review generated code: run it, check edges and security, verify packages exist, separate reviewer
 * Big refactor: plan → tests → small steps on a branch → verify each
+* Each life-cycle stage commits an artefact (intent → spec → plan → code + tests → review findings); git history is the audit trail; one source of truth per artefact
+* Agent that wrote it can't approve it; agent acts up to the production gate, not past it; rollback rehearsed
+* Bug fix: failing test first, then fix **without editing the test**
+* Parallel sessions = separate worktrees, different files; sub-agents = scoped helpers inside a session
 * Cloud platforms: auth, model IDs and feature availability differ. Check before relying on a feature
 
 ## Instruction surfaces
@@ -165,6 +169,8 @@ Drift grows with length. Pin exact facts · summarise old turns · clear old too
 * Layers: screen input → separate data from instructions → **least privilege** → approval → validate output → monitor
 * Untrusted content in `tool_result` / tags; never your instructions in tool results
 * Deterministic guardrails: `PreToolUse` hook, deny rules, validation
+* Advisory (CLAUDE.md, skill) < project hooks/permissions < **managed settings** (admin-enforced, can't be overridden)
+* Permissions govern Claude's tools; a **sandbox** (network allow-list, blocked credential paths) governs what shell commands can reach
 * Keys: backend only, secret store, per-environment, rotate; leaked → **revoke first**; never in prompts
 * Identity from the **session**; authorisation **inside the tool**
 * Model output is untrusted: no `eval`, parameterised SQL, escape HTML

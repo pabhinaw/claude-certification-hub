@@ -138,6 +138,7 @@ nav:
       - Claude Code Basics: fundamentals/claude-code-basics.md
       - MCP Basics: fundamentals/mcp-basics.md
       - Evaluation Basics: fundamentals/evaluation-basics.md
+      - The AI-Native SDLC: fundamentals/ai-native-sdlc.md
       - Glossary: fundamentals/glossary.md
   - Architect (CCAR-F):
       - architect/index.md
@@ -179,13 +180,13 @@ nav:
           - "Claude Code · Eval, Testing & Debugging": developer/domains/d7-claude-code-evals.md
       - Question Bank & Practice:
           - Overview: developer/practice-questions.md
-          - "Applications & Integration (71)": developer/question-bank/ai.md
+          - "Applications & Integration (76)": developer/question-bank/ai.md
           - "Model Selection (30)": developer/question-bank/ms.md
           - "Agents & Workflows (24)": developer/question-bank/aw.md
           - "Prompt & Context (18)": developer/question-bank/pc.md
           - "Tools & MCPs (21)": developer/question-bank/tm.md
-          - "Security & Safety (14)": developer/question-bank/ss.md
-          - "Claude Code · Evals (16)": developer/question-bank/cc-ev.md
+          - "Security & Safety (17)": developer/question-bank/ss.md
+          - "Claude Code · Evals (19)": developer/question-bank/cc-ev.md
       - Mock Exams: developer/mock-exams.md
       - Cheat Sheet: developer/cheat-sheet.md
       - Exam Day Guide: developer/exam-day.md
@@ -194,6 +195,7 @@ nav:
       - "Lab 1 · Build an Agentic Loop": labs/lab-01-agentic-loop.md
       - "Lab 2 · Reliable Structured Extraction": labs/lab-02-structured-extraction.md
       - "Lab 3 · Configure Claude Code for a Team": labs/lab-03-claude-code-config.md
+      - "Lab 4 · Multi-Agent Research Pipeline": labs/lab-04-multi-agent-research.md
   - Study Notes:
       - notes/index.md
       - Prompts guide, code guarantees: notes/prompts-guide-code-guarantees.md

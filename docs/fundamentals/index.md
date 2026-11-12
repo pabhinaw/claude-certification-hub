@@ -13,4 +13,5 @@ Everything in the Architect and Developer tracks builds on these pages. Work thr
 | [Claude Code Basics](claude-code-basics.md) | name every Claude Code configuration file and what it is for |
 | [MCP Basics](mcp-basics.md) | explain servers, tools, resources, prompts and scopes |
 | [Evaluation Basics](evaluation-basics.md) | measure quality with test sets, graders and per-field metrics |
+| [The AI-Native SDLC](ai-native-sdlc.md) | explain how Claude fits each stage of software delivery, and which controls are advisory, enforced or organisation-wide |
 | [Glossary](glossary.md) | look up any term quickly |

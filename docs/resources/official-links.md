@@ -35,6 +35,7 @@
 | MCP connector | <https://platform.claude.com/docs/en/agents-and-tools/mcp-connector> |
 | Mitigating jailbreaks and prompt injection | <https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks> |
 | Claude Code CLI reference | <https://code.claude.com/docs/en/cli> |
+| The AI-native SDLC playbook (Anthropic) | <https://claude.com/resources/articles/the-ai-native-sdlc-playbook> |
 | Anthropic news | <https://www.anthropic.com/news> |
 
 ## Courses for the Architect exam (CCAR-F)

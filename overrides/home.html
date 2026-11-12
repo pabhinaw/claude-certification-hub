@@ -15,6 +15,7 @@
         </p>
         <div class="hub-cta">
           <a href="{{ 'architect/' | url }}" class="md-button md-button--primary">Start the Architect track</a>
+          <a href="{{ 'developer/' | url }}" class="md-button md-button--primary">Start the Developer track</a>
           <a href="{{ 'start-here/' | url }}" class="md-button">New here? Start here</a>
         </div>
         <p class="hub-byline">
@@ -25,15 +26,33 @@
         </p>
       </div>
 
-      <aside class="hub-panel" aria-label="CCAR-F at a glance">
-        <p class="hub-panel__title">CCAR-F at a glance</p>
-        <div class="hub-stats">
-          <div class="hub-stat"><strong>60</strong><span>scenario questions</span></div>
-          <div class="hub-stat"><strong>120</strong><span>minutes</span></div>
-          <div class="hub-stat"><strong>720</strong><span>pass mark / 1000</span></div>
-          <div class="hub-stat"><strong>5</strong><span>weighted domains</span></div>
+      <aside class="hub-panel" aria-label="The two exams at a glance">
+        {#- Pure-CSS switch: no JavaScript needed -#}
+        <input class="hub-switch__input" type="radio" name="hub-exam" id="hub-exam-a" checked>
+        <input class="hub-switch__input" type="radio" name="hub-exam" id="hub-exam-d">
+        <p class="hub-panel__title">At a glance</p>
+        <div class="hub-switch">
+          <label for="hub-exam-a">Architect · CCAR-F</label>
+          <label for="hub-exam-d">Developer · CCDV-F</label>
         </div>
-        <a class="hub-panel__link" href="{{ 'architect/mock-exams/' | url }}">Take a timed mock exam →</a>
+        <div class="hub-glance hub-glance--a">
+          <div class="hub-stats">
+            <div class="hub-stat"><strong>60</strong><span>scenario questions</span></div>
+            <div class="hub-stat"><strong>120</strong><span>minutes</span></div>
+            <div class="hub-stat"><strong>720</strong><span>pass mark / 1000</span></div>
+            <div class="hub-stat"><strong>5</strong><span>weighted domains</span></div>
+          </div>
+          <a class="hub-panel__link" href="{{ 'architect/mock-exams/' | url }}">Take a timed Architect mock →</a>
+        </div>
+        <div class="hub-glance hub-glance--d">
+          <div class="hub-stats">
+            <div class="hub-stat"><strong>53</strong><span>questions</span></div>
+            <div class="hub-stat"><strong>120</strong><span>minutes</span></div>
+            <div class="hub-stat"><strong>720</strong><span>pass mark / 1000</span></div>
+            <div class="hub-stat"><strong>8</strong><span>weighted domains</span></div>
+          </div>
+          <a class="hub-panel__link" href="{{ 'developer/mock-exams/' | url }}">Take a timed Developer mock →</a>
+        </div>
       </aside>
     </div>
   </section>

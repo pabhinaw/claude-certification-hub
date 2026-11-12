@@ -492,3 +492,93 @@ A main agent must analyse five large log files, but only a short finding from ea
   [("Read all five files in full into the main context", "Fills the window with material that will not be needed."),
    ("Raise max_tokens so that the logs take up less room", "Output limits do not shrink input."),
    ("Lower the temperature so that less context is used", "Temperature does not affect context size.")])
+
+# ---- Claude across the software life cycle (from Anthropic's published guidance, in our own words) ----
+
+Q("AI", "SDLC integration", """
+A team adopts AI-assisted delivery and wants an audit trail showing who asked for a change, what the agent produced and who approved it. Which practice provides this most directly?""",
+  "Commit each stage's artefact to version control",
+  "Intent, specification, plan, code and review findings in git give a dated, attributable record.",
+  [("Ask the agent to remember earlier decisions", "Model memory is not an audit record."),
+   ("Keep the artefacts in each person's chat history", "Private chat history is neither shared nor reviewable."),
+   ("Email a weekly summary of what was built", "A summary is not a traceable record of each decision.")])
+
+Q("AI", "SDLC integration", """
+An agent wrote a change and opened a pull request. Which arrangement preserves separation of duties?""",
+  "Branch protection requires a human code owner's approval",
+  "The author of a change, human or agent, should not be the one who approves it.",
+  [("The same agent session approves its own request", "Self-approval removes the independent check."),
+   ("The request merges automatically once tests pass", "Tests do not replace an accountable approval."),
+   ("The agent pushes straight to the main branch", "That bypasses review altogether.")])
+
+Q("AI", "SDLC integration", """
+An engineer asks Claude Code to fix a bug. The agent makes the failing test pass by changing the test's expected value. Which workflow prevents this?""",
+  "Commit the failing test first, then forbid edits to it",
+  "A test that existed before the fix and could not be changed is real evidence that the bug is gone.",
+  [("Delete the test so that it can no longer fail", "Removes the evidence altogether."),
+   ("Raise the temperature so the fix is more creative", "Sampling settings do not protect the test."),
+   ("Run the same request again in a longer session", "Nothing stops the same shortcut being taken again.")])
+
+Q("AI", "SDLC integration", """
+An engineer wants three independent tasks worked on at the same time by separate Claude Code sessions. What keeps the sessions from overwriting each other's files?""",
+  "Giving each session its own git worktree and branch",
+  "A worktree is a separate checkout, so parallel sessions cannot collide on files.",
+  [("Running all three in the same working folder", "They would edit the same files and conflict."),
+   ("Sharing one conversation between the sessions", "Sessions do not share a conversation, and that would not isolate files."),
+   ("Lowering max_tokens for each of the sessions", "Output limits do not isolate file changes.")])
+
+Q("AI", "SDLC integration", """
+Work items live in an existing ticket system, and the team now also keeps specifications as files in the repository. The two start to disagree. What is the recommended rule?""",
+  "Name one system as the source of truth and link the other",
+  "One authoritative record per artefact, with a link from the copy, prevents drift.",
+  [("Keep both and let each team trust its own copy", "That guarantees the copies diverge."),
+   ("Stop using version control for specifications", "Loses the reviewable, versioned record."),
+   ("Ask the agent to guess which copy is correct", "Guessing is not governance.")])
+
+Q("SS", "Guardrails", """
+A security policy must apply to every developer's Claude Code sessions, and individuals must not be able to turn it off. Where should it be configured?""",
+  "In managed settings deployed by administrators",
+  "Managed settings are enforced by the organisation and cannot be overridden by project or personal settings.",
+  [("In each developer's personal settings file", "Individuals can change their own settings."),
+   ("In a skill that describes the security policy", "A skill is advisory; nothing forces compliance."),
+   ("In a paragraph near the top of CLAUDE.md", "Instructions guide the model; they are not enforced.")])
+
+Q("SS", "Guardrails", """
+A permission rule denies Claude's web-fetch tool, yet a shell command run by the agent still reaches an external site. Which control closes this gap?""",
+  "An operating-system sandbox with a network allow-list",
+  "Permission rules govern Claude's tools; a sandbox restricts what any command can reach.",
+  [("A second deny rule for the same web-fetch tool", "The request did not go through that tool."),
+   ("A reminder in the prompt not to use the network", "Advisory only."),
+   ("A longer timeout on the shell command", "Does nothing to restrict network access.")], level=3)
+
+Q("SS", "Hooks", """
+A team adds a hook that asks a person for approval on every file edit during implementation. Engineers running several sessions are constantly interrupted. What is the better placement?""",
+  "Use allow-or-block hooks in the build; ask only at release gates",
+  "Fast automatic hooks suit the build phase; human approval belongs at the few gates that need it.",
+  [("Remove every hook to stop the interruptions", "Removes the guardrails altogether."),
+   ("Ask for approval on reads as well as edits", "More interruptions, less attention per approval."),
+   ("Move the approval rule into a system prompt", "A prompt cannot enforce an approval.")])
+
+Q("CC", "Parallel work", """
+In Claude Code, what distinguishes a sub-agent from a parallel session?""",
+  "A sub-agent is a scoped helper inside one session",
+  "Sub-agents have their own context and tool limits and report to the parent; parallel sessions are separate instances.",
+  [("A sub-agent always runs on a different machine", "Location is not the distinction."),
+   ("A sub-agent shares the parent's whole context", "It has its own context window."),
+   ("A sub-agent can only be used for writing tests", "Sub-agents can be defined for many jobs.")])
+
+Q("EV", "Evals", """
+A team edits a skill that steers its coding agent. What is the most reliable way to check that the agent still performs as before?""",
+  "Run the eval suite in CI whenever that configuration changes",
+  "Configuration that steers the agent deserves the same regression testing as code.",
+  [("Try one prompt by hand and see if it looks fine", "One manual check misses regressions elsewhere."),
+   ("Wait for developers to report worse results", "Users become the test suite."),
+   ("Compare the length of the old and new skill", "Length says nothing about behaviour.")])
+
+Q("EV", "Evals", """
+What is the difference between giving an agent a feedback loop and adding a verifier sub-agent?""",
+  "The loop runs during the task; the verifier checks at the end in a fresh context",
+  "A feedback loop lets the agent correct itself repeatedly; a fresh-context verifier gives an independent final check.",
+  [("The loop is run by people; the verifier by the model", "Both are automated."),
+   ("The loop replaces tests; the verifier replaces review", "Neither replaces tests or human review."),
+   ("They are two names for exactly the same mechanism", "They serve different purposes at different times.")])

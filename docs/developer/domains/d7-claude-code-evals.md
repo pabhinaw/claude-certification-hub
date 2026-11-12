@@ -45,6 +45,10 @@ Besides the `CLAUDE.md` files *you* write, Claude Code can keep **its own notes*
 
 Choose the **least permissive mode that lets the task proceed**. For anything that must never happen, use `deny` or a `PreToolUse` hook, not a sentence in `CLAUDE.md`.
 
+### Parallel work
+
+Run independent tasks as separate sessions, each in its own **git worktree**, so they cannot collide on files. Use **sub-agents** inside a session for scoped, recurring jobs such as verifying a change in a fresh context. Shared settings in the repository apply to every session.
+
 ### Sessions
 
 | Action | How |
@@ -84,7 +88,11 @@ Choose the **least permissive mode that lets the task proceed**. For anything th
     | **Human** | Subtle judgement; calibrating the other graders | Best quality; slow and costly |
 
 4. **Run on every change**: prompt, model, tool definition, schema. This is **regression testing**. Test at several levels: unit (a parser, a tool), functional (one prompt against its cases), integration (the loop with real tools), end to end (the whole task).
-5. **Feed production failures back** into the test set.
+5. **Feed production failures back** into the test set. Every incident should leave a permanent eval behind.
+
+**Evals for the agent's configuration.** `CLAUDE.md`, skills and hooks steer the agent, so a change to them deserves the same regression testing as code. A practical pattern: collect a few dozen real tasks with accepted outcomes, run them non-interactively in CI on a schedule and whenever that configuration changes, and block the change if the pass rate drops. Treat the suite as living: retire cases that every model now passes and add new ones from monitoring.
+
+**Feedback loop versus verifier.** A feedback loop (run the tests, the build, a screenshot comparison) runs many times *during* the task so the agent corrects itself. A verifier is a final check in a **fresh context**, so its verdict is not coloured by the assumptions that produced the work. Use both.
 
 Calibrate an LLM grader against a set of **human-labelled** cases before trusting it, and re-check when you change the grader's prompt or model.
 

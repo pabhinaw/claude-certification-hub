@@ -24,9 +24,9 @@ Make high-quality preparation **free, structured and practical**: from first pri
 
 - [x] Architect – Foundations (CCAR-F) track
 - [x] 214-question bank, three timed mock exams and a random exam simulation
-- [x] Runnable lab code and Study Notes
+- [x] Four hands-on labs with code, and Study Notes
 - [x] Learner stories with on-page comments
-- [x] Developer – Foundations (CCDV-F) track: deep-dives, 194 questions, three timed mocks, 10-day plan
+- [x] Developer – Foundations (CCDV-F) track: deep-dives, 205 questions, three timed mocks, 10-day plan
 - [ ] More labs (MCP server build, prompt caching, eval harness)
 - [ ] Architect – Professional (CCAR-P) overview
 

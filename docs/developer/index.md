@@ -11,7 +11,7 @@
 flowchart LR
     A[Exam overview] --> B[10-day plan]
     B --> C[Domain deep-dives]
-    C --> D[Question bank<br/>194 questions]
+    C --> D[Question bank<br/>205 questions]
     D --> E[3 timed mocks<br/>53 questions each]
     E --> F[Cheat sheet +<br/>exam-day guide]
 ```
@@ -21,7 +21,7 @@ flowchart LR
 | 1 | [Exam Overview](exam-overview.md) | Format, domains and weights, question types, scoring |
 | 2 | [10-Day Study Plan](study-plan-10-day.md) | A day-by-day schedule with reading, a small build and practice |
 | 3 | Domain deep-dives (below) | Concepts, code, traps, decision rules, self-checks |
-| 4 | [Question Bank](practice-questions.md) | 194 original questions with full explanations |
+| 4 | [Question Bank](practice-questions.md) | 205 original questions with full explanations |
 | 5 | [Mock Exams](mock-exams.md) | Three timed 53-question exams, including multiple-response items |
 | 6 | [Cheat Sheet](cheat-sheet.md) · [Exam Day Guide](exam-day.md) | Last-day revision and a strategy for the sitting |
 

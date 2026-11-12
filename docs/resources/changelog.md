@@ -4,6 +4,12 @@ What's new in the hub. Dates are when changes were published.
 
 ## November 2026
 
+**Final review against the official exam guide and Anthropic's delivery guidance**
+
+* New Fundamentals page: **The AI-Native SDLC**, a study summary of Anthropic's playbook covering the artefact chain, the ladder of control, working patterns and measurement.
+* New **Lab 4**: a multi-agent research pipeline, completing the four kinds of hands-on practice the Architect exam guide recommends.
+* Developer track: how Claude fits each life-cycle stage, parallel work with worktrees, test-first fixes, managed settings and sandboxing, and evals for agent configuration, with 11 new questions.
+
 **Mock exams closer to the real format**
 
 * Architect: 12 new multiple-response questions (bank now 214), four in each mock; scenario framing above each question; and an **exam simulation** that draws 4 of the 6 scenarios at random with 15 questions each.
@@ -18,7 +24,7 @@ What's new in the hub. Dates are when changes were published.
 
 * Full Developer track, mapped to the 25 skills in the official exam guide: nine deep-dive pages with code, covering API mechanics, application design, model selection and cost, agents, prompt and context engineering, tools and MCP server development, security, Claude Code and evals, plus engineering foundations (requirements, REST and JSON, async, code review, refactoring).
 * A day-by-day **10-Day Study Plan**, a one-page cheat sheet and an exam-day guide with a strategy for multiple-response questions.
-* **194 original Developer questions** and **three timed 53-question mock exams**. The mock engine now supports multiple-response ("Select TWO") questions.
+* **205 original Developer questions** and **three timed 53-question mock exams**. The mock engine now supports multiple-response ("Select TWO") questions.
 
 **Practice & assessment**
 

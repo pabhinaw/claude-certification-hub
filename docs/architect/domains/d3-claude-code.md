@@ -253,3 +253,4 @@ claude -p "Review this PR diff for security issues. Output JSON findings." \
 
     * [Claude Code documentation](https://code.claude.com/docs)
     * [Claude Code hooks reference](https://code.claude.com/docs/en/hooks)
+    * [The AI-native SDLC playbook](https://claude.com/resources/articles/the-ai-native-sdlc-playbook), summarised on this site: [The AI-Native SDLC](../../fundamentals/ai-native-sdlc.md)

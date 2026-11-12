@@ -13,17 +13,17 @@
 
 What is the defining difference between a workflow and an agent?
 
-- **A.** Code fixes a workflow's steps; an agent's model chooses
-- **B.** A workflow uses one model; an agent always uses several
+- **A.** A workflow uses one model; an agent always uses several
+- **B.** Code fixes a workflow's steps; an agent's model chooses
 - **C.** A workflow runs in batch; an agent always runs in real time
 - **D.** A workflow cannot call tools; an agent always calls tools
 
-??? success "Answer: A"
-    **Why A is right:** The distinction is who controls the sequence of actions.
+??? success "Answer: B"
+    **Why B is right:** The distinction is who controls the sequence of actions.
 
     **Why the others are wrong:**
 
-    * **B:** Either can use one or many models.
+    * **A:** Either can use one or many models.
     * **C:** Timing mode is unrelated.
     * **D:** Workflows can use tools too.
 
@@ -54,17 +54,17 @@ In a hand-written agent loop, what should decide whether to make another call to
 Claude's response contains two tool_use blocks. How should the application reply?
 
 - **A.** Two separate user messages, each with one tool_result
-- **B.** One user message with two ID-matched tool_result blocks
-- **C.** Only the first result; Claude will ask again for the second
+- **B.** Only the first result; Claude will ask again for the second
+- **C.** One user message with two ID-matched tool_result blocks
 - **D.** One assistant message containing both of the results
 
-??? success "Answer: B"
-    **Why B is right:** All results for a turn go back together, each linked to its request by ID.
+??? success "Answer: C"
+    **Why C is right:** All results for a turn go back together, each linked to its request by ID.
 
     **Why the others are wrong:**
 
     * **A:** Results for one assistant turn belong in a single user message.
-    * **C:** Every tool_use needs a result or the request is invalid.
+    * **B:** Every tool_use needs a result or the request is invalid.
     * **D:** Tool results are sent in a user message.
 
 ---
@@ -74,17 +74,17 @@ Claude's response contains two tool_use blocks. How should the application reply
 A tool raises an exception inside an agent loop. What is the best way to handle it?
 
 - **A.** Let the exception end the process so that it is noticed
-- **B.** Return a tool_result with is_error true and a reason
-- **C.** Return a made-up success value to keep the flow simple
+- **B.** Return a made-up success value to keep the flow simple
+- **C.** Return a tool_result with is_error true and a reason
 - **D.** Return an empty string so that the loop carries on
 
-??? success "Answer: B"
-    **Why B is right:** The model can then retry, try another route, or explain the problem.
+??? success "Answer: C"
+    **Why C is right:** The model can then retry, try another route, or explain the problem.
 
     **Why the others are wrong:**
 
     * **A:** Crashing loses the task and the context.
-    * **C:** Fabricated results cause wrong answers.
+    * **B:** Fabricated results cause wrong answers.
     * **D:** Hiding the failure misleads the model.
 
 ---
@@ -115,17 +115,17 @@ An agent calls the same search tool with the same query fifteen times in a row. 
 
 - **A.** Raise the iteration limit so that the agent has more attempts
 - **B.** Remove the iteration limit to avoid cutting the agent off
-- **C.** Return a specific error and whether a retry can help
-- **D.** Raise the temperature so that the queries vary a little
+- **C.** Raise the temperature so that the queries vary a little
+- **D.** Return a specific error and whether a retry can help
 
-??? success "Answer: C"
-    **Why C is right:** With an informative error the model can change approach instead of repeating itself.
+??? success "Answer: D"
+    **Why D is right:** With an informative error the model can change approach instead of repeating itself.
 
     **Why the others are wrong:**
 
     * **A:** More attempts at the same failing call.
     * **B:** That removes the only protection.
-    * **D:** Random variation does not fix a failing tool.
+    * **C:** Random variation does not fix a failing tool.
 
 ---
 
@@ -135,17 +135,17 @@ An agent can issue refunds. Policy says refunds above a set amount must be appro
 
 - **A.** A sentence in the system prompt stating the policy firmly
 - **B.** A lower temperature so that the agent follows the policy
-- **C.** A code check that blocks the tool until approved
-- **D.** A few-shot example showing the agent asking a manager
+- **C.** A few-shot example showing the agent asking a manager
+- **D.** A code check that blocks the tool until approved
 
-??? success "Answer: C"
-    **Why C is right:** A rule that must always hold needs deterministic enforcement outside the model.
+??? success "Answer: D"
+    **Why D is right:** A rule that must always hold needs deterministic enforcement outside the model.
 
     **Why the others are wrong:**
 
     * **A:** Prompts guide behaviour but cannot guarantee it.
     * **B:** Sampling settings are not enforcement.
-    * **D:** Examples make it likelier, not certain.
+    * **C:** Examples make it likelier, not certain.
 
 ---
 
@@ -173,19 +173,19 @@ A team adds a human approval step before every tool call, including read-only lo
 
 A lead agent delegates research to a sub-agent with the instruction "research the product we discussed". The sub-agent returns generic material. Why?
 
-- **A.** Sub-agents always ignore the first instruction given
-- **B.** Sub-agents cannot use search tools of any kind
-- **C.** Sub-agents are limited to the smallest model tier
-- **D.** Sub-agents start fresh and never saw that discussion
+- **A.** Sub-agents start fresh and never saw that discussion
+- **B.** Sub-agents always ignore the first instruction given
+- **C.** Sub-agents cannot use search tools of any kind
+- **D.** Sub-agents are limited to the smallest model tier
 
-??? success "Answer: D"
-    **Why D is right:** Everything a sub-agent needs must be passed explicitly in its task.
+??? success "Answer: A"
+    **Why A is right:** Everything a sub-agent needs must be passed explicitly in its task.
 
     **Why the others are wrong:**
 
-    * **A:** There is no such behaviour.
-    * **B:** They can be given tools.
-    * **C:** They can use any configured model.
+    * **B:** There is no such behaviour.
+    * **C:** They can be given tools.
+    * **D:** They can use any configured model.
 
 ---
 
@@ -193,19 +193,19 @@ A lead agent delegates research to a sub-agent with the instruction "research th
 
 What is a main benefit of delegating a noisy exploration task to a sub-agent?
 
-- **A.** The sub-agent shares and extends the parent's context
-- **B.** The sub-agent's tokens are not billed to the account
-- **C.** The sub-agent's output is guaranteed to be correct
-- **D.** The noise stays out of the main context window
+- **A.** The noise stays out of the main context window
+- **B.** The sub-agent shares and extends the parent's context
+- **C.** The sub-agent's tokens are not billed to the account
+- **D.** The sub-agent's output is guaranteed to be correct
 
-??? success "Answer: D"
-    **Why D is right:** Context isolation keeps the lead agent's window focused.
+??? success "Answer: A"
+    **Why A is right:** Context isolation keeps the lead agent's window focused.
 
     **Why the others are wrong:**
 
-    * **A:** It has a separate context.
-    * **B:** All tokens are billed.
-    * **C:** No such guarantee exists.
+    * **B:** It has a separate context.
+    * **C:** All tokens are billed.
+    * **D:** No such guarantee exists.
 
 ---
 
@@ -233,17 +233,17 @@ A simple, strictly sequential task is split across five sub-agents. It becomes s
 
 Using the Claude Agent SDK, a code-review agent must be able to read and search files but never modify them. Which configuration achieves this?
 
-- **A.** Set allowed_tools to read and search tools only
-- **B.** Set the temperature to 0 so that it stays cautious
+- **A.** Set the temperature to 0 so that it stays cautious
+- **B.** Set allowed_tools to read and search tools only
 - **C.** Set max_turns to 1 so that there is no time to edit
 - **D.** Ask in the system prompt that files are not modified
 
-??? success "Answer: A"
-    **Why A is right:** Restricting the tool set is least privilege, enforced by the SDK.
+??? success "Answer: B"
+    **Why B is right:** Restricting the tool set is least privilege, enforced by the SDK.
 
     **Why the others are wrong:**
 
-    * **B:** Temperature does not control tool access.
+    * **A:** Temperature does not control tool access.
     * **C:** A turn limit does not remove the ability to edit.
     * **D:** A request, not a restriction.
 
@@ -253,17 +253,17 @@ Using the Claude Agent SDK, a code-review agent must be able to read and search 
 
 When is the Claude Agent SDK a better choice than a hand-written loop on the Messages API?
 
-- **A.** When built-in tools, hooks and sessions are wanted
-- **B.** When the application makes one call with no tools
+- **A.** When the application makes one call with no tools
+- **B.** When built-in tools, hooks and sessions are wanted
 - **C.** When token usage must go unrecorded
 - **D.** When no tool should ever run in the application
 
-??? success "Answer: A"
-    **Why A is right:** The SDK packages the loop and the surrounding machinery.
+??? success "Answer: B"
+    **Why B is right:** The SDK packages the loop and the surrounding machinery.
 
     **Why the others are wrong:**
 
-    * **B:** A direct API call is simpler.
+    * **A:** A direct API call is simpler.
     * **C:** Neither approach hides usage.
     * **D:** The SDK's value is largely in tools.
 
@@ -340,17 +340,17 @@ Which TWO statements about returning tool results are correct? (Select TWO.)
 A team wants long-running agents but does not want to build sandboxing, session storage and scaling. Data requirements permit a hosted service. Which option fits?
 
 - **A.** A nightly batch of unrelated summary requests
-- **B.** An Anthropic-hosted managed agent service
-- **C.** A hand-written loop on a developer's laptop
+- **B.** A hand-written loop on a developer's laptop
+- **C.** An Anthropic-hosted managed agent service
 - **D.** A single Messages API call with a long prompt
 
-??? success "Answer: B"
-    **Why B is right:** A managed service runs the harness and infrastructure, which suits long-running and asynchronous work.
+??? success "Answer: C"
+    **Why C is right:** A managed service runs the harness and infrastructure, which suits long-running and asynchronous work.
 
     **Why the others are wrong:**
 
     * **A:** Batches are not interactive agents.
-    * **C:** Not durable or scalable for long-running work.
+    * **B:** Not durable or scalable for long-running work.
     * **D:** One call is not a long-running agent.
 
 ---
@@ -360,17 +360,17 @@ A team wants long-running agents but does not want to build sandboxing, session 
 An agent must read files on an internal network that cannot be exposed outside the company. Which deployment is most appropriate?
 
 - **A.** A hosted agent given the network's admin password
-- **B.** A self-hosted agent running inside the company network
-- **C.** A public MCP server that publishes the files
+- **B.** A public MCP server that publishes the files
+- **C.** A self-hosted agent running inside the company network
 - **D.** A chat app where staff paste the files by hand
 
-??? success "Answer: B"
-    **Why B is right:** Self-hosting keeps the loop, files and credentials in the organisation's own environment.
+??? success "Answer: C"
+    **Why C is right:** Self-hosting keeps the loop, files and credentials in the organisation's own environment.
 
     **Why the others are wrong:**
 
     * **A:** Sharing credentials outward defeats the restriction.
-    * **C:** Exposes what must stay private.
+    * **B:** Exposes what must stay private.
     * **D:** Manual, error-prone and not an agent.
 
 ---
@@ -401,17 +401,17 @@ What is the main risk of adopting an agent framework before understanding the un
 
 - **A.** Frameworks only work with the smallest model tier
 - **B.** Frameworks prevent the use of any tool definitions
-- **C.** The abstraction hides the prompts and requests
-- **D.** Frameworks make each API call cost twice as much
+- **C.** Frameworks make each API call cost twice as much
+- **D.** The abstraction hides the prompts and requests
 
-??? success "Answer: C"
-    **Why C is right:** When something goes wrong you need to see what was actually sent. Heavy abstraction can obscure it.
+??? success "Answer: D"
+    **Why D is right:** When something goes wrong you need to see what was actually sent. Heavy abstraction can obscure it.
 
     **Why the others are wrong:**
 
     * **A:** They work with any tier.
     * **B:** Frameworks generally support tools.
-    * **D:** Pricing is unaffected by the framework itself.
+    * **C:** Pricing is unaffected by the framework itself.
 
 ---
 
@@ -421,17 +421,17 @@ When is a supervisor agent with several workers a good design?
 
 - **A.** When the task is a single short classification
 - **B.** When the token budget for the task is very limited
-- **C.** When the work splits into independent, parallel parts
-- **D.** When every step depends closely on the previous one
+- **C.** When every step depends closely on the previous one
+- **D.** When the work splits into independent, parallel parts
 
-??? success "Answer: C"
-    **Why C is right:** Hierarchies pay off for broad, separable work. For sequential tasks they add cost and hand-off errors.
+??? success "Answer: D"
+    **Why D is right:** Hierarchies pay off for broad, separable work. For sequential tasks they add cost and hand-off errors.
 
     **Why the others are wrong:**
 
     * **A:** Far too much machinery for one call.
     * **B:** Hierarchies multiply token use.
-    * **D:** Tightly coupled steps suit a single agent or a chain.
+    * **C:** Tightly coupled steps suit a single agent or a chain.
 
 ---
 
@@ -459,19 +459,19 @@ An agent keeps a single shared memory file for all users. One user's reply menti
 
 In an Agent SDK application, a rule must run every time before any shell command executes, whatever the model decides. Which feature provides this?
 
-- **A.** A lower limit on the number of turns
-- **B.** A sentence in the system prompt option
-- **C.** A description added to the sub-agent
-- **D.** A hook registered for the pre-tool-use event
+- **A.** A hook registered for the pre-tool-use event
+- **B.** A lower limit on the number of turns
+- **C.** A sentence in the system prompt option
+- **D.** A description added to the sub-agent
 
-??? success "Answer: D"
-    **Why D is right:** Hooks run deterministically at lifecycle points and can block the action.
+??? success "Answer: A"
+    **Why A is right:** Hooks run deterministically at lifecycle points and can block the action.
 
     **Why the others are wrong:**
 
-    * **A:** A turn cap does not inspect commands.
-    * **B:** Advisory, not deterministic.
-    * **C:** Descriptions guide delegation, not enforcement.
+    * **B:** A turn cap does not inspect commands.
+    * **C:** Advisory, not deterministic.
+    * **D:** Descriptions guide delegation, not enforcement.
 
 ---
 
@@ -479,18 +479,18 @@ In an Agent SDK application, a rule must run every time before any shell command
 
 What does a custom agent harness need to do that a single Messages API call does not?
 
-- **A.** Translate each prompt into a different language
-- **B.** Train the model on the user's documents first
-- **C.** Replace the system prompt after every single token
-- **D.** Run tools, feed results back, and decide when to stop
+- **A.** Run tools, feed results back, and decide when to stop
+- **B.** Translate each prompt into a different language
+- **C.** Train the model on the user's documents first
+- **D.** Replace the system prompt after every single token
 
-??? success "Answer: D"
-    **Why D is right:** A harness is the loop around the model: dispatching tools, managing context and enforcing limits.
+??? success "Answer: A"
+    **Why A is right:** A harness is the loop around the model: dispatching tools, managing context and enforcing limits.
 
     **Why the others are wrong:**
 
-    * **A:** Unrelated to what a harness does.
-    * **B:** No training happens in a harness.
-    * **C:** Not something a harness does.
+    * **B:** Unrelated to what a harness does.
+    * **C:** No training happens in a harness.
+    * **D:** Not something a harness does.
 
 ---

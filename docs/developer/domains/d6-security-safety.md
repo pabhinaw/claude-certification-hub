@@ -84,6 +84,20 @@ A **guardrail** is any control that keeps the system inside allowed behaviour. R
 
 In Claude Code, permission rules (`allow` / `ask` / `deny`) are a second deterministic layer; **deny wins**.
 
+**Three levels of control, weakest to strongest**
+
+| Level | Example | Can a developer switch it off? |
+|---|---|---|
+| Advisory | `CLAUDE.md`, a skill describing the policy | It is only guidance |
+| Enforced in the project | Hooks and permission rules in the committed settings file | Yes, by changing the file (visible in review) |
+| Enforced by the organisation | **Managed settings** deployed by administrators | No. They override project and personal settings |
+
+A skill makes a violation unlikely; a hook makes it close to impossible; managed settings make sure the hook cannot be removed. Pair any policy that must always hold with a deterministic control.
+
+**Hook placement.** Hooks that only allow or block (protected paths, formatters, secret checks) suit the build phase and should be fast. Hooks that **ask a person** belong at release gates; an approval prompt in the middle of every build stalls parallel work. A block should say why and how to get approval.
+
+**Sandboxing closes what permissions cannot.** A permission rule governs Claude's own tools. It does not stop a shell command from reaching the network or reading a credentials file. An operating-system sandbox with a network allow-list and blocked credential paths does. For agents in CI: containers, a network policy, short-lived scoped tokens, and **no standing production credentials**.
+
 ## 4. Secrets and key management
 
 | Do | Don't |

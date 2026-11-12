@@ -6,6 +6,10 @@
 |---|---|
 | Anthropic Academy (free courses) | <https://anthropic.skilljar.com> |
 | Partner Academy: certification FAQ | <https://anthropic-partners.skilljar.com/page/faq-certifications> |
+| Partner Academy: certifications page (exam guides and policies) | <https://anthropic-partners.skilljar.com/page/partner-certifications> |
+| Partner Academy: Developer – Foundations exam registration | <https://anthropic-partners.skilljar.com/claude-certified-developer-foundations-certification> |
+| Partner Academy: Developer – Foundations prep path (5 courses) | <https://anthropic-partners.skilljar.com/path/claude-certified-developer-foundations> |
+| Partner Academy: Developer learning path (9 courses) | <https://anthropic-partners.skilljar.com/path/claude-developer> |
 | CCAR-F access request page | <https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request> |
 | Pearson VUE: Anthropic programme | <https://www.pearsonvue.com/us/en/anthropic.html> |
 | Credly: Developer – Foundations badge | <https://www.credly.com/org/anthropic/badge/claude-certified-developer-foundations> |

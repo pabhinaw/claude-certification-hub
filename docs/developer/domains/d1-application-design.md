@@ -4,12 +4,13 @@ The largest single skills on the exam sit here: designing a Claude application, 
 
 ## What this page covers
 
-* Turning requirements into a design
+* Turning requirements into a design ([Part 3](d1-engineering-foundations.md) covers requirements and engineering practice in depth)
 * Choosing an interaction pattern
 * Session and state handling
 * Schema design and validation
 * Reliability: timeouts, retries, idempotency, fallbacks
 * Configuration, versioning and the system life cycle
+* How Claude reads instructions on each surface, content boundaries, session hygiene, plugins
 
 ---
 
@@ -149,7 +150,72 @@ flowchart LR
 * **Monitor in production**: error rate by type, token usage and cost, latency, `stop_reason` distribution, validation failures.
 * **Model deprecations happen.** Keeping the model ID in config and an eval set ready is what makes migration a small job.
 
-## 8. Authentication, in one table
+## 8. How Claude receives instructions on each surface
+
+The same model sits behind several products, and each one assembles the context differently. Knowing **where an instruction lives** on each surface explains most "it worked there but not here" problems.
+
+| Surface | Where your instructions go | What else is in the context |
+|---|---|---|
+| **Messages API** | The `system` parameter and the messages you send | Nothing you didn't send. No memory, no built-in tools |
+| **Agent SDK** | `system_prompt` in the options; project files only if you opt in through settings sources | The SDK's agent harness and the tools you allow |
+| **Claude Code** | `CLAUDE.md` files, rules, skills, commands; your prompt | Claude Code's own system prompt, built-in tools, settings, hooks, MCP servers, plugins |
+| **claude.ai and the desktop app** | Profile preferences, Project instructions and Project knowledge, styles, skills | The product's own system prompt, connectors, enabled features |
+
+Three ideas to carry into the exam:
+
+1. **Instructions are advisory; configuration is enforced.** Text in a system prompt or `CLAUDE.md` *guides* the model. Permissions, hooks, tool lists and schemas are applied by the harness or your code, whatever the model decides.
+2. **Each surface adds its own context.** A prompt tuned in the chat app can behave differently through the API, because the API adds no product system prompt, tools or memory. Test on the surface you ship.
+3. **Put each instruction at the right level.** Standing behaviour → system prompt or project instructions. Project facts → `CLAUDE.md`. Task detail → the user turn. Hard limits → configuration.
+
+### Content boundaries
+
+Claude treats text differently according to where it arrives. Keep those boundaries sharp.
+
+| Source | Trust | How to present it |
+|---|---|---|
+| System prompt (you, the developer) | Highest | Role, rules, policy |
+| User turn | The person being served | The task |
+| Documents, retrieved text, tool results | **Data, not instructions** | Inside tags or `tool_result` blocks, labelled with its source |
+
+* Wrap variable content in **XML tags** so instructions, examples and data cannot blur.
+* Never paste untrusted text into the system prompt.
+* Say explicitly that content inside the data tags is to be analysed, not obeyed.
+
+### Session hygiene
+
+Long, mixed sessions are a main cause of poor results.
+
+* **One task per session.** Start fresh for unrelated work (`/clear` in Claude Code; a new conversation in an app).
+* **Compact at natural breakpoints**, not when the window is already full.
+* **Don't stack failed attempts.** After two unsuccessful corrections, restart with a better prompt rather than arguing with a polluted context.
+* **Hand over deliberately**: a short written summary of state, decisions and next steps beats a 200-turn history.
+* **In your own apps**: cap or summarise history, expire idle sessions, and never share a session between users.
+
+### Plugin management
+
+In Claude Code, a **plugin** packages skills, commands, sub-agents, hooks and MCP servers as one installable unit, distributed through a **marketplace** (typically a git repository).
+
+* Enable shared plugins in **project settings** so the whole team gets the same set.
+* A plugin can run hooks and start MCP servers, so **install only from sources you trust** and review what it contains.
+* Every plugin adds to the context and to the list of things Claude can choose from. Keep the set small; remove what you don't use.
+* **Pin versions** for anything a team or CI job depends on, as you would with any dependency.
+
+## 9. Configuration files to know
+
+| File | Holds | Shared? |
+|---|---|---|
+| `CLAUDE.md` (project root, sub-folders, user-level) | Instructions and project facts, loaded automatically | Project file: committed. User file: personal |
+| `.claude/settings.json` | Permissions, hooks, environment, enabled plugins | Committed, team-wide |
+| `.claude/settings.local.json` | Personal overrides | Git-ignored |
+| `~/.claude/settings.json` | Your defaults for every project | Personal |
+| `.mcp.json` | Project MCP servers, secrets via `${VAR}` | Committed |
+| Your app's config | Model ID (pinned), prompts and their versions, limits | Version-controlled |
+
+**Prompt versioning.** Give each prompt an identifier and version, store it as a file, log which version produced each response, and change it through review plus the eval set. When output quality shifts, you need to know *which prompt and which model version* were in use.
+
+**Plugin and tool dependencies.** If a workflow needs a plugin, an MCP server or a CLI tool, declare it in the project configuration and pin it. "It works on my machine" usually means an undeclared dependency.
+
+## 10. Authentication, in one table
 
 | Layer | Who proves identity to whom | How |
 |---|---|---|
@@ -172,6 +238,9 @@ The API key identifies your *organisation*. It says nothing about which of your 
 | Unlimited retries until it works | Retry storms; bound them and add backoff |
 | Ship the prompt change, watch for complaints | Run the eval set first |
 | Use a `latest` alias in production | Unplanned behaviour changes; pin a version |
+| "The prompt worked in the chat app, so it will work through the API" | Different surface, different context; test where you ship |
+| Put a must-never rule in `CLAUDE.md` | Advisory; use permissions or a hook |
+| Keep one long session for a whole day's unrelated tasks | Context pollution; one task per session |
 
 ## Decision rules
 

@@ -6,9 +6,9 @@ What's new in the hub. Dates are when changes were published.
 
 **Developer (CCDV-F) track**
 
-* Full Developer track: eight domain deep-dives with code, covering API mechanics, application design, model selection and cost, agents, prompt and context engineering, tools and MCP server development, security, Claude Code and evals.
+* Full Developer track, mapped to the 25 skills in the official exam guide: nine deep-dive pages with code, covering API mechanics, application design, model selection and cost, agents, prompt and context engineering, tools and MCP server development, security, Claude Code and evals, plus engineering foundations (requirements, REST and JSON, async, code review, refactoring).
 * A day-by-day **10-Day Study Plan**, a one-page cheat sheet and an exam-day guide with a strategy for multiple-response questions.
-* **135 original Developer questions** and **two timed 53-question mock exams**. The mock engine now supports multiple-response ("Select TWO") questions.
+* **194 original Developer questions** and **three timed 53-question mock exams**. The mock engine now supports multiple-response ("Select TWO") questions.
 
 **Practice & assessment**
 

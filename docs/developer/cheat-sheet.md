@@ -62,6 +62,8 @@ SDK defaults: **2 retries**, **10-minute timeout**. Log the **request ID**. Erro
 | Sonnet | Balanced default for production |
 | Opus and above | Hardest reasoning; errors are costly |
 
+Three dials: **model tier**, **thinking / effort**, **speed** (fast mode = same model, faster, premium price, not with batch). Zero-shot → one-shot → multi-shot: more consistency, more input tokens (cache them). New release ≠ drop-in: pin, read notes, re-run evals.
+
 Decide with **your evals**. Mix tiers (route small → escalate). Output tokens cost several times input. Temperature 0 ≠ deterministic. Context window = input + output, per request, not memory. Thinking = output tokens + time; skip for simple tasks.
 
 ## Prompt caching
@@ -92,6 +94,30 @@ Latency: smaller model · shorter output · stream (perceived) · cache · paral
 * Model ID, prompts, limits in **versioned config**; **pin** the model version
 * Every prompt/model change → **eval set** → staged rollout → monitor
 
+## Engineering foundations
+
+* Business goal → **functional** (what it does) + **infrastructure** (latency, volume, cost, data rules) → measurable tests
+* Life cycle: design → develop → test/eval → deploy → operate → **maintain** (deprecations, behaviour changes)
+* SDK = wrapper over the same REST API (typing, retries, timeouts, stream helpers)
+* JSON: double quotes, no comments or trailing commas; build with a serialiser; `null` ≠ missing ≠ `""`
+* Sync (short) · SSE streaming (one-way, user watching) · async job / batch (bulk) · **WebSocket (two-way)**
+* Async: bound concurrency (semaphore), handle partial failure, keep IDs for ordering
+* Git for prompts, schemas, tools, evals, `CLAUDE.md`; CI runs tests **and** evals
+* Review generated code: run it, check edges and security, verify packages exist, separate reviewer
+* Big refactor: plan → tests → small steps on a branch → verify each
+* Cloud platforms: auth, model IDs and feature availability differ. Check before relying on a feature
+
+## Instruction surfaces
+
+| Surface | Instructions live in |
+|---|---|
+| Messages API | `system` + messages; nothing else exists |
+| Agent SDK | `system_prompt`; project files only if opted in |
+| Claude Code | `CLAUDE.md`, rules, skills, commands + its own system prompt, tools, settings |
+| claude.ai / desktop | Preferences, Project instructions and knowledge, styles, skills |
+
+**Instructions are advisory; configuration is enforced.** Test on the surface you ship. One task per session; compact at breakpoints; restart after repeated failed corrections. Plugins bundle skills, commands, agents, hooks, MCP: trusted sources only, pinned, shared through project settings.
+
 ## Agents
 
 * Loop on `stop_reason == "tool_use"`; append full assistant content; return **all** `tool_result`s in one user message, matched by `tool_use_id`
@@ -99,6 +125,10 @@ Latency: smaller model · shorter output · stream (perceived) · cache · paral
 * Safety nets: turn cap, token/cost budget, timeout, repeat detection → escalate
 * Approval gates for irreversible actions, **in code**
 * Sub-agents: isolated context, pass everything explicitly, return summaries
+* Supervisor + workers: for broad, separable work; costs many more tokens
+* Memory: scoped (user/project), store decisions not transcripts, treat as data
+* Self-hosted (your loop / Agent SDK: full control, private network) vs managed (hosted harness, long-running, stateful sessions)
+* Frameworks: LangGraph (graph + state + checkpoints) · PydanticAI (typed, validated) · Strands (model-driven). Keep prompts visible
 * **Must / never / always → code, not prompt**
 
 ## Structured output and validation
@@ -126,6 +156,8 @@ Drift grows with length. Pin exact facts · summarise old turns · clear old too
 * FastMCP: `@mcp.tool()`, `@mcp.resource()`, `@mcp.prompt()`; docstring = description; **logs to stderr**
 * Test with the **Inspector**; scopes local / project (`.mcp.json`) / user; secrets via `${VAR}`
 * **Reused by several hosts → MCP server. One app, one call → plain tool.**
+* **Access → tool / MCP. Know-how → skill. Already exists → built-in tool. Enforce → hook. Isolate → sub-agent. Always-on facts → `CLAUDE.md`.**
+* Harness: dispatch by name (unknown tool → error result), approve by risk, small distinct tool sets
 
 ## Security
 
@@ -137,12 +169,16 @@ Drift grows with length. Pin exact facts · summarise old turns · clear old too
 * Identity from the **session**; authorisation **inside the tool**
 * Model output is untrusted: no `eval`, parameterised SQL, escape HTML
 * Minimise and redact PII, including in logs
+* Authentication (who) ≠ authorisation (what they may do); monitor key and tool use
+* Sanitise input (length, format, delimiter break-outs); don't trust confident-sounding output, verify it
 
 ## Claude Code and evals
 
+`/init` creates `CLAUDE.md` · auto memory = Claude's own notes · modes: default / accept edits / plan / auto / bypass · headless `-p`, `--output-format json` or `stream-json` · custom commands in `.claude/commands/`.
+
 `CLAUDE.md` (always) · rules (path-scoped) · skills (on demand) · commands (`/name`) · hooks (enforce) · `.mcp.json` · settings (allow / ask / **deny wins**) · `-p` for CI · `--continue` / `--resume` · `/compact` / `/clear`.
 
-Evals: define success → realistic test set → grader (code / LLM / human) → run on every change → add production failures. Trace everything. Debug in order: HTTP error → `stop_reason` → context sent → tool behaviour → prompt.
+Evals: define success → realistic test set → grader (code / LLM / human) → run on every change → add production failures. Trace everything. Debug in order: HTTP error → `stop_reason` → context sent → tool behaviour → prompt. **Integration or model?** Same failure every time → code; varies run to run → model. Calibrate LLM graders against human labels.
 
 ## Words that decide questions
 

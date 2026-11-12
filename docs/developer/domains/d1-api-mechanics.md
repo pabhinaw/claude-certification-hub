@@ -239,6 +239,19 @@ batch = client.messages.batches.create(requests=[
 * Images and PDFs cost input tokens like everything else. Large ones are expensive.
 * The **Files API** lets you upload once and reference by `file_id` across requests, instead of resending the bytes each time. It is a beta feature; check the docs for the current header.
 
+## 11. Extended thinking in the API
+
+When thinking is enabled, the response contains `thinking` blocks before the answer.
+
+* Thinking counts as **output tokens**, so leave room in `max_tokens`.
+* In a tool loop, **return thinking blocks unchanged** with the rest of the assistant content. Editing or dropping them breaks the next request.
+* Forced `tool_choice` (`any` or a named tool) is not compatible with manually enabled thinking.
+* Thinking is a *mode*, separate from the *model*. Choosing a tier and switching thinking on are two different decisions ([Model Selection](d2-model-selection.md)).
+
+## 12. Cloud platforms and data
+
+Claude is also available through cloud vendors. Authentication, model identifiers and feature availability differ there, so confirm a feature exists on your platform before depending on it. Know how long each feature keeps data: stored files, batches and other stateful features retain content for a period by design. [Part 3](d1-engineering-foundations.md) has the detail.
+
 ---
 
 ## Traps

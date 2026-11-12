@@ -5,11 +5,12 @@ hide:
 
 # Developer Mock Exams
 
-Two full-length practice exams, each with **53 original questions** weighted like the published domain split, in mixed order, with an optional **120-minute timer**. Each mock includes **multiple-response** questions ("Select TWO"), which need every correct option for the mark. When you finish, you get a breakdown by domain and a full review with explanations.
+Three full-length practice exams, each with **53 original questions** weighted like the published domain split, in mixed order, with an optional **120-minute timer**. Each mock includes **multiple-response** questions ("Select TWO"), which need every correct option for the mark. When you finish, you get a breakdown by domain and a full review with explanations.
 
 !!! info "Before you start"
     * **Nothing is saved or sent anywhere.** Your answers stay in this browser tab, and refreshing the page clears them.
-    * The two mocks share **no questions**. Take Mock A on Day 7 and Mock B on Day 9 of the [10-day plan](study-plan-10-day.md).
+    * The three mocks share **no questions**. In the [10-day plan](study-plan-10-day.md), Mock A is on Day 7, Mock B on Day 8 and Mock C on Day 9.
+    * Mock questions also appear on the question-bank pages. For a fair first attempt, take a mock **before** reading the bank.
     * Your **first attempt** is the honest measure. A retake mostly measures memory.
     * Practice percentages are a guide only. The real exam uses a scaled score, so practice results can't be converted into an exam score.
     * These are original questions, **not** real or recalled exam items ([content policy](../resources/content-policy.md)).

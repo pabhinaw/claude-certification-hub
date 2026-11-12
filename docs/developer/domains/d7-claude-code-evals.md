@@ -21,9 +21,29 @@ Two small domains, roughly three questions together. Don't over-invest: learn th
 
 **Hierarchy.** User-level (`~/.claude/`) applies to all your projects; project-level (in the repo, committed) is shared with the team; local files (`*.local.*`, git-ignored) are personal overrides. Team standards go in **project** files.
 
+### Getting started in a repository
+
+`/init` analyses the codebase and writes a starter `CLAUDE.md`. Review and trim it: a short, accurate file beats a long one. `/memory` opens the memory files for editing.
+
+### Agent memory
+
+Besides the `CLAUDE.md` files *you* write, Claude Code can keep **its own notes** across sessions (auto memory), and a sub-agent can be given persistent memory of its own. Treat it like any memory: useful for continuity, worth reviewing, and never the place for a rule that must be enforced.
+
 ### Permissions
 
-`allow` (no prompt) · `ask` (confirm each time) · `deny` (never). **Deny takes precedence.** For anything that must never happen, use `deny` or a `PreToolUse` hook, not a sentence in `CLAUDE.md`.
+`allow` (no prompt) · `ask` (confirm each time) · `deny` (never). **Deny takes precedence.**
+
+**Permission modes** set the baseline for a session:
+
+| Mode | Behaviour |
+|---|---|
+| Default | Asks before edits and commands |
+| Accept edits | File edits proceed; commands still ask |
+| Plan | Read and plan only; no changes |
+| Auto | A classifier approves routine, low-risk actions and stops risky ones |
+| Bypass | Skips prompts. Only for isolated, disposable environments |
+
+Choose the **least permissive mode that lets the task proceed**. For anything that must never happen, use `deny` or a `PreToolUse` hook, not a sentence in `CLAUDE.md`.
 
 ### Sessions
 
@@ -33,7 +53,10 @@ Two small domains, roughly three questions together. Don't over-invest: learn th
 | Resume a chosen session | `claude --resume` |
 | Shrink a long context, keep going | `/compact` |
 | Start clean | `/clear` |
-| Run without interaction (scripts, CI) | `claude -p "prompt"`, optionally `--output-format json` |
+| Run without interaction (headless: scripts, CI) | `claude -p "prompt"`, optionally `--output-format json` |
+| Stream events from a headless run | `--output-format stream-json` |
+| Built-in slash commands | `/init`, `/memory`, `/compact`, `/clear`, `/mcp`, `/agents`, `/permissions`, `/plugin` |
+| Custom slash commands | A Markdown file in `.claude/commands/` (project) or `~/.claude/commands/` (personal) |
 | Plan before editing | Plan mode |
 
 **One-line choosers**
@@ -60,8 +83,10 @@ Two small domains, roughly three questions together. Don't over-invest: learn th
     | **LLM-based** (a model scores against a rubric) | Quality is nuanced: tone, relevance, faithfulness | Scales; needs a clear rubric and spot checks |
     | **Human** | Subtle judgement; calibrating the other graders | Best quality; slow and costly |
 
-4. **Run on every change**: prompt, model, tool definition, schema. This is **regression testing**.
+4. **Run on every change**: prompt, model, tool definition, schema. This is **regression testing**. Test at several levels: unit (a parser, a tool), functional (one prompt against its cases), integration (the loop with real tools), end to end (the whole task).
 5. **Feed production failures back** into the test set.
+
+Calibrate an LLM grader against a set of **human-labelled** cases before trusting it, and re-check when you change the grader's prompt or model.
 
 Guidance worth remembering: prefer **many automated cases** over a few hand-graded ones; give an LLM grader a specific rubric and ask it to reason before scoring; use a different prompt (ideally a different instance) from the one that produced the output.
 
@@ -98,6 +123,20 @@ flowchart TD
     E -- yes --> F[Now improve the prompt:<br/>clarity, examples, structure]
     F --> G[Re-run the eval set]
 ```
+
+### Integration layer or model output?
+
+The most useful debugging question: **is the fault in what my code sent and did, or in what the model produced?**
+
+| Evidence | Points to |
+|---|---|
+| HTTP error, timeout, malformed request | Integration |
+| `stop_reason` of `max_tokens`; missing history; wrong or empty tool result in the trace | Integration |
+| The right context was sent, the tools worked, and the answer is still wrong | Model output: improve the prompt, examples, model or thinking |
+| Fails identically every time | Usually integration (deterministic) |
+| Varies run to run with identical input | Usually model behaviour (non-deterministic) |
+
+Check the trace **before** editing the prompt. A large share of "the model got it wrong" turns out to be "we sent it the wrong thing".
 
 ### Error handling and recovery
 

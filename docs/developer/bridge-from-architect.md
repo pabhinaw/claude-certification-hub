@@ -6,7 +6,7 @@ If you've completed the Architect track, a good part of CCDV-F is familiar. Use 
 
 | CCDV-F domain | Already covered in Architect | New or deeper for Developer | Go to |
 |---|---|---|---|
-| Applications & Integration (33.1%) | Statelessness, sync vs batch, structured output | **Request/response shapes, stop reasons, streaming events, error codes and retries, rate limits, token counting, schema and configuration practice, reliability engineering** | [Part 1](domains/d1-api-mechanics.md) · [Part 2](domains/d1-application-design.md) |
+| Applications & Integration (33.1%) | Statelessness, sync vs batch, structured output | **Request/response shapes, stop reasons, streaming events, error codes and retries, rate limits, token counting, schema and configuration practice, reliability engineering, requirements, REST/JSON/async, code review and refactoring, instruction surfaces, plugins** | [Part 1](domains/d1-api-mechanics.md) · [Part 2](domains/d1-application-design.md) · [Part 3](domains/d1-engineering-foundations.md) |
 | Model Selection & Optimisation (16.8%) | Model fit per task (light) | **Tokens, sampling, non-determinism, tier trade-offs, prompt-caching mechanics, cost arithmetic, latency levers** | [Deep-dive](domains/d2-model-selection.md) |
 | Agents & Workflows (14.7%) | ✅ Most of D1 | The loop **in code**, stop conditions, Agent SDK options | [Deep-dive](domains/d3-agents-workflows.md) |
 | Prompt & Context Engineering (11.0%) | ✅ D4 + D5 | Validation layers, defensive parsing, bounded retries with feedback | [Deep-dive](domains/d4-prompt-context.md) |

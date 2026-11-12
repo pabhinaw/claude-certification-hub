@@ -75,6 +75,36 @@ Thinking gives Claude room to reason before answering. It raises quality on hard
 * In tool loops, pass `thinking` blocks back unchanged with the rest of the assistant content.
 * Don't use thinking for simple lookups or classification. You pay for nothing.
 
+### Fast mode
+
+Some Opus models offer a **fast mode**: the *same model* generating output considerably faster, at a **higher price**. You opt in per request (`speed: "fast"`).
+
+* It changes speed, not quality or capability.
+* It is a premium for latency: sensible for interactive work, wasteful for background jobs.
+* It is not combined with the batch discount, and availability varies by model and platform. Check the docs.
+
+So there are now three separate dials: **which model**, **how much thinking / effort**, and **how fast**.
+
+### Zero-shot, one-shot, multi-shot
+
+| Style | Examples in the prompt | Trade-off |
+|---|---|---|
+| Zero-shot | None | Cheapest; fine for simple, well-specified tasks |
+| One-shot | One | Fixes format; risk of copying that single example |
+| Multi-shot (few-shot) | Several, varied | Best consistency on format and edge cases; **more input tokens on every call** |
+
+Examples are paid for on every request, so put them in the **cached** prefix. Add examples when instructions alone don't give consistent output, not by default.
+
+### Behaviour changes between model releases
+
+A newer model is not a drop-in replacement. Between releases, expect differences in default tone and verbosity, how literally instructions are followed, tool-calling habits, supported parameters (some newer models restrict sampling settings or prefill, and move from thinking budgets to adaptive thinking), and token counts for the same text.
+
+Therefore: **pin the version, read the migration notes, re-run your evals, re-count tokens, then roll out in stages.**
+
+### SDKs, REST and WebSockets
+
+The blueprint's *Technical Fundamentals* skill covers how developers reach the model: an SDK is a wrapper over the REST API; streaming uses server-sent events; WebSockets are for two-way channels. These are explained in [Engineering Foundations](d1-engineering-foundations.md).
+
 ## 4. Prompt caching
 
 The single most valuable optimisation to know cold.
@@ -98,7 +128,7 @@ print(response.usage.cache_creation_input_tokens, response.usage.cache_read_inpu
 | Cache **write** | 1.25× base input price (5-minute TTL) or 2× (1-hour TTL) |
 | Cache **read** | 0.1× base input price |
 | Default lifetime | 5 minutes, **refreshed on every hit** |
-| Breakpoints | Up to 4 per request |
+| Breakpoints (cache checkpoints) | Up to 4 per request. Each marks the end of a reusable prefix |
 | Prefix order | `tools` → `system` → `messages` |
 | Minimum size | A model-dependent minimum (about a thousand tokens or more). Shorter prefixes are silently not cached |
 | Match rule | The prefix must be **exactly identical** up to the breakpoint |
@@ -130,6 +160,8 @@ Total input = `cache_read_input_tokens` + `cache_creation_input_tokens` + `input
 * Non-deterministic serialisation, such as JSON keys in a different order each time
 
 **When caching does not pay.** Prompts that change every time, short prompts, or traffic so sparse the cache always expires: you pay the write premium and never read.
+
+**Several checkpoints.** With more than one breakpoint you cache layers that change at different rates: tools and system prompt (rarely), reference documents (sometimes), conversation so far (every turn). A change invalidates only what comes *after* it. In a long conversation, moving the last breakpoint forward each turn lets every new request read the previous turns from cache.
 
 **Extra benefit.** On most current models, cached reads don't count toward the input-tokens-per-minute limit, so caching also raises throughput.
 

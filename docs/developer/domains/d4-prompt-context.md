@@ -117,6 +117,37 @@ raise NeedsHumanReview()
 * A retry cannot create information that isn't in the source. If a field is absent from the document, the fix is a nullable field, not more attempts.
 * `Truncated` needs a bigger `max_tokens`, not a retry of the same call.
 
+### Scepticism toward confident output
+
+Fluent, confident wording is **not evidence of correctness**. A model can state a wrong figure, an invented citation or a non-existent function with complete assurance.
+
+* Don't use the model's own "I'm confident" as a quality signal. Self-reported confidence is poorly calibrated.
+* Verify what matters against a source: recompute totals, check that cited passages exist, run the code, look the ID up.
+* Ask for evidence (quotes, references to the supplied documents) so claims can be checked.
+* Route high-stakes or unverifiable outputs to a person.
+
+### Input sanitisation
+
+Clean and constrain what goes *into* a prompt.
+
+* Validate type, length and format of user input before it reaches the model; reject or truncate oversize input.
+* Put variable content inside delimiters (XML tags) and tell Claude it is data.
+* Escape or strip content that could break your delimiters, such as a user typing your closing tag.
+* Remove what the task doesn't need: secrets, personal data, irrelevant boilerplate.
+* Sanitisation reduces risk; it does not replace least-privilege tools and output validation ([Security](d6-security-safety.md)).
+
+### Where instructions belong
+
+| Put it in… | When it is… |
+|---|---|
+| System prompt | Role, standing rules, tone, stable reference material |
+| User turn | The specific task and its data |
+| Tool descriptions | When and how to use each tool |
+| `CLAUDE.md` / project instructions | Project facts that apply every session |
+| Code / configuration | Anything that must be guaranteed |
+
+Prompting is **iterative**: change one thing, run the eval set, compare, keep or revert. Guessing at several changes together tells you nothing about which one helped.
+
 ## 4. Context management
 
 Every turn resends the history, so long sessions get slower, dearer and less accurate.

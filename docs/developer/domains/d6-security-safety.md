@@ -126,6 +126,18 @@ flowchart LR
 * In multi-tenant systems, scope retrieval and caches by tenant so one customer's data can't appear in another's context.
 * The agent should act with **the user's permissions or fewer**, never with a shared super-user account.
 
+## 7. The security properties, in one table
+
+| Property | Means | In a Claude application |
+|---|---|---|
+| **Authentication** | Proving who someone is | Your login; API keys for services |
+| **Authorisation** | What they may do | Checks inside tools, permission rules |
+| **Confidentiality** | Only the right people see data | Tenant isolation, redaction, no secrets in prompts |
+| **Integrity** | Data and actions are not altered improperly | Validate outputs, approval gates, signed or reviewed changes |
+| **Privacy** | Personal data is used minimally and lawfully | Data minimisation, retention limits, redaction |
+
+**Least privilege, concretely:** separate keys per environment and service; the narrowest scopes; time-limited credentials where possible; access granted through an approval step and reviewed periodically; and **monitoring** of who used which key or tool, with alerts on unusual use. Secure-by-design means these are built in from the start, not added after an incident.
+
 ---
 
 ## Traps

@@ -56,7 +56,7 @@ The Developer bank works the same way. Questions live in `tools/qbank/dev/q_*.py
 python tools/qbank/build_dev.py
 ```
 
-It writes `docs/assets/data/qbank-dev.json` and `docs/developer/question-bank/*.md`, and builds two non-overlapping 53-question mocks.
+It writes `docs/assets/data/qbank-dev.json` and `docs/developer/question-bank/*.md`, and builds three non-overlapping 53-question mocks.
 
 ---
 

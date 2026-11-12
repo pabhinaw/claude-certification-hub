@@ -10,6 +10,7 @@ If you studied the Architect track, most of this is familiar: read [Architect D1
 * Human approval gates
 * Sub-agents
 * The Claude Agent SDK
+* Supervisor hierarchies, memory, self-hosted versus managed agents, third-party frameworks
 
 ---
 
@@ -161,7 +162,54 @@ asyncio.run(main())
 | You want full control of every request | You want built-in context management, hooks, permissions, sessions |
 | Minimal dependencies | Sub-agents and MCP with little code |
 
-## 7. Guidance versus guarantee
+## 7. Hierarchies, memory, hosting and frameworks
+
+### Supervisor hierarchies
+
+A **supervisor** (manager, orchestrator, lead) agent plans, delegates to workers and combines their results.
+
+| Benefit | Cost |
+|---|---|
+| Each worker has a clean, focused context | Many times the tokens of a single agent |
+| Parallel work on separable sub-tasks | Coordination errors; information lost in hand-offs |
+| Specialised prompts and tool sets | Harder to trace and debug |
+
+Use a hierarchy when the work is broad and separable. Keep a single agent when the task is sequential or the steps depend closely on each other. Keep hierarchies shallow, and make hand-offs explicit (goal, inputs, expected output format).
+
+### Agent memory
+
+| Kind | Lives in | Lasts |
+|---|---|---|
+| Working memory | The context window | This session |
+| Persistent memory | Files or a store outside the window (notes, a memory tool, a database) | Across sessions |
+
+* Store **decisions, facts and progress**, not transcripts.
+* Scope memory deliberately (per user, per project, per agent). A shared memory can leak one user's data to another.
+* Load only what is relevant; loading everything defeats the purpose.
+* Treat stored memory as **data**: it may be stale or contain injected text.
+
+### Self-hosted or Anthropic-hosted
+
+| | Self-hosted (your loop or the Agent SDK) | Anthropic-hosted managed agents |
+|---|---|---|
+| Who runs the loop | Your process, on your infrastructure | The platform |
+| You manage | Compute, sandboxing, session state, scaling | The agent definition and the environment configuration |
+| Good for | Full control, access to local files and private networks, custom harness logic, strict data requirements | Long-running or asynchronous tasks without building runtime infrastructure |
+| Watch for | Operational effort | Sessions are stateful and stored by the service; beta features and data-retention eligibility |
+
+The managed service is organised around an **agent** (model, system prompt, tools, MCP servers, skills), an **environment** (where sessions run: a cloud sandbox, or a sandbox you host) and **sessions** (running instances whose state is kept server-side). Check the docs for current status and limits.
+
+### Third-party agent frameworks
+
+| Framework | Idea | Fits when |
+|---|---|---|
+| **LangGraph** | The agent as a **graph**: nodes, edges, explicit shared state, checkpoints | You want explicit control flow, durable state and human-in-the-loop pauses |
+| **PydanticAI** | **Type-safe** agents with validated inputs and outputs | Typed Python code and structured, validated results matter most |
+| **Strands Agents** | **Model-driven**: give a model, tools and a prompt, and the model plans | You want a light, open-source SDK with little orchestration code |
+
+When to use any framework: it can save time on plumbing, but it adds an abstraction that can hide the actual prompts and requests, which makes debugging harder. A sound default is to **start with direct API calls or the Agent SDK, and adopt a framework when it removes real work**. Whatever you choose, make sure you can see the underlying prompts and responses.
+
+## 8. Guidance versus guarantee
 
 The idea that carries across both exams:
 

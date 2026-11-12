@@ -16,7 +16,7 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, os.path.join(HERE, "dev"))
 
 import devlib  # noqa: E402
-import q_ai, q_ms, q_rest  # noqa: E402,F401
+import q_ai, q_ms, q_rest, q_gap  # noqa: E402,F401
 
 DOMAINS = {
     "AI": "Applications & Integration",
@@ -30,7 +30,7 @@ DOMAINS = {
 }
 # 53-question mock, following the published weights 33.1/16.8/14.7/11.0/10.6/8.1/3.1/2.6 %
 MOCK_COUNTS = {"AI": 18, "MS": 9, "AW": 8, "PC": 6, "TM": 5, "SS": 4, "CC": 2, "EV": 1}
-MOCKS = ["A", "B"]
+MOCKS = ["A", "B", "C"]
 PAGES = [("ai", ["AI"]), ("ms", ["MS"]), ("aw", ["AW"]), ("pc", ["PC"]),
          ("tm", ["TM"]), ("ss", ["SS"]), ("cc-ev", ["CC", "EV"])]
 LETTERS = "ABCDE"

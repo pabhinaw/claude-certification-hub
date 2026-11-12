@@ -1,6 +1,6 @@
 # 10-Day Study Plan
 
-A day-by-day plan for someone with a full-time job: about **2 hours on weekdays** and **3–4 hours on two heavier days**. Roughly 25 hours in total. The order follows exam weight, so if you lose a day, you lose the least valuable one.
+A day-by-day plan for someone with a full-time job: about **2 hours on weekdays** and **3–4 hours on two heavier days**. Roughly 28 hours in total. The order follows exam weight, so if you lose a day, you lose the least valuable one.
 
 !!! abstract "The method, every day"
     1. **Read** the page actively (20–40 min). Cover the "Check yourself" answers and say them aloud first.
@@ -14,13 +14,13 @@ A day-by-day plan for someone with a full-time job: about **2 hours on weekdays*
 |---|---|---|---|
 | 1 | Orientation + API mechanics I | 33.1% (start) | 2 h |
 | 2 | API mechanics II: streaming, errors, limits, batches | 33.1% | 2 h |
-| 3 | Application design | 33.1% (done) | 2 h |
+| 3 | Application design + engineering foundations | 33.1% (done) | 3 h |
 | 4 | Model selection, tokens, caching, cost | 16.8% | 2.5 h |
 | 5 | Agents & workflows | 14.7% | 2 h |
 | 6 | Prompt & context + Tools & MCP | 21.6% | 3.5 h |
 | 7 | Security + Claude Code + evals, then **Mock A** | 13.8% | 4 h |
-| 8 | Repair day: misses and weakest two domains | — | 2 h |
-| 9 | **Mock B** + cheat sheet | — | 3 h |
+| 8 | Repair, then **Mock B** | — | 3.5 h |
+| 9 | **Mock C** + cheat sheet | — | 3 h |
 | 10 | Light review, logistics, rest | — | 1 h |
 
 ---
@@ -51,12 +51,15 @@ A day-by-day plan for someone with a full-time job: about **2 hours on weekdays*
 * **Practise:** AI-013 to AI-031
 * **You're done when** you can recite the error table (status → type → retry or fix) and the streaming event order.
 
-## Day 3 · Application design
+## Day 3 · Application design and engineering foundations
 
-* **Read:** [Application Design](domains/d1-application-design.md)
-* **Build:** define a small Pydantic schema, ask for structured output, validate it, and add one semantic check. Move the model ID and `max_tokens` into a config file.
-* **Practise:** AI-032 to AI-050
-* **You're done when**, for any scenario, you can say: which pattern, where state lives, what is validated, and what happens on failure.
+This day covers the two heaviest skills in the blueprint, so give it the extra hour.
+
+* **Read:** [Application Design](domains/d1-application-design.md) · [Engineering Foundations](domains/d1-engineering-foundations.md)
+* **Build:** define a small Pydantic schema, ask for structured output, validate it, and add one semantic check. Move the model ID and `max_tokens` into a config file. Then run five calls concurrently with `AsyncAnthropic` behind a semaphore.
+* **Write:** take one vague request ("make support faster") and list three functional and three infrastructure requirements for it.
+* **Practise:** AI-032 to AI-050 today. Leave AI-051 onwards unread until after Mock A, or use them on Day 8.
+* **You're done when**, for any scenario, you can say: which pattern, where state lives, what is validated, what happens on failure, and where each instruction should live on each Claude surface.
 
 ## Day 4 · Model selection and optimisation
 
@@ -86,21 +89,19 @@ A day-by-day plan for someone with a full-time job: about **2 hours on weekdays*
 * **Then:** take **[Mock A](mock-exams.md)**, timed, in one sitting, no notes.
 * **Afterwards:** review every miss and every question you guessed correctly. Add them to your miss log.
 
-## Day 8 · Repair day
-
-No new material.
+## Day 8 · Repair, then Mock B
 
 * Sort the miss log by domain. Re-read the matching sections for your **two weakest** domains.
-* Redo the bank questions for those domains without looking at the answers.
-* Work through the bank-only questions you haven't seen.
 * Rewrite the tables you got wrong, from memory.
+* Then take **[Mock B](mock-exams.md)**, timed. Review every miss and every lucky guess.
 
-## Day 9 · Mock B and consolidation
+## Day 9 · Mock C and consolidation
 
-* Take **[Mock B](mock-exams.md)**, timed.
-* Review as on Day 7.
+* Take **[Mock C](mock-exams.md)**, timed. This is your final rehearsal: same time of day as your exam if you can.
+* Review as before.
+* Work through any bank-only questions you haven't seen.
 * Read the [Cheat Sheet](cheat-sheet.md) once, slowly, and stop at anything that surprises you.
-* If Mock B is below your target, spend the remaining time on that domain's page rather than retaking a mock you now remember.
+* If Mock C is below your target, spend the remaining time on that domain's page rather than retaking a mock you now remember.
 
 ## Day 10 · Light review and exam
 
@@ -121,6 +122,10 @@ No new material.
 
 Practice percentages are a guide only. The real exam uses a scaled score and its own questions, so no practice result can promise an exam result.
 
+## Alongside the official courses
+
+The [official prep path](exam-overview.md#official-resources) has five courses, about 13 hours. If you have access, the most valuable use of limited time is to take the courses for the domains you find hardest, and use this hub for revision and practice. A workable split: watch one course on each of Days 1–5 in place of some of the reading here, and keep the builds, questions and mocks as planned.
+
 ## If you have less time
 
 | Days left | Keep | Drop |
@@ -131,4 +136,4 @@ Practice percentages are a guide only. The real exam uses a scaled score and its
 
 ## If you passed the Architect exam first
 
-You can move faster through Days 5 and 6: skim the agent, prompt and tool-design sections, and concentrate on what is new (the loop in code, validation and retries, **building** an MCP server, MCP server versus API client). Put the saved time into Days 1–4. The [bridge page](bridge-from-architect.md) has the full map.
+You can move faster through Days 5 and 6, and Mock A can move earlier: skim the agent, prompt and tool-design sections, and concentrate on what is new (the loop in code, validation and retries, **building** an MCP server, MCP server versus API client). Put the saved time into Days 1–4. The [bridge page](bridge-from-architect.md) has the full map.

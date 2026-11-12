@@ -10,6 +10,7 @@
 * MCP architecture and primitives
 * Building and testing an MCP server
 * MCP server versus an application-side API client
+* Choosing among built-in tools, custom tools, skills and MCP
 
 ---
 
@@ -109,7 +110,9 @@ flowchart LR
 | Transport | Use | Notes |
 |---|---|---|
 | **stdio** | Local server started as a child process | Simple; one user; credentials from the local environment |
-| **Streamable HTTP** | Remote, shared server | Many clients; needs real authentication (OAuth / tokens). Replaces the older HTTP+SSE transport |
+| **Streamable HTTP** | Remote, shared server | Many clients over the network; needs real authentication (OAuth / tokens). Replaces the older HTTP+SSE transport |
+
+In short: **stdio for a local process, a network (socket-based) transport for a remote one.** The choice also decides who can reach the server and how it must be secured.
 
 ## 5. Build an MCP server
 
@@ -188,7 +191,32 @@ Rule of thumb: **reuse across hosts → MCP server. Single app, simple call → 
 
 **The MCP connector.** The Messages API can also connect straight to a **remote** MCP server (HTTP only, not local stdio) through an `mcp_servers` parameter, so you need no MCP client of your own. It is a beta feature limited to tool calls; check the docs for the current header.
 
-## 7. MCP security
+## 7. Agentic customisation: which mechanism?
+
+A whole blueprint skill is about choosing the right way to extend an agent. The distinction to hold on to: **tools and MCP give access; skills give know-how.**
+
+| Need | Use | Why |
+|---|---|---|
+| Read or edit files, run commands, search the codebase, search the web | **Built-in tools** | They already exist and are well tested. Don't rebuild them |
+| One action specific to this application | **Custom tool** | Simplest way to add a capability to one app |
+| Connect to an external system from several hosts | **MCP server** | One implementation, reused everywhere |
+| Teach a procedure, house style or domain method, perhaps with scripts and templates | **Skill** | Instructions load on demand, so they cost little until needed; no new connectivity |
+| A prompt you trigger by name | **Command** | Explicit, user-invoked |
+| Keep noisy work out of the main context | **Sub-agent** | Context isolation |
+| Something that must always or never happen | **Hook / permission** | Deterministic |
+| Facts every session needs | **`CLAUDE.md`** | Always loaded |
+
+Combinations are normal: an MCP server provides access to the ticketing system, and a skill explains the team's triage procedure that uses it.
+
+**How skills load.** Only each skill's short name and description are in context up front. The full instructions are read when the task matches, and bundled files only when needed. That is why a good **description** decides whether a skill is ever used, and why skills scale better than putting everything in `CLAUDE.md`. A skill written once can be used from Claude Code, the Agent SDK and the API.
+
+### Harness patterns
+
+* **Dispatch.** Your harness maps each `tool_use` name to a function, validates the input, runs it and returns the result. An unknown tool name returns an error result; it does not crash the loop.
+* **Approval.** Classify tools by risk. Read-only tools run automatically; state-changing tools ask; destructive ones are denied or need explicit sign-off. The check lives in the harness.
+* **Well-scoped tool sets.** Give each agent the few tools its job needs, with distinct purposes and clear names. Overlapping tools cause wrong selections; a very large set costs tokens on every request and lowers accuracy. Load specialised tools only for the tasks that need them.
+
+## 8. MCP security
 
 * An MCP server runs with **whatever access you give it**. Apply least privilege: read-only credentials unless writes are required, narrow scopes.
 * Tool results from a server are **untrusted content**. They can carry injected instructions ([Security](d6-security-safety.md)).

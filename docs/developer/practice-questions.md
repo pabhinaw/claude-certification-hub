@@ -1,18 +1,18 @@
 # Developer Question Bank
 
-**135 original questions** across the eight CCDV-F domains, including multiple-response items. Each has an explanation of why the right answer is right and why every other option is wrong.
+**194 original questions** across the eight CCDV-F domains, including multiple-response items. Each has an explanation of why the right answer is right and why every other option is wrong.
 
 | Domain | Weight | Questions | Page |
 |---|---|---|---|
-| Applications & Integration | 33.1% | 50 | [Open](question-bank/ai.md) |
-| Model Selection & Optimisation | 16.8% | 24 | [Open](question-bank/ms.md) |
-| Agents & Workflows | 14.7% | 16 | [Open](question-bank/aw.md) |
-| Prompt & Context Engineering | 11.0% | 12 | [Open](question-bank/pc.md) |
-| Tools & MCPs | 10.6% | 14 | [Open](question-bank/tm.md) |
-| Security & Safety | 8.1% | 11 | [Open](question-bank/ss.md) |
-| Claude Code · Eval, Testing & Debugging | 5.7% | 8 | [Open](question-bank/cc-ev.md) |
+| Applications & Integration | 33.1% | 71 | [Open](question-bank/ai.md) |
+| Model Selection & Optimisation | 16.8% | 30 | [Open](question-bank/ms.md) |
+| Agents & Workflows | 14.7% | 24 | [Open](question-bank/aw.md) |
+| Prompt & Context Engineering | 11.0% | 18 | [Open](question-bank/pc.md) |
+| Tools & MCPs | 10.6% | 21 | [Open](question-bank/tm.md) |
+| Security & Safety | 8.1% | 14 | [Open](question-bank/ss.md) |
+| Claude Code · Eval, Testing & Debugging | 5.7% | 16 | [Open](question-bank/cc-ev.md) |
 
-106 of these appear in the two [mock exams](mock-exams.md); 29 are bank-only, so you still have unseen questions for your repair day.
+159 of these appear in the three [mock exams](mock-exams.md); 35 are bank-only. If you want the mocks to be a fair first-attempt test, **take the mocks before reading the bank pages**, and use the bank afterwards for review.
 
 ## How to use the bank
 

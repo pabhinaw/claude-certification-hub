@@ -28,7 +28,7 @@ hide:
 <a class="hub-track" href="developer/">
 <span class="hub-badge hub-badge--live">Complete track</span>
 <span class="hub-track__title">Developer · CCDV-F</span>
-<span class="hub-track__desc">A 10-day study plan, eight domain deep-dives with code, 135 practice questions, two timed mock exams and a cheat sheet.</span>
+<span class="hub-track__desc">A 10-day study plan, nine deep-dive pages mapped to the official skill list, 194 practice questions, three timed mock exams and a cheat sheet.</span>
 <span class="hub-track__go">Start the Developer track →</span>
 </a>
 </div>

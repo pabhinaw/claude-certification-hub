@@ -116,6 +116,18 @@ The decision rules on one page, plus short [articles](notes/index.md) on the ide
 </section>
 
 <section class="hub-section" markdown>
+<div class="hub-video" markdown>
+<p class="hub-eyebrow">Prefer to learn by watching?</p>
+
+### Video lessons on TarkoniX Academy
+
+Everything you need for the exams is on this site, and it stays free. For those who learn better by watching, I am starting a video series on **TarkoniX Academy**, in Hinglish (Hindi and English): walkthroughs of these certification topics, core AI concepts explained simply, and hands-on build sessions. The series is just getting started, so subscribe if you would like to be notified as new videos are published.
+
+[:fontawesome-brands-youtube: Visit the channel](https://www.youtube.com/@tarkonixacademy){ .md-button target="_blank" rel="noopener" }
+</div>
+</section>
+
+<section class="hub-section" markdown>
 <div class="hub-author" markdown>
 <div class="hub-author__avatar" aria-hidden="true">PA</div>
 <div class="hub-author__body" markdown>

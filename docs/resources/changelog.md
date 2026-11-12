@@ -6,6 +6,7 @@ What's new in the hub. Dates are when changes were published.
 
 **Final review against the official exam guide and Anthropic's delivery guidance**
 
+* Added a link to the **TarkoniX Academy** YouTube channel, where video lessons on these topics will be published.
 * New Fundamentals page: **The AI-Native SDLC**, a study summary of Anthropic's playbook covering the artefact chain, the ladder of control, working patterns and measurement.
 * New **Lab 4**: a multi-agent research pipeline, completing the four kinds of hands-on practice the Architect exam guide recommends.
 * Developer track: how Claude fits each life-cycle stage, parallel work with worktrees, test-first fixes, managed settings and sandboxing, and evals for agent configuration, with 11 new questions.

@@ -32,6 +32,12 @@ Make high-quality preparation **free, structured and practical**: from first pri
 
 Read the author's notes: [How I Prepared](my-journey.md).
 
+## Video lessons
+
+Some ideas are easier to follow when you can watch them being built. I am starting a video series on **[TarkoniX Academy](https://www.youtube.com/@tarkonixacademy)**, a YouTube channel I co-host, in Hinglish (Hindi and English). The plan is to cover these certification topics, core AI concepts, and hands-on sessions where things are built step by step.
+
+The series is new and videos will be added over time. The hub does not depend on it: every topic here is complete in writing. If video suits you, subscribing to the channel is the simplest way to hear when a new lesson is out. The same rule applies there as here: topics and concepts only, never exam questions.
+
 ## Contact
 
 For questions about the content, suggestions or collaboration, connect on [LinkedIn](https://www.linkedin.com/in/pabhinaw/). To report an error, message me there with the page name and, if you can, a link to the official source. I can discuss topics and study strategy, but never exam questions.

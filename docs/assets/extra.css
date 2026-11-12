@@ -502,3 +502,9 @@ code, pre, kbd { font-family: var(--md-code-font-family); }
 .hub-glance { display: none; }
 #hub-exam-a:checked ~ .hub-glance--a, #hub-exam-d:checked ~ .hub-glance--d { display: block; }
 .hub-panel { position: relative; }
+
+/* home: quiet pointer to the video channel */
+.hub-video { border: 1px solid var(--md-default-fg-color--lightest); border-radius: 14px; padding: 1.4rem 1.6rem;
+  background: var(--md-code-bg-color); }
+.md-typeset .hub-video h3 { margin: .2rem 0 .6rem; }
+.md-typeset .hub-video p { max-width: 46rem; }
